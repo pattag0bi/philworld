@@ -53,4 +53,4 @@ Then open http://localhost:8765. Headphones are recommended.
 
 Progress saves automatically: your character, insights, finished puzzles, the room you're in, and where you're standing (every few seconds, and whenever you close or switch away from the tab). Choose **Continue journey** on the title screen to pick up where you left off.
 
-Saves live in each player's own browser, so progress doesn't carry over to another device or browser, and clearing site data erases it.
+Saves live in each player's own browser, and clearing site data erases them. To move a journey to another browser or device, choose **Copy save code** on the title screen, open PhilWorld in the other browser, choose **Enter save code**, and paste the code. A copied code also works as a backup.

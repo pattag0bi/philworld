@@ -5,13 +5,53 @@
 const Title = { sel: 0, hasSave: false, t: 0 };
 const Creator = { row: 0, rows: ['Name', 'Hair', 'Hair color', 'Skin', 'Outfit', 'Begin journey'] };
 
-function startTitle() {
-  G.screen = 'title'; G.fadeTo = 0;
+function refreshTitleSave() {
   const s = loadSave();
   Title.hasSave = !!s;
   Title.info = s ? `Saved: ${s.name} · ${(s.insights || []).length}/10 insights · ${(MAP_NODES.find(n => n.id === s.room) || {}).name || ''}` : '';
+}
+function titleOptions() {
+  return Title.hasSave ? ['Continue journey', 'New journey', 'Copy save code', 'Enter save code'] : ['New journey', 'Enter save code'];
+}
+function startTitle() {
+  G.screen = 'title'; G.fadeTo = 0;
+  refreshTitleSave();
   Title.sel = 0;
   AudioSys.setScene('title');
+}
+
+// ---------------- save codes: move progress between browsers / devices
+const CODE_PREFIX = 'PHILWORLD-';
+function makeSaveCode() {
+  const s = loadSave(); if (!s) return null;
+  return CODE_PREFIX + btoa(unescape(encodeURIComponent(JSON.stringify(s))));
+}
+function readSaveCode(code) {
+  code = (code || '').trim().replace(/\s+/g, '');
+  if (code.startsWith(CODE_PREFIX)) code = code.slice(CODE_PREFIX.length);
+  const s = JSON.parse(decodeURIComponent(escape(atob(code))));
+  if (!s || typeof s !== 'object' || !Array.isArray(s.insights) || !s.look || !s.room || !Rooms[s.room]) throw new Error('bad save');
+  return Object.assign(newState(), s);
+}
+async function copySaveCode() {
+  const code = makeSaveCode(); if (!code) return;
+  let ok = false;
+  try { await navigator.clipboard.writeText(code); ok = true; } catch (e) { }
+  for (const k in keys) keys[k] = false;
+  if (ok) notice('Save code *copied*! Open PhilWorld in the other browser, choose *Enter save code*, and paste it.', 5);
+  else { window.prompt('Copy this save code, then paste it into PhilWorld in the other browser:', code); notice('Paste that code into *Enter save code* on the other browser.', 4); }
+}
+function enterSaveCode() {
+  const code = window.prompt('Paste your PhilWorld save code:');
+  for (const k in keys) keys[k] = false;
+  if (!code) return;
+  try {
+    const s = readSaveCode(code);
+    G.state = s; save(true);
+    refreshTitleSave(); Title.sel = 0;
+    SFX.chime();
+    notice(`Welcome back, *${s.name}*! Journey restored (${s.insights.length}/10 insights). Choose *Continue journey*.`, 5);
+  } catch (e) { SFX.boing(); notice('That code didn\'t work. Copy the *whole* code and try again.', 4); }
 }
 function startCreator() {
   G.screen = 'creator';
@@ -77,26 +117,29 @@ function drawTitleBg(t) {
 }
 
 function updateTitle() {
-  const opts = Title.hasSave ? ['Continue journey', 'New journey'] : ['New journey'];
+  const opts = titleOptions();
   if (hit('up')) { Title.sel = (Title.sel + opts.length - 1) % opts.length; SFX.select(); }
   if (hit('down')) { Title.sel = (Title.sel + 1) % opts.length; SFX.select(); }
   if (hit('act')) {
     SFX.confirm();
     const o = opts[Title.sel];
     if (o === 'Continue journey') startGame(true);
+    else if (o === 'Copy save code') copySaveCode();
+    else if (o === 'Enter save code') enterSaveCode();
     else startCreator();
   }
 }
 function drawTitleUI() {
-  const opts = Title.hasSave ? ['Continue journey', 'New journey'] : ['New journey'];
+  const opts = titleOptions();
   text('PHILWORLD', 240, 78, { title: true, size: 22, align: 'center', color: '#f7c948' });
   text('a walk through the love of wisdom', 240, 108, { size: 16, align: 'center', color: '#e8d5a8' });
   opts.forEach((o, i) => {
     const sel = i === Title.sel;
-    text((sel ? '▶ ' : '  ') + o, 240, 134 + i * 16, { size: 16, align: 'center', color: sel ? '#f7c948' : '#e8d5a8' });
+    text((sel ? '▶ ' : '  ') + o, 240, 126 + i * 14, { size: 15, align: 'center', color: sel ? '#f7c948' : '#e8d5a8' });
   });
-  if (Title.hasSave && Title.info) text(Title.info, 240, 172, { size: 13, align: 'center', color: '#9a8fb8' });
-  if (Title.hasSave && opts[Title.sel] === 'New journey') text('(starting over replaces your saved journey)', 240, 186, { size: 12, align: 'center', color: '#c0604a' });
+  if (Title.hasSave && Title.info) text(Title.info, 240, 184, { size: 13, align: 'center', color: '#9a8fb8' });
+  const tip = { 'New journey': Title.hasSave ? '(starting over replaces your saved journey)' : '', 'Copy save code': 'copy a code to move your progress to another browser or device', 'Enter save code': 'paste a code from another browser to continue your journey here' }[opts[Title.sel]];
+  if (tip) text(tip, 240, 172, { size: 12, align: 'center', color: opts[Title.sel] === 'New journey' ? '#c0604a' : '#9a8fb8' });
   text('arrows / WASD to move · E or Space to interact · headphones recommended', 240, 258, { size: 12, align: 'center', color: '#9a8fb8' });
 }
 
@@ -214,7 +257,7 @@ function render() {
     text('PHILWORLD', 240, 96, { title: true, size: 22, align: 'center', color: '#f7c948' });
     if (Math.floor(G.t * 2) % 2 === 0) text('press any key to begin', 240, 140, { size: 18, align: 'center' });
     text('(sound is a big part of this game; turn it up!)', 240, 164, { size: 13, align: 'center', color: '#9a8fb8' });
-  } else if (G.screen === 'title') drawTitleUI();
+  } else if (G.screen === 'title') { drawTitleUI(); drawMsg(); }
   else if (G.screen === 'creator') drawCreatorUI();
   else if (G.screen === 'game') {
     if (G.activity && G.activity.ui) { try { G.activity.ui(ctx, G.t); } catch (e) { console.error(e); } }

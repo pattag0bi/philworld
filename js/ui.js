@@ -389,8 +389,9 @@ function drawMsg() {
   ctx.globalAlpha = a;
   const lines = layoutRich(parseRich(m.str), 300, 13);
   const w = Math.min(316, Math.max(...lines.map(l => l.length)) * 6.5 + 16), h = lines.length * 12 + 8;
-  panel(240 - w / 2, 70, w, h, { bg: 'rgba(22,16,34,0.92)' });
-  drawRich(lines, 240 - w / 2 + 8, 74, 13, 12);
+  const my = G.screen === 'title' ? 214 : 70;
+  panel(240 - w / 2, my, w, h, { bg: 'rgba(22,16,34,0.92)' });
+  drawRich(lines, 240 - w / 2 + 8, my + 4, 13, 12);
   ctx.globalAlpha = 1;
 }
 function drawPrompt() {
