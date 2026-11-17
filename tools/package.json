@@ -1,0 +1,13 @@
+{
+  "name": "philworld-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "extract": "node extract-lines.mjs",
+    "voices": "node generate-voices.mjs"
+  },
+  "devDependencies": {
+    "acorn": "^8.14.0",
+    "acorn-walk": "^8.3.4"
+  }
+}

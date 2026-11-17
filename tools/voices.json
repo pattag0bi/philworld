@@ -1,0 +1,190 @@
+{
+  "_note": "Speaker -> Sarvam bulbul:v4-flash persona. Change a voice here, then run `npm run voices` again: only changed lines are regenerated.",
+  "_model": "bulbul:v4-flash",
+  "_language": "en-IN",
+  "narrator": {
+    "voice": "sarang_en_narration",
+    "pace": 0.95
+  },
+  "owl": {
+    "voice": "ishita_en_stories",
+    "pace": 1.05
+  },
+  "socrates": {
+    "voice": "girish_en_documentary",
+    "pace": 1.0
+  },
+  "youngPlato": {
+    "voice": "ojas_en_social",
+    "pace": 1.05
+  },
+  "plato": {
+    "voice": "shubh_en_narration",
+    "pace": 0.95
+  },
+  "sophist": {
+    "voice": "nachiket_en_ads",
+    "pace": 1.1
+  },
+  "aristotle": {
+    "voice": "dev_en_conversational",
+    "pace": 1.05
+  },
+  "alexander": {
+    "voice": "ashwin_en_sports_energetic",
+    "pace": 1.05
+  },
+  "epictetus": {
+    "voice": "rohan_en_recovery",
+    "pace": 0.95
+  },
+  "marcus": {
+    "voice": "shubh_en_audiobook",
+    "pace": 0.92
+  },
+  "zeno": {
+    "voice": "deven_en_conversation",
+    "pace": 1.0
+  },
+  "nietzsche": {
+    "voice": "varun_en_suspense",
+    "pace": 1.0
+  },
+  "demon": {
+    "voice": "rustom_en_suspense",
+    "pace": 0.8
+  },
+  "confucius": {
+    "voice": "girish_en_devotional",
+    "pace": 0.92
+  },
+  "name:Yan Hui, a student": {
+    "voice": "kalpit_en_edtech",
+    "pace": 1.0
+  },
+  "courtyardPeople": {
+    "voice": "roopa_en_conversational",
+    "pace": 1.0
+  },
+  "laozi": {
+    "voice": "shubh_en_narration_gentle",
+    "pace": 0.85
+  },
+  "zhuangzi": {
+    "voice": "sunny_en_social",
+    "pace": 1.0
+  },
+  "cookding": {
+    "voice": "kalpit_en_edtech",
+    "pace": 1.0
+  },
+  "buddha": {
+    "voice": "dev_en_recovery",
+    "pace": 0.88
+  },
+  "monk": {
+    "voice": "deven_en_conversation",
+    "pace": 0.95
+  },
+  "kisa": {
+    "voice": "chandrika_en_stories",
+    "pace": 0.92
+  },
+  "nagasena": {
+    "voice": "ashwin_en_sports",
+    "pace": 1.0
+  },
+  "sartre": {
+    "voice": "varun_en_ads",
+    "pace": 1.05
+  },
+  "beauvoir": {
+    "voice": "simran_en_narration",
+    "pace": 1.0
+  },
+  "camus": {
+    "voice": "rohan_en_recovery",
+    "pace": 1.0
+  },
+  "waiter": {
+    "voice": "nachiket_en_ads",
+    "pace": 1.15
+  },
+  "name:Prisoner": {
+    "voice": "rustom_en_suspense",
+    "pace": 1.0
+  },
+  "puppeteer": {
+    "voice": "varun_en_suspense",
+    "pace": 0.9
+  },
+  "you": null,
+  "name:Chaerephon": {
+    "voice": "sunny_en_social",
+    "pace": 1.1
+  },
+  "name:A Famous Politician": {
+    "voice": "nachiket_en_ads",
+    "pace": 1.05
+  },
+  "name:A Celebrated Poet": {
+    "voice": "ojas_en_social",
+    "pace": 0.95
+  },
+  "name:A Skilled Craftsman": {
+    "voice": "ashwin_en_sports",
+    "pace": 1.05
+  },
+  "name:Meletus, the accuser": {
+    "voice": "varun_en_suspense",
+    "pace": 1.05
+  },
+  "name:Crito": {
+    "voice": "deven_en_conversation",
+    "pace": 1.0
+  },
+  "name:His Mother": {
+    "voice": "chandrika_en_stories",
+    "pace": 0.9
+  },
+  "name:A Resistance fighter": {
+    "voice": "dev_en_conversational",
+    "pace": 1.05
+  },
+  "name:Society": {
+    "voice": "neha_en_customer",
+    "pace": 1.0
+  },
+  "name:The Madman": {
+    "voice": "ashwin_en_sports_energetic",
+    "pace": 1.1
+  },
+  "name:His Master": {
+    "voice": "varun_en_ads",
+    "pace": 1.0
+  },
+  "name:The Gatekeeper": {
+    "voice": "kalpit_en_edtech",
+    "pace": 1.0
+  },
+  "name:A clumsy cook": {
+    "voice": "sunny_en_social",
+    "pace": 1.1
+  },
+  "name:Lord Wenhui": {
+    "voice": "shubh_en_audiobook",
+    "pace": 0.95
+  },
+  "name:Prince Siddhartha": {
+    "voice": "ojas_en_social",
+    "pace": 0.95
+  },
+  "name:Channa, the charioteer": {
+    "voice": "deven_en_conversation",
+    "pace": 0.95
+  },
+  "name:A passer-by": {
+    "voice": "nachiket_en_ads",
+    "pace": 1.05
+  }
+}

@@ -68,11 +68,7 @@ Rooms.agora = {
       s,
       thing('gadfly', 252, 128, null, {
         r: 10, ph: 4, label: 'Swat the fly', iy: 8,
-        async interact() {
-          SFX.buzz();
-          await say('socrates', 'Ha! Leave it be. In my trial I called *myself* a gadfly: a fly sent by the gods to sting the big, lazy horse of Athens awake.');
-          await say('socrates', 'Annoying? Yes. Useful? Also yes. A city that never gets questioned falls asleep.');
-        },
+        interact: () => gadflyCutscene(),
       }),
       npc('youngPlato', 272, 166, LOOKS.youngPlato, {
         dir: 2, label: 'Talk', hold: true,
@@ -100,22 +96,11 @@ Rooms.agora = {
       }),
       thing('oracle', 174, 102, null, {
         r: 18, ph: 22, label: 'Read the inscription',
-        async interact() {
-          AudioSys.play('bell', 62, { vol: 0.1, dur: 3 });
-          await say(null, 'A stone tablet: *"The Oracle of Delphi was asked: is anyone wiser than Socrates? The priestess answered: No one."*');
-          await say('socrates', 'That puzzled me! I know *nothing*. So I questioned politicians, poets and craftsmen, people famous for their wisdom.');
-          await say('socrates', 'They all *thought* they knew things they didn\'t. Then I understood: I\'m wiser only in one tiny way. *I know that I don\'t know.*');
-        },
+        async interact() { await oracleCutscene(); },
       }),
       thing('hemlock', 311, 230, (g, t) => { R(g, '#8a8a92', 308, 220, 6, 7); R(g, '#5a7a3a', 309, 221, 4, 2); }, {
         r: 18, ph: 16, label: 'Look at the cup',
-        async interact() {
-          SFX.sad();
-          await say(null, 'A cup of *hemlock*, a poison.');
-          await say(null, 'In 399 BCE, Athens put Socrates on trial for "corrupting the youth" and "not honoring the city\'s gods." A jury of 501 citizens voted. He was sentenced to death.');
-          await say(null, 'His friends arranged an escape. He refused. Fleeing would break the laws he had lived under all his life. He spent his last hours talking about the soul, then calmly drank.');
-          await say(null, 'At his trial he said the line he\'s most famous for: *"The unexamined life is not worth living."*');
-        },
+        async interact() { await trialCutscene(); },
       }),
       thing('fountain', 121, 164, null, {
         r: 26, ph: 26, label: 'Listen at the fountain',
@@ -168,13 +153,13 @@ async function socratesTalk() {
     },
   });
   const answers = [
-    { a: 'Telling the truth and paying back what you owe.', short: 'truth & debts', who: 'This is what old Cephalus said, in Plato\'s *Republic*.',
+    { a: 'Telling the truth and paying back what you owe.', short: 'truth & debts', who: 'Interesting! This is what old Cephalus says in Plato\'s *Republic*. Let\'s test it.',
       ce: ['Suppose a friend lends you his sword. Later he goes *mad* and demands it back, raging.', 'You owe it to him. Is it *just* to hand a sword to a madman?'],
       v: (v, t) => { R(v, '#3a2a40', 0, 0, 160, 90); drawPerson(v, 50, 72, playerLook(), 3, 0, { hold: (g, x, y) => { R(g, '#bdc3c7', x + 5, y - 14, 1, 10); R(g, '#8b5a2b', x + 4, y - 5, 3, 2); } }); drawPerson(v, 108, 72, { skin: '#e8b48f', hairStyle: 'spiky', hairC: '#7a3a1a', robe: '#7a6a5a', eyes: '#e74c3c' }, 2, Math.floor(t * 8) % 4, { armsUp: true }); for (let i = 0; i < 3; i++) line(v, 120 + i * 4, 40, 124 + i * 4, 30 + Math.sin(t * 10 + i) * 3, '#e74c3c'); } },
-    { a: 'Helping your friends and harming your enemies.', short: 'help friends, harm foes', who: 'Polemarchus argued this in the *Republic*.',
+    { a: 'Helping your friends and harming your enemies.', short: 'help friends, harm foes', who: 'Interesting! Polemarchus argues this in the *Republic*. Let\'s test it.',
       ce: ['But we often misjudge who our friends really are. Someone who seems friendly might be robbing you!', 'And tell me: does *harming* a person make them better, or worse? Can justice ever make people *worse*?'],
       v: (v, t) => { R(v, '#2a3a2a', 0, 0, 160, 90); drawPerson(v, 50, 72, LOOKS.sophist, 3, 0, { smile: true }); R(v, '#f1c40f', 40, 60, 5, 5); R(v, '#111', 46, 51, 6, 2); drawPerson(v, 110, 72, { skin: '#c98e62', hairStyle: 'spiky', hairC: '#111', robe: '#5a5a5a' }, 2, 0, {}); ICONS.heart(v, 110, 40 + Math.sin(t * 3) * 2); } },
-    { a: 'Whatever benefits the stronger: the rulers decide.', short: 'might makes right', who: 'Thrasymachus angrily said this in the *Republic*.',
+    { a: 'Whatever benefits the stronger: the rulers decide.', short: 'might makes right', who: 'Interesting! Thrasymachus angrily says this in the *Republic*. Let\'s test it.',
       ce: ['But rulers make *mistakes*. Sometimes they order things that actually harm themselves.', 'Then obeying them is sometimes *not* in the stronger\'s interest. So is justice obeying, or benefiting? It can\'t be both!'],
       v: (v, t) => { R(v, '#3a2a2a', 0, 0, 160, 90); R(v, '#5a4a3a', 0, 70, 120, 20); R(v, '#1a1010', 120, 70, 40, 20); drawPerson(v, 30, 70, LOOKS.ruler, 3, 0, { armsUp: true }); for (let i = 0; i < 3; i++) drawPerson(v, 70 + i * 18 + (t * 8 % 18), 70 + (i === 2 && (t * 8 % 18) > 14 ? 8 : 0), { skin: '#e8b48f', hairStyle: 'short', robe: '#c0392b', hat: 'helmet' }, 3, Math.floor(t * 8) % 4, {}); } },
   ];
@@ -184,7 +169,7 @@ async function socratesTalk() {
     const A = answers[left[c]];
     left.splice(c, 1);
     bubble.text = A.short; bubble.cert = 1; AudioSys.play('bell', 76, { vol: 0.08, dur: 1 });
-    await say('socrates', 'Interesting! ' + A.who + ' Let\'s test it.');
+    await say('socrates', A.who);
     showVignette(A.v, { title: 'Imagine…', x: 14, y: 84 });
     await say('socrates', A.ce[0]);
     await say('socrates', A.ce[1]);
@@ -219,4 +204,108 @@ async function forkScene(again) {
   SFX.rumble(1); shake(0.3);
   await say('socrates', c === 0 ? 'Then go upper-left, to the Cave. Bring a sense of wonder… and maybe sunglasses.' : 'Then go lower-left, to the Lyceum. Aristotle walks while he talks, so keep up!');
   await say('owl', 'Don\'t worry: once you finish that road, the other one opens too. *Every* path can be explored.');
+}
+
+// ---------- cutscenes
+const CITIZEN = i => ({ skin: ['#eab994', '#c98e62', '#e8b48f', '#d8a070'][i % 4], hairStyle: ['short', 'curly', 'bald', 'short'][i % 4], hairC: ['#3a2a1a', '#2b1d14', '#6b6b6b', '#5a3a22'][i % 4], beard: i % 2 ? '#3a2a1a' : null, beardLen: 2, robe: ['#a89f91', '#8a7a5a', '#c8b898', '#7a6a5a', '#9a8a7a', '#b8a888'][i % 6], robe2: '#5a4a3a', long: true });
+async function oracleCutscene() {
+  const S = G.room.ents.find(e => e.id === 'socrates'); const home = [S.x, S.y];
+  AudioSys.play('bell', 62, { vol: 0.1, dur: 3 });
+  await say(null, 'A stone tablet: *"The Oracle of Delphi was asked: is anyone wiser than Socrates? The priestess answered: No one."*');
+  const C = await cutStart('The Oracle of Delphi');
+  const ch = C.actor('chaerephon', CITIZEN(1), S.x + 14, S.y, { dir: 2 });
+  await say({ name: 'Chaerephon', look: ch.look, voice: 330 }, 'Socrates, my friend! I went all the way to Delphi and asked the god: is anyone wiser than you? The priestess said: *no one!*');
+  C.emote(S, '?', 2.5);
+  await say('socrates', 'Me? But I know *nothing*! There must be a mistake. I\'ll find someone wiser and prove the god wrong.');
+  const pol = C.actor('pol', LOOKS.ruler, 150, 120, { dir: 3 });
+  const poet = C.actor('poet', { skin: '#eab994', hairStyle: 'long', hairC: '#5a3a22', robe: '#8e44ad', robe2: '#e0c060', hat: 'laurel', long: true }, 330, 200, { dir: 2 });
+  const smith = C.actor('smith', { skin: '#c98e62', hairStyle: 'short', hairC: '#1d1d2b', robe: '#6b4a2b', robe2: '#3a2a1a', sash: '#3a2a1a' }, 380, 150, { dir: 2 });
+  await C.walk(S, 174, 122, 50); C.face(S, pol);
+  C.emote(pol, '!', 2); await say({ name: 'A Famous Politician', look: pol.look, voice: 240 }, 'Justice? Simple. It\'s whatever wins votes. Next question.');
+  C.emote(S, '?', 2); await wait(0.6);
+  await C.walk(S, 306, 196, 55); C.face(S, poet);
+  C.emote(poet, 'note', 2); await say({ name: 'A Celebrated Poet', look: poet.look, voice: 380 }, 'My verses are inspired by the Muses! What do they *mean*? Well… I couldn\'t really say.');
+  C.emote(S, '?', 2); await wait(0.6);
+  await C.walk(S, 360, 154, 55); C.face(S, smith);
+  C.emote(smith, '!', 2); await say({ name: 'A Skilled Craftsman', look: smith.look, voice: 200 }, 'I make the finest shoes in Athens! So of course I also know how the city should be run.');
+  C.emote(S, 'idea', 2.5);
+  await say('socrates', 'Each one *thought* he knew things he didn\'t. The craftsman truly knew his craft, but thought that made him wise about everything.');
+  await say('socrates', 'So I am wiser in just one tiny way: *I know that I don\'t know.* Maybe that\'s what the god meant.');
+  await Promise.all([C.walk(S, home[0], home[1], 60), C.fadeActor(pol, 0), C.fadeActor(poet, 0), C.fadeActor(smith, 0), C.fadeActor(ch, 0)]);
+  S.dir = 0;
+  await C.end();
+  await say('owl', 'Asking experts hard questions in public made Socrates many enemies. Powerful people don\'t like looking foolish.');
+}
+async function trialCutscene() {
+  const S = G.room.ents.find(e => e.id === 'socrates'); const home = [S.x, S.y];
+  SFX.sad();
+  await say(null, 'A cup of *hemlock*, a poison. Something terrible happened in this city…');
+  const C = await cutStart('The Trial of Socrates · Athens, 399 BCE');
+  const jurors = [];
+  for (let i = 0; i < 8; i++) jurors.push(C.actor('j' + i, CITIZEN(i), 500 + i * 10, 150 + (i % 2) * 22, { dir: 2 }));
+  await C.walkAll(jurors.map((j, i) => [j, 296 + (i >> 1) * 20, 148 + (i % 2) * 24, 70]));
+  jurors.forEach(j => j.dir = 2);
+  await C.walk(S, 230, 140, 40); S.dir = 3;
+  const mel = C.actor('meletus', { skin: '#e8b48f', hairStyle: 'spiky', hairC: '#1d1d2b', beard: '#1d1d2b', beardLen: 1, robe: '#5a2a2a', robe2: '#3a1a1a', long: true }, 252, 196, { dir: 1 });
+  C.emote(mel, 'angry', 3);
+  await say({ name: 'Meletus, the accuser', look: mel.look, voice: 230 }, 'Men of Athens! This Socrates *corrupts the youth* and does not honor the gods of the city! He must be punished!');
+  jurors.forEach((j, i) => setTimeout(() => C.emote(j, i % 3 ? '?' : 'angry', 1.5), i * 120));
+  await say(null, 'Socrates speaks in his own defense. He doesn\'t beg or weep, as accused men usually did.');
+  await say('socrates', 'I am like a *gadfly* on a great, lazy horse. If you kill me, you won\'t easily find another to keep you awake. And I tell you: *the unexamined life is not worth living.*');
+  await say(null, 'A jury of about *500 citizens* votes, dropping pebbles into urns…');
+  for (let i = 0; i < jurors.length; i++) { C.emote(jurors[i], i < 5 ? 'angry' : 'tear', 2.5); AudioSys.play('drum', 60 + i * 3, { vol: 0.2 }); await wait(0.25); }
+  await say(null, 'Guilty, by about 60 votes. The sentence: *death*.');
+  SFX.sad();
+  await C.walkAll(jurors.map((j, i) => [j, 520, 150 + (i % 2) * 22, 90]));
+  mel.alpha = 0;
+  // the prison: friends gather
+  await C.black(true, 0.6);
+  C.caption('A prison cell, one month later');
+  C.set((g, t) => {
+    tex(g, 0, 0, W, H, '#3a3430', ['#2e2824', '#4a423c'], 0.2, 7);
+    for (let y = 0; y < 100; y += 12) for (let x = (y / 12 % 2) * 14; x < W; x += 28) R(g, '#2a2420', x, y, 1, 12);
+    R(g, '#2a2420', 0, 100, W, 3);
+    R(g, '#1a1410', 200, 20, 80, 50); R(g, '#c8d8e8', 204, 24, 72, 42); for (let i = 0; i < 6; i++) R(g, '#3a3430', 210 + i * 12, 24, 3, 42);
+    g.fillStyle = 'rgba(220,230,255,0.08)'; g.beginPath(); g.moveTo(204, 66); g.lineTo(276, 66); g.lineTo(320, 200); g.lineTo(170, 200); g.fill();
+    R(g, '#5a4a3a', 180, 160, 30, 8);
+  }, [S]);
+  const crito = C.actor('crito', CITIZEN(2), 266, 150, { dir: 2 });
+  const f2 = C.actor('f2', CITIZEN(3), 250, 170, { dir: 1 });
+  const f3 = C.actor('f3', CITIZEN(5), 214, 166, { dir: 1 });
+  S.x = 236; S.y = 146; S.dir = 0;
+  await C.black(false);
+  await say({ name: 'Crito', look: crito.look, voice: 260 }, 'Socrates, everything is ready. The guards are bribed. A ship is waiting. *Escape tonight!*');
+  C.face(S, crito);
+  await say('socrates', 'Dear Crito. Should I break the laws that raised me, just to save my own skin? Would that be *just*? No. I won\'t run.');
+  const jailer = C.actor('jailer', LOOKS.puppeteer, 480, 200, { dir: 2 });
+  await C.walk(jailer, 262, 168, 35); C.face(jailer, S);
+  C.emote(crito, 'tear', 4); C.emote(f2, 'tear', 4); C.emote(f3, 'tear', 4);
+  await say(null, 'The jailer brings the cup. The friends weep. Socrates comforts *them*.');
+  await say('socrates', 'Why cry? We have spent our lives practicing for this: caring for the soul more than the body. Let us go calmly.');
+  C.emote(S, '...', 3);
+  await wait(1.2);
+  AudioSys.play('pad', 45, { vol: 0.08, dur: 6 }); AudioSys.play('pad', 52, { vol: 0.06, dur: 6 });
+  await C.black(true, 1.2);
+  await narrate('He drank calmly, talking with his friends about the soul until the end.');
+  await say('owl', 'Plato was too ill to be there that day. He wrote the scene later, in the *Phaedo*. Socrates died for the right to keep asking questions.');
+  await C.end();
+  S.x = home[0]; S.y = home[1]; S.dir = 0;
+  await C.black(false);
+}
+
+async function gadflyCutscene() {
+  SFX.buzz();
+  await say('socrates', 'Ha! Leave it be. I call *myself* a gadfly. Look:');
+  const C = await cutStart('Athens, the sleepy horse');
+  const horse = C.prop('horse', 330, 220, function (g, t) { const x = this.x, y = this.y, j = this.jump || 0; R(g, '#8b5a2b', x - 12, y - 16 - j, 24, 9); R(g, '#8b5a2b', x + 8, y - 22 - j + (this.sleep ? 5 : 0), 5, 9); R(g, '#8b5a2b', x + 10, y - 23 - j + (this.sleep ? 5 : 0), 7, 4); for (const lx of [-11, -7, 6, 10]) R(g, '#6b4a2b', x + lx, y - 7 - j, 2, 7); R(g, '#3a2a1a', x - 15, y - 16 - j, 3, 8); if (this.sleep) { R(g, '#aed6f1', x + 16, y - 26 - (t * 4) % 6, 4, 1); R(g, '#aed6f1', x + 19, y - 32 - (t * 4) % 6, 3, 1); } }, { sleep: true });
+  const fly = C.prop('fly', 240, 120, function (g, t) { R(g, '#111', this.x, this.y, 2, 1); R(g, 'rgba(255,255,255,0.7)', this.x, this.y - 1 - (Math.floor(t * 20) % 2), 1, 1); }, {});
+  await say(null, 'Athens is like a big, noble horse: strong, but lazy and half asleep.');
+  SFX.buzz();
+  for (let i = 0; i <= 40; i++) { fly.x = lerp(240, 342, i / 40) + Math.sin(i) * 6; fly.y = lerp(120, 200, i / 40) + Math.cos(i * 1.3) * 5; await nextFrame(); }
+  SFX.snap(); horse.sleep = false; shake(0.3);
+  for (let i = 0; i < 20; i++) { horse.jump = Math.sin(i / 20 * Math.PI) * 10; await nextFrame(); }
+  horse.jump = 0;
+  AudioSys.play('sine', 700, { hz: true, wave: 'sawtooth', to: 350, dur: 0.6, vol: 0.06 });
+  await say('socrates', 'Sting! Now it\'s awake. Annoying? Yes. Useful? Also yes. A city that never gets questioned falls asleep.');
+  await C.end();
 }

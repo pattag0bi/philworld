@@ -141,8 +141,8 @@ function drawMannequin(g, x, y, m, t) {
 async function sartreTalk() {
   if (flag('cf_sartre')) {
     const c = await ask('sartre', 'Mm? *(puffs pipe)*', ['What is bad faith?', 'What should I do with my freedom?', 'Is "Hell is other people" true?', 'Goodbye.']);
-    if (c === 0) { await say('sartre', 'Watch the waiter. Too precise, too eager, like a machine. He\'s *playing at being a waiter*, as if that were all he could be.'); await say('sartre', '*Bad faith* is lying to yourself about your freedom: "I had no choice." "That\'s just how I am." You always have a choice. Even not choosing is a choice.'); }
-    if (c === 1) { await say('sartre', 'During the war a student came to me. His brother had been killed. Should he join the Resistance, or stay and care for his mother, who lived only for him?'); await say('sartre', 'No ethics book could decide for him. I told him: *you are free, so choose*, that is, invent. Whatever he chose, he would be choosing what kind of person he was.'); }
+    if (c === 0) { await waiterCutscene(); await say('sartre', 'Too precise, too eager, like a machine. He\'s *playing at being a waiter*, as if that were all he could be.'); await say('sartre', '*Bad faith* is lying to yourself about your freedom: "I had no choice." "That\'s just how I am." You always have a choice. Even not choosing is a choice.'); }
+    if (c === 1) await studentCutscene();
     if (c === 2) { await say('sartre', 'That line from my play *No Exit* gets misread! I didn\'t mean people are awful. I meant: if we depend entirely on others\' judgment to know who we are, *that* becomes a hell.'); }
     return;
   }
@@ -173,8 +173,8 @@ async function sartreTalk() {
 async function beauvoirTalk() {
   const c = await ask('beauvoir', 'Simone de Beauvoir. Do sit down. What would you like to discuss?', ['"One is not born a woman…"?', 'Is my freedom just about me?', 'You and Sartre?']);
   if (c === 0) {
-    await say('beauvoir', 'In *The Second Sex* (1949) I wrote: *"One is not born, but rather becomes, a woman."*');
-    await say('beauvoir', 'Society hands women a ready-made "essence": passive, the "Other," defined in relation to men. But that\'s a role taught and imposed, not a fate. It can be refused and rewritten.');
+    await becomingCutscene();
+    await say('beauvoir', 'In *The Second Sex* (1949) I wrote: *"One is not born, but rather becomes, a woman."* The role is taught and imposed, not a fate. It can be refused and rewritten.');
     await say('owl', 'That book helped spark the modern feminist movement. It\'s the existentialist idea, "existence precedes essence," turned toward how societies shape people.');
   }
   if (c === 1) {
@@ -200,7 +200,8 @@ async function camusTalk() {
     return;
   }
   await say('camus', 'Albert Camus. I grew up poor in Algiers: sun, sea, football. I love life so much it hurts. And still I see the problem.');
-  await say('camus', 'We humans demand meaning, reasons, a point. The universe answers with… silence. That clash, our cry and the silent world, I call *the absurd*.');
+  await absurdCutscene();
+  await say('camus', 'We demand meaning. The universe answers with… silence. That clash, our cry and the silent world, I call *the absurd*.');
   await say('camus', 'Some escape it with false hope. Some give up. I say: *revolt*. Live with the absurd, fully, with eyes open. Let me show you my favorite hero.');
   await say('camus', 'Step into the painting with me…');
   await sisyphus();
@@ -337,4 +338,72 @@ async function finale() {
   await waitUntil(() => hit('act'));
   end();
   AudioSys.setMusic(null);
+}
+
+async function studentCutscene() {
+  await say('sartre', 'During the war a student came to me with an impossible choice. Watch.');
+  const C = await cutStart('Paris, 1940 · the occupation');
+  const st = C.actor('student', { skin: '#f0caa8', hairStyle: 'short', hairC: '#5a3a22', robe: '#5d6d7e', robe2: '#2c3e50', legs: '#2c3e50' }, 240, 200, { dir: 0 });
+  const mom = C.actor('mother', { skin: '#e8c0a0', hairStyle: 'bun', hairC: '#bbb', robe: '#7a6a8a', robe2: '#4a3a5a', long: true }, 150, 196, { dir: 3 });
+  const res = C.actor('resist', { skin: '#e0b090', hairStyle: 'short', hairC: '#2a1a10', robe: '#4a4a3a', robe2: '#2a2a1a', hat: 'beret', legs: '#2a2a1a' }, 330, 196, { dir: 2 });
+  await say(null, 'His brother had been killed in the war. His mother, alone and heartbroken, lived only for him.');
+  st.dir = 2; C.emote(mom, 'heart', 3);
+  await say({ name: 'His Mother', look: mom.look, voice: 400 }, 'Stay with me, my son. You are all I have left.');
+  st.dir = 3; C.emote(res, '!', 3);
+  await say({ name: 'A Resistance fighter', look: res.look, voice: 240 }, 'France needs you. Join us. Fight to free your country.');
+  for (let i = 0; i < 4; i++) { st.dir = i % 2 ? 2 : 3; C.emote(st, '?', 0.8); await wait(0.7); }
+  st.dir = 0; C.emote(st, 'sweat', 3);
+  await say('sartre', 'No rulebook could decide for him. Christian ethics says love your neighbor, but which one? Kant says never treat people merely as means, but he must fail someone.');
+  await say('sartre', 'I told him: *you are free, so choose*, that is, invent. Whatever he chose, he would be choosing what kind of person he was.');
+  await Promise.all([C.fadeActor(mom, 0), C.fadeActor(res, 0), C.fadeActor(st, 0)]);
+  await C.end();
+}
+
+async function waiterCutscene() {
+  const Wt = G.room.ents.find(e => e.id === 'waiter'); Wt._talk = true; const home = [Wt.x, Wt.y];
+  await say('sartre', 'Watch the waiter.');
+  const C = await cutStart('Bad faith');
+  const pts = [[200, 180], [200, 120], [290, 120], [290, 180], [200, 180]];
+  for (const [x, y] of pts) { await C.walk(Wt, x, y, 90); Wt.pose = { bow: true }; AudioSys.play('sine', 2000, { hz: true, wave: 'square', dur: 0.02, vol: 0.03 }); await wait(0.25); Wt.pose = {}; }
+  C.emote(Wt, '!', 1.5);
+  await say('waiter', 'I am a waiter! I bow at exactly the correct angle. I could not *possibly* be anything else!');
+  await C.walk(Wt, home[0], home[1], 90);
+  await C.end(); Wt._talk = false;
+}
+async function becomingCutscene() {
+  const C = await cutStart('One is not born, but becomes…');
+  const girl = C.actor('girl', { skin: '#f0caa8', hairStyle: 'ponytail', hairC: '#5a3a22', robe: '#ecf0f1', robe2: '#bdc3c7' }, 240, 210, { dir: 0, alpha: 0 });
+  await C.fadeActor(girl, 1, 0.8);
+  await say(null, 'A girl is born. Nothing about her is decided yet.');
+  const a1 = C.actor('a1', { skin: '#e8c0a0', hairStyle: 'short', hairC: '#3a2a1a', robe: '#34495e', collar: '#ecf0f1' }, 160, 200, { dir: 3 });
+  const a2 = C.actor('a2', { skin: '#e8c0a0', hairStyle: 'bun', hairC: '#bbb', robe: '#7a6a8a', long: true }, 320, 200, { dir: 2 });
+  C.emote(a1, '!', 2);
+  await say({ name: 'Society', look: a1.look, voice: 230 }, 'Be quiet. Be pretty. Don\'t be too clever. Your job is to please others.');
+  girl.look = Object.assign({}, girl.look, { robe: '#f78fb3', robe2: '#f8c8d8' }); SFX.sparkle(); C.emote(girl, '...', 2);
+  await say({ name: 'Society', look: a2.look, voice: 400 }, 'Girls don\'t do philosophy, dear. Here is an apron.');
+  C.emote(girl, '?', 2); await wait(1);
+  const book = C.prop('book', 250, 240, (g) => ICONS.book(g, 250, 236), {});
+  await C.walk(girl, 250, 246, 30);
+  book.alpha = 0; girl.pose = { hold: (g, x, y) => ICONS.book(g, x + 6, y - 9) };
+  girl.look = Object.assign({}, girl.look, { robe: '#7a2a3a', robe2: '#4a1a24' });
+  C.emote(girl, 'idea', 2.5); SFX.chime();
+  await say(null, 'But a role taught is not a fate. She picks up a book and walks her own way.');
+  await Promise.all([C.walk(girl, 240, 290, 40), C.fadeActor(a1, 0), C.fadeActor(a2, 0)]);
+  await C.end();
+}
+async function absurdCutscene() {
+  const C = await cutStart('The absurd');
+  const man = C.actor('man', playerLook(), 240, 200, { dir: 1 });
+  C.set((g, t) => { vgrad(g, 0, 0, W, H, '#05050f', '#1a1a3a', 10); for (let i = 0; i < 80; i++) R(g, '#fff', (i * 97) % W, (i * 41) % 180, 1, 1); R(g, '#2a2a3a', 0, 210, W, 62); });
+  await say(null, 'A person stands under the night sky and asks the biggest question of all.');
+  man.pose = { armsUp: true }; C.emote(man, '?', 3);
+  await say('you', 'WHY? Why am I here? What is it all *for*?');
+  AudioSys.setMusicVol(0.0001, 0.3);
+  for (let i = 0; i < 3; i++) AudioSys.play('sine', 300, { hz: true, vol: 0.05 / (i + 1), dur: 0.4 }, i * 0.6);
+  await wait(2.5);
+  await narrate('…The stars say nothing at all.');
+  man.pose = {}; C.emote(man, '...', 2.5);
+  await wait(1.2);
+  AudioSys.setMusicVol(0.55, 2);
+  await C.end();
 }

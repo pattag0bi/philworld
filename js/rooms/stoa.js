@@ -87,11 +87,7 @@ Rooms.stoa = {
       }),
       npc('zeno', 168, 104, LOOKS.zeno, {
         dir: 1,
-        async interact() {
-          await say('zeno', 'I\'m Zeno, founder of this school. We meet here at the *Stoa Poikile*, the "Painted Porch." That\'s why they call us *Stoics*.');
-          await say('zeno', 'I was a rich merchant. Then my ship sank with everything I owned. I wandered into a bookshop in Athens, read about Socrates, and found philosophy.');
-          await say('zeno', 'Later I said: *"I made a prosperous voyage when I suffered shipwreck."* Losing everything showed me what truly mattered.');
-        },
+        interact: () => zenoCutscene(),
       }),
       thing('desk', 152, 222, (g, t) => {
         R(g, '#f3e6c4', 144, 216, 8, 5); R(g, '#8b5a2b', 147, 217, 3, 1);
@@ -145,9 +141,7 @@ async function epictetusTalk() {
   if (flag('st_sorted')) {
     const c = await ask('epictetus', 'Yes, friend?', ['Why do you walk with a stick?', 'Remind me of the lesson.', 'Goodbye.']);
     if (c === 0) {
-      await say('epictetus', 'I was born a *slave*. My name even means "acquired." The story goes that my master once twisted my leg to see if I\'d cry out.');
-      await say('epictetus', 'I said calmly: "You\'ll break it." He twisted more. *Crack.*'); SFX.snap(); shake(0.2);
-      await say('epictetus', '"There. Didn\'t I tell you?" My leg was never up to me. My *response* was. Later I was freed and taught philosophy in Rome and Greece.');
+      await epictetusLegCutscene();
     }
     if (c === 1) await say('epictetus', 'Some things are up to us: our judgments, choices and efforts. The rest is not. Don\'t tie your peace to the second list.');
     return;
@@ -238,8 +232,7 @@ async function marcusTalk() {
     const c = await ask('marcus', 'Yes?', ['What are you writing?', 'Goodbye, Emperor.']);
     if (c === 0) {
       await say('marcus', 'Notes to myself. Never meant for anyone else. People will later publish them as my *Meditations*.');
-      await say('marcus', 'Each morning I remind myself: today I\'ll meet people who are rude, ungrateful, dishonest. They act that way from ignorance. I can\'t be harmed by them unless I *choose* to be.');
-      await say('owl', 'He was the most powerful man in the world, fighting wars and plague, and he spent his evenings writing reminders to be humble and patient.');
+      await marcusMorningCutscene();
     }
     return;
   }
@@ -293,4 +286,89 @@ async function marcusTalk() {
   await say('marcus', 'And there, the sun. It too was never up to you. Enjoy it anyway!');
   await giveInsight('control');
   await say('owl', 'The path *up* at the end of the colonnade is open. Where it leads, about 1,700 years later, a philosopher will challenge *everything*, including the Stoics.');
+}
+
+// ---------- cutscenes
+async function zenoCutscene() {
+  const Z = G.room.ents.find(e => e.id === 'zeno'), home = [Z.x, Z.y], Rm = Rooms.stoa;
+  await say('zeno', 'I\'m Zeno, founder of this school. We meet here at the *Stoa Poikile*, the "Painted Porch." That\'s why they call us *Stoics*.');
+  await say('zeno', 'Want to know how I became a philosopher? It began with a disaster.');
+  const C = await cutStart('Zeno of Citium · around 312 BCE');
+  const ship = C.prop('ship', 500, 150, function (g, t) {
+    const x = this.x, y = this.y + Math.sin(t * 3) * (1 + Rm.storm * 3), tilt = this.sink || 0;
+    g.save(); g.beginPath(); g.rect(342, 84, 138, 188); g.clip();
+    R(g, '#6b4a2b', x - 16, y + tilt * 10, 32, 6); R(g, '#8b5a2b', x - 13, y - 2 + tilt * 10, 26, 2);
+    R(g, '#5a3a1a', x, y - 22 + tilt * 14, 2, 22); R(g, '#f5f5f5', x + 2, y - 20 + tilt * 14, 12, 14);
+    for (let i = 0; i < 4; i++) ICONS.coin(g, x - 10 + i * 6, y - 4 + tilt * 12);
+    drawPerson(g, x - 8, y + tilt * 12, LOOKS.zeno, 2, 0, { noShadow: true });
+    g.restore();
+  });
+  Z.alpha = 0; Z.hidden = true;
+  await C.walk(ship, 410, 150, 25);
+  await say(null, 'A wealthy merchant sails toward Athens, his ship heavy with precious purple dye.');
+  for (let k = 0; k <= 20; k++) { Rm.storm = k / 20; await wait(0.05); }
+  SFX.thunder(); shake(0.4); Rm.bolt = G.t;
+  await say('zeno', 'A storm! The waves are too high!');
+  SFX.crack(); SFX.splash();
+  for (let k = 0; k <= 30; k++) { ship.sink = k / 10; await wait(0.05); }
+  ship.alpha = 0;
+  await narrate('The ship sinks with everything he owns.');
+  for (let k = 20; k >= 0; k--) { Rm.storm = k / 20; await wait(0.04); }
+  const z = C.actor('zenoWet', LOOKS.zeno, 440, 210, { dir: 2, alpha: 0 });
+  await C.fadeActor(z, 1, 1);
+  C.emote(z, 'tear', 2); await wait(1);
+  await C.walk(z, 214, 200, 35);
+  const book = C.prop('book', 236, 200, (g, t) => { R(g, '#6b4a2b', 226, 192, 26, 8); ICONS.book(g, 238, 190); }, {});
+  C.face(z, book);
+  await say(null, 'Penniless in Athens, he wanders into a bookshop and picks up a book about *Socrates*.');
+  C.emote(z, 'idea', 3);
+  await say('zeno', '"Where can I find a man like this?" I asked. The bookseller pointed to a philosopher walking by. *Follow him*, he said. And I did.');
+  await C.walk(z, home[0], home[1] + 6, 45);
+  z.alpha = 0; Z.hidden = false; Z.alpha = 1; ship.alpha = 0;
+  await C.end();
+  await say('zeno', 'Later I said: *"I made a prosperous voyage when I suffered shipwreck."* Losing everything showed me what truly mattered.');
+}
+async function epictetusLegCutscene() {
+  const E = G.room.ents.find(e => e.id === 'epictetus');
+  await say('epictetus', 'I was born a *slave*. My name even means "acquired." Let me show you a story they tell about me.');
+  const C = await cutStart('Rome, around 70 CE');
+  const master = C.actor('master', { skin: '#eab994', hairStyle: 'short', hairC: '#1d1d2b', robe: '#f5f5f5', robe2: '#8b1e2b', sash: '#8b1e2b', long: true }, 500, 150, { dir: 2 });
+  await C.walk(master, 222, 146, 50); C.face(master, E);
+  C.emote(master, 'angry', 2);
+  await say({ name: 'His Master', look: master.look, voice: 230 }, 'Let\'s see if you cry out, philosopher.');
+  shake(0.15); SFX.grunt();
+  C.emote(E, '...', 2.5);
+  await say('epictetus', '(calmly) If you keep twisting, you\'ll break it.');
+  shake(0.2); await wait(0.6);
+  SFX.snap(); shake(0.5); flash('#ffffff', 0.4);
+  C.emote(master, '!', 2);
+  await say('epictetus', '(just as calmly) There. Didn\'t I tell you?');
+  await C.walk(master, 520, 150, 60);
+  await C.end();
+  await say('epictetus', 'Perhaps it\'s only a legend. But the lesson is true: my leg was never up to me. My *response* was. Later I was freed and taught philosophy in Rome and Greece.');
+}
+
+async function marcusMorningCutscene() {
+  const Mc = G.room.ents.find(e => e.id === 'marcus'), home = [Mc.x, Mc.y];
+  await say('marcus', 'Each morning I write: today I will meet people who are rude, ungrateful, dishonest. Let me show you one such morning.');
+  const C = await cutStart('A Roman army camp · 170s CE');
+  const people = [
+    [{ skin: '#eab994', hairStyle: 'short', hairC: '#3a2a1a', robe: '#c0392b', hat: 'helmet' }, 'angry', 'Out of my way, old man!'],
+    [{ skin: '#c98e62', hairStyle: 'curly', hairC: '#1d1d2b', robe: '#8e44ad', robe2: '#e0c060', long: true }, 'ha', 'The emperor scribbles in his little diary again? Ha!'],
+    [{ skin: '#f0caa8', hairStyle: 'bun', hairC: '#5a3a22', robe: '#16a085', long: true }, '...', '(walks past, ignoring his greeting)'],
+  ];
+  await C.walk(Mc, 150, 236, 40); Mc.dir = 3;
+  for (const [look, emo, line] of people) {
+    const p = C.actor('p', look, 500, 236, { dir: 2 });
+    await C.walk(p, 176, 236, 70);
+    C.emote(p, emo, 2);
+    if (emo === 'angry') { shake(0.2); SFX.thud(); }
+    await say({ name: 'A passer-by', look, voice: 280 }, line);
+    C.emote(Mc, 'heart', 1.5);
+    await C.walk(p, -20, 236, 80);
+  }
+  await say('marcus', 'They act that way out of ignorance. I can\'t be harmed by them unless I *choose* to be. And I was born to work *with* them, like hands and feet.');
+  await C.walk(Mc, home[0], home[1], 40); Mc.dir = 3;
+  await C.end();
+  await say('owl', 'The most powerful man in the world, fighting wars and plague, writing himself reminders to be patient.');
 }

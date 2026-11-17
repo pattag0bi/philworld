@@ -174,15 +174,8 @@ async function buddhaTalk() {
   const Rm = Rooms.bodhi;
   if (!flag('bd_lute')) {
     await say('buddha', '…Welcome. Sit with me. I was born *Siddhartha Gautama*, a prince, in a palace full of every pleasure. My father wanted me never to see sorrow.');
-    const sights = [
-      ['An old man', (v, t) => { R(v, '#d8c8a8', 0, 0, 160, 90); drawPerson(v, 80, 76, { skin: '#d8b08a', hairStyle: 'bald', hairC: '#ddd', beard: '#ddd', beardLen: 3, robe: '#8a7a6a', staff: true, long: true }, 0, Math.floor(t * 2) % 4, { bow: true }); }],
-      ['A sick man', (v, t) => { R(v, '#c8c0b0', 0, 0, 160, 90); R(v, '#8b5a2b', 50, 62, 60, 8); drawPerson(v, 80, 64, { skin: '#c8d8a8', hairStyle: 'short', hairC: '#3a2a1a', robe: '#d8d0c0' }, 0, 0, { sit: true, closedEyes: true }); R(v, '#5dade2', 90, 44, 1, 2); }],
-      ['A funeral procession', (v, t) => { R(v, '#a8a090', 0, 0, 160, 90); R(v, '#f5f5f5', 60, 56, 40, 6); R(v, '#8b5a2b', 56, 62, 48, 2); for (let i = 0; i < 3; i++) drawPerson(v, 40 + i * 40 + (t * 6 % 40) - 20, 82, { skin: '#c98e62', hairStyle: 'short', hairC: '#111', robe: '#ecf0f1' }, 3, Math.floor(t * 4) % 4, {}); }],
-      ['A wandering monk, at peace', (v, t) => { R(v, '#f5cba7', 0, 0, 160, 90); drawPerson(v, 80, 76, LOOKS.monk, 0, 0, { smile: true }); disc(v, 80, 52, 14, 'rgba(255,230,150,0.3)'); }],
-    ];
     await say('buddha', 'But one day I rode out beyond the palace walls, and I saw *four sights*.');
-    for (const [title, fn] of sights) { showVignette(fn, { title }); AudioSys.play('bowl', 55 + sights.findIndex(s => s[0] === title) * 2, { vol: 0.07 }); await wait(1.6); }
-    hideVignette();
+    await fourSightsCutscene();
     await say('buddha', 'Old age. Sickness. Death. They come to *everyone*, even princes. And then a monk, calm in the middle of it all. I left the palace that night to find out how.');
     await say('buddha', 'For six years I tried the opposite of luxury: fasting until my ribs showed, sleeping on thorns. I nearly died. It didn\'t help either.');
     await say('buddha', 'Then, so the story goes, I overheard a music teacher on a passing boat, instructing a student. Here. Tune this string.');
@@ -195,7 +188,7 @@ async function buddhaTalk() {
     return;
   }
   if (!flag('bd_letgo')) {
-    if (Rm.carried.length < TREASURES.length) { await say('buddha', `Gather them all. You have ${Rm.carried.length} of ${TREASURES.length}.`); return; }
+    if (Rm.carried.length < TREASURES.length) { await say('buddha', 'Gather them *all*, every last one. Then come back to me.'); return; }
     await say('buddha', 'You have everything. Wealth, power, pleasure, praise, a fine self-image. Tell me: how do you feel?');
     await ask('buddha', '', ['Heavy. Slow.', 'Anxious. I\'m afraid of dropping something.', 'I want *more*.']);
     await say('buddha', 'This is *tanha*: craving, clinging. We grab at things that cannot last, and then we suffer when they change or slip away.');
@@ -307,14 +300,7 @@ async function kisaStory() {
   await say('kisa', 'My name is Kisa Gotami. I want to tell you how I met the Buddha. It is a sad story, but it ends in peace.');
   await say('kisa', 'My little son died. I couldn\'t accept it. I carried him from house to house, begging for medicine to bring him back.');
   await say('kisa', 'The Buddha said: "Bring me a mustard seed, but only from a house where *no one has ever died*."');
-  let lit = 0;
-  showVignette((v, t) => {
-    R(v, '#1a1a30', 0, 0, 160, 90);
-    for (let i = 0; i < 6; i++) { const x = 12 + i * 25; R(v, '#5a4a3a', x, 50, 18, 22); for (let k = 0; k < 6; k++) R(v, '#7a5a3a', x - 2 + k * 0.5, 44 + k, 22 - k, 1); if (i < lit) { R(v, '#f7dc6f', x + 6, 58, 6, 6); drawFlame(v, x + 9, 82, t + i, 0.6); } else R(v, '#2a2a3a', x + 6, 58, 6, 6); }
-  }, { title: 'House after house…' });
-  for (let i = 1; i <= 6; i++) { lit = i; AudioSys.play('bell', 64 + [0, 2, 4, 7, 9, 12][i - 1], { vol: 0.05, dur: 2 }); await wait(0.6); }
-  await say('kisa', 'I went to every house in the village. Everyone had a seed to give, but every family had lost someone: a parent, a child, a friend.');
-  hideVignette();
+  await kisaCutscene();
   await say('kisa', 'By nightfall I understood. I was not alone. Death touches everyone. I buried my son, and became a nun.');
   await say('owl', 'The Buddha didn\'t argue with her grief. He let her *discover* impermanence for herself, and find that it connected her to everyone else.');
 }
@@ -334,4 +320,68 @@ async function chariotScene(Rm) {
   hideVignette();
   Rm.chariot = 0;
   await say('owl', 'Remember the pond at the Crossroads? "Who is looking back?" This is the Buddhist answer: there\'s a *process*, not a thing. Freeing, once you stop clinging to it!');
+}
+
+async function fourSightsCutscene() {
+  const C = await cutStart('Kapilavastu · the four sights');
+  const prince = C.actor('prince', { skin: '#d9a066', hairStyle: 'short', hairC: '#1d1d2b', robe: '#f1c40f', robe2: '#c0392b', hat: 'crown', long: true }, 150, 190, { dir: 3 });
+  const ch = C.actor('channa', { skin: '#c98e62', hairStyle: 'topknot', hairC: '#1d1d2b', robe: '#ecf0f1', robe2: '#8b5a2b' }, 132, 196, { dir: 3 });
+  const passers = [
+    ['An old man', { skin: '#d8b08a', hairStyle: 'bald', hairC: '#ddd', beard: '#ddd', beardLen: 3, robe: '#8a7a6a', robe2: '#5a4a3a', staff: true, long: true }, { bow: true }, 22, 'tear', 'Channa, what is wrong with that man? His back is bent, his hair is white!', 'He is *old*, my prince. It comes to everyone who lives long enough. To you too.'],
+    ['A sick man', { skin: '#c8d8a8', hairStyle: 'short', hairC: '#3a2a1a', robe: '#d8d0c0', robe2: '#a8a090' }, { sit: true, closedEyes: true }, 0, 'tear', 'And that one, shaking, lying by the road?', 'He is *sick*, my prince. Anyone can fall ill, even a king.'],
+    ['A funeral procession', { skin: '#c98e62', hairStyle: 'short', hairC: '#111', robe: '#ecf0f1', robe2: '#ecf0f1' }, {}, 30, 'tear', 'Why are they carrying that still body, weeping?', 'He has *died*, my prince. Every living thing must die.'],
+    ['A wandering monk', LOOKS.monk, { smile: true }, 28, 'idea', 'And him? He owns nothing, yet his face is so *peaceful*.', 'He is a monk, a seeker. He has left everything to find a way beyond suffering.'],
+  ];
+  for (const [title, look, pose, speed, emote, q, a] of passers) {
+    C.caption(title);
+    let actors = [];
+    if (title === 'A funeral procession') {
+      for (let i = 0; i < 3; i++) actors.push(C.actor('f' + i, look, 420 + i * 16, 168, { dir: 2 }));
+      actors.push(C.prop('shroud', 440, 156, function (g) { R(g, '#f5f5f5', this.x - 14, this.y, 30, 5); R(g, '#8b5a2b', this.x - 16, this.y + 5, 34, 2); }, {}));
+    } else if (title === 'A sick man') {
+      actors.push(C.actor('s', look, 300, 168, { pose }));
+    } else actors.push(C.actor('p', look, 400, 168, { dir: 2, pose }));
+    AudioSys.play('bowl', 55 + passers.findIndex(p => p[0] === title) * 2, { vol: 0.08 });
+    if (speed) await Promise.all(actors.map(x => C.walk(x, x.x - 150, x.y, speed)));
+    C.face(prince, actors[0]);
+    C.emote(prince, emote, 3);
+    await say({ name: 'Prince Siddhartha', look: prince.look, voice: 330 }, q);
+    await say({ name: 'Channa, the charioteer', look: ch.look, voice: 260 }, a);
+    if (speed) await Promise.all(actors.map(x => C.walk(x, x.x - 300, x.y, speed * 1.5)));
+    actors.forEach(x => x.alpha = 0);
+  }
+  C.caption('That night');
+  prince.look = Object.assign({}, prince.look, { hat: null, robe: '#e07b1a', robe2: '#b05a10' });
+  SFX.sparkle();
+  await say(null, 'That night the prince took off his crown, left the palace, and set out to find the end of suffering.');
+  await C.walk(prince, -20, 190, 40);
+  await C.end();
+}
+async function kisaCutscene() {
+  const K = G.room.ents.find(e => e.id === 'kisa'), home = [K.x, K.y];
+  const C = await cutStart('Kisa Gotami and the mustard seed');
+  const houses = [];
+  const xs = [160, 220, 280, 340, 400];
+  xs.forEach((x, i) => houses.push(C.prop('h' + i, x, 252, function (g, t) {
+    R(g, '#c8a070', x - 12, 230, 24, 22); for (let k = 0; k < 8; k++) R(g, '#a07a3a', x - 14 + k * 0.5, 222 + k, 28 - k, 1);
+    R(g, '#3a2a1a', x - 3, 240, 6, 12);
+    if (this.lit) { R(g, '#f7dc6f', x + 5, 236, 5, 5); drawFlame(g, x + 7, 256, t + i, 0.5); }
+  }, {})));
+  G.tint = 'rgba(20,20,50,0.35)';
+  for (let i = 0; i < houses.length; i++) {
+    await C.walk(K, xs[i], 262, 45);
+    K.dir = 1;
+    await wait(0.4);
+    houses[i].lit = true;
+    AudioSys.play('bell', 64 + [0, 2, 4, 7, 9][i], { vol: 0.06, dur: 2 });
+    C.emote(K, i < 4 ? '...' : 'tear', 1.5);
+    await wait(0.8);
+  }
+  await say('kisa', 'I went to every house in the village. Everyone had a seed to give, but every family had lost someone: a parent, a child, a friend.');
+  K.pose = { sit: true };
+  await wait(1);
+  G.tint = null;
+  await C.walk(K, home[0], home[1], 60);
+  K.pose = {}; K.dir = 3;
+  await C.end();
 }

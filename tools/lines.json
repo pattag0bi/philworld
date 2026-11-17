@@ -1,0 +1,3692 @@
+[
+ {
+  "speaker": "youngPlato",
+  "text": "Shh, I'm writing. Socrates never writes anything down. He says writing makes memory lazy!",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "youngPlato",
+  "text": "So I'll write *dialogues*: little plays starring him. Ironically, the only reason anyone will remember him is my books.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "youngPlato",
+  "text": "One day I'll found a school called the *Academy*. Our word \"academic\" will come from it. It'll run for about 300 years.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sophist",
+  "text": "Psst! I'm *Gorgias*, a Sophist. For a fee I'll teach you to win *any* argument, whether you're right or not!",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sophist",
+  "text": "Special price: two obols. What do you say?",
+  "file": "js/rooms/agora.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "sophist",
+  "text": "Lesson one: never admit you're wrong. Lesson two: if you're losing, *talk faster*. Lesson three: see lesson one.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "(from across the square) And what if the other person is *right*, Gorgias? Then you've \"won\" and stayed foolish!",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sophist",
+  "text": "Bah! You sound just like Socrates. He never charges a single coin. Terrible business model.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "The Sophists taught *rhetoric*, the art of persuasion. Socrates cared about *truth* instead. That's why \"sophistry\" now means clever-sounding but misleading arguments.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Citizens gather here to argue about politics, trade gossip and buy olives.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Athens invented *democracy*: \"rule by the people.\" Citizens voted directly on laws. But only free adult men counted. Women, slaves and foreigners had no vote. A good question for Socrates: *was that just?*",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Still here? Good. Keep asking questions. When someone says \"everyone knows that…\", that's exactly where to dig.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Ah, a new face! I'm Socrates. I don't teach anything. I just ask questions. Will you help me with one?",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Here it is: *What is justice?*",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "What is justice? Give me your best answer.",
+  "file": "js/rooms/agora.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Hmm. Then try again: *what is justice?*",
+  "file": "js/rooms/agora.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "you",
+  "text": "Hmm… okay, maybe not quite.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "you",
+  "text": "Ugh. You're good at this.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "you",
+  "text": "Hmm…",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "you",
+  "text": "Wait… then I don't know what justice is at all!",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Wonderful! Don't look so sad. You've lost a *false belief*. That's a gain, not a loss!",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "This is my method: ask \"what is X?\", then test each answer with *counterexamples*. People call it the *Socratic method*.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Most people are certain about big words like justice, courage and love, and they never check. Now you've checked. Now you *know that you don't know*. That's where real thinking begins.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Now. My student Plato, that young man writing everything down, will grow up with a bold idea:",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "that the true reality is *beyond* this world of the senses. And *his* student Aristotle will disagree: truth is right *here*, in real things.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Your road leads upper-left, to Plato's Cave.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Your road leads lower-left, to Aristotle's Lyceum.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "So which road calls you? *Is truth beyond this world, or in it?*",
+  "file": "js/rooms/agora.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Then go upper-left, to the Cave. Bring a sense of wonder… and maybe sunglasses.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Then go lower-left, to the Lyceum. Aristotle walks while he talks, so keep up!",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Don't worry: once you finish that road, the other one opens too. *Every* path can be explored.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A stone tablet: *\"The Oracle of Delphi was asked: is anyone wiser than Socrates? The priestess answered: No one.\"*",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Chaerephon",
+  "text": "Socrates, my friend! I went all the way to Delphi and asked the god: is anyone wiser than you? The priestess said: *no one!*",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Me? But I know *nothing*! There must be a mistake. I'll find someone wiser and prove the god wrong.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:A Famous Politician",
+  "text": "Justice? Simple. It's whatever wins votes. Next question.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:A Celebrated Poet",
+  "text": "My verses are inspired by the Muses! What do they *mean*? Well… I couldn't really say.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:A Skilled Craftsman",
+  "text": "I make the finest shoes in Athens! So of course I also know how the city should be run.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Each one *thought* he knew things he didn't. The craftsman truly knew his craft, but thought that made him wise about everything.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "So I am wiser in just one tiny way: *I know that I don't know.* Maybe that's what the god meant.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Asking experts hard questions in public made Socrates many enemies. Powerful people don't like looking foolish.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A cup of *hemlock*, a poison. Something terrible happened in this city…",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Meletus, the accuser",
+  "text": "Men of Athens! This Socrates *corrupts the youth* and does not honor the gods of the city! He must be punished!",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Socrates speaks in his own defense. He doesn't beg or weep, as accused men usually did.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "I am like a *gadfly* on a great, lazy horse. If you kill me, you won't easily find another to keep you awake. And I tell you: *the unexamined life is not worth living.*",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A jury of about *500 citizens* votes, dropping pebbles into urns…",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Guilty, by about 60 votes. The sentence: *death*.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Crito",
+  "text": "Socrates, everything is ready. The guards are bribed. A ship is waiting. *Escape tonight!*",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Dear Crito. Should I break the laws that raised me, just to save my own skin? Would that be *just*? No. I won't run.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The jailer brings the cup. The friends weep. Socrates comforts *them*.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Why cry? We have spent our lives practicing for this: caring for the soul more than the body. Let us go calmly.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "He drank calmly, talking with his friends about the soul until the end.",
+  "file": "js/rooms/agora.js",
+  "kind": "narrate"
+ },
+ {
+  "speaker": "owl",
+  "text": "Plato was too ill to be there that day. He wrote the scene later, in the *Phaedo*. Socrates died for the right to keep asking questions.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Ha! Leave it be. I call *myself* a gadfly. Look:",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Athens is like a big, noble horse: strong, but lazy and half asleep.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Sting! Now it's awake. Annoying? Yes. Useful? Also yes. A city that never gets questioned falls asleep.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Slowly, the lotus flowers open: pure pink petals rising from brown, muddy water.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "The lotus is a favorite Buddhist symbol. It grows *out of* the mud, yet blooms clean. Awakening doesn't happen by escaping life's mess. It grows *from* it.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The deer look up, hop a few steps, then go back to grazing.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "After his awakening, the Buddha gave his very first teaching in a *deer park* at Sarnath, to five former companions. It's called \"Setting the Wheel of Dharma in Motion.\"",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Hoo… are you walking slower? And what's that buzzing?",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Arms full. Heavy. Every step is an effort, and the buzzing in your ears won't stop. Go back to the Buddha.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "…Welcome. Sit with me. I was born *Siddhartha Gautama*, a prince, in a palace full of every pleasure. My father wanted me never to see sorrow.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "But one day I rode out beyond the palace walls, and I saw *four sights*.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "Old age. Sickness. Death. They come to *everyone*, even princes. And then a monk, calm in the middle of it all. I left the palace that night to find out how.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "For six years I tried the opposite of luxury: fasting until my ribs showed, sleeping on thorns. I nearly died. It didn't help either.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "Then, so the story goes, I overheard a music teacher on a passing boat, instructing a student. Here. Tune this string.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "Too loose, it won't sing. Too tight, it snaps. This is the *Middle Way*: not indulgence, not self-torture.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "I ate a bowl of rice milk, sat beneath this very tree, and vowed not to rise until I understood. At dawn, I *awoke*. \"Buddha\" means \"the awakened one.\"",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "Now, let me show you the root of suffering. Treasures are scattered around this garden. Go and *gather them all*.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "Gather them *all*, every last one. Then come back to me.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "You have everything. Wealth, power, pleasure, praise, a fine self-image. Tell me: how do you feel?",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "This is *tanha*: craving, clinging. We grab at things that cannot last, and then we suffer when they change or slip away.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "Let go. Press *E* to set each one down.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "…Silence. Then a single singing bowl, slowly fading. You feel light enough to float.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "narrate"
+ },
+ {
+  "speaker": "buddha",
+  "text": "Hear how the bowl rings and fades? Every sound, every flower, every feeling, every life arises and passes away. This is *anicca*, impermanence.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "Suffering doesn't come from things changing. It comes from *clinging* to them as if they wouldn't.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "Let me put it the way a doctor would. My first teaching had *four truths*.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "Don't believe me because I said it. *Test it*, like a goldsmith tests gold by rubbing and burning it. See for yourself.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "The path *east* is open, to Paris in the 1940s. Strange neighbors, I know! But they're also asking how to live with suffering and freedom.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "…",
+  "file": "js/rooms/bodhi.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "buddha",
+  "text": "Look for your \"self.\" Is it your body? Your feelings? Thoughts? All are always changing. Ask *Nagasena* by the chariot. He explains it well.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "buddha",
+  "text": "To *see clearly*. Sit, breathe, and watch thoughts arise and pass like clouds. Slowly you stop being pushed around by every craving.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "monk",
+  "text": "I am making a sand mandala, as monks in Tibet do. Thousands of grains, placed one by one, for days or weeks. Will you help? Press *E* to pour each ring.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "monk",
+  "text": "Beautiful, isn't it? Look at it carefully…",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "monk",
+  "text": "…and gone. We always sweep it away when it's finished, and pour the sand into a river.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "monk",
+  "text": "Not because it didn't matter. Because *everything* is like this. Making it beautifully *and* letting it go: that's the whole practice.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "kisa",
+  "text": "My name is Kisa Gotami. I want to tell you how I met the Buddha. It is a sad story, but it ends in peace.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "kisa",
+  "text": "My little son died. I couldn't accept it. I carried him from house to house, begging for medicine to bring him back.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "kisa",
+  "text": "The Buddha said: \"Bring me a mustard seed, but only from a house where *no one has ever died*.\"",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "kisa",
+  "text": "By nightfall I understood. I was not alone. Death touches everyone. I buried my son, and became a nun.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "The Buddha didn't argue with her grief. He let her *discover* impermanence for herself, and find that it connected her to everyone else.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nagasena",
+  "text": "I am the monk Nagasena. A Greek king named *Milinda*, Menander, ruler of northwest India around 150 BCE, once asked me: \"Who are you, really?\"",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nagasena",
+  "text": "I asked him: \"Your Majesty, how did you come here?\" \"By chariot,\" he said. \"Then show me the chariot.\"",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nagasena",
+  "text": "Is the *wheel* the chariot? No. The *axle*? No. The *box*, the *pole*? No. Is the chariot something *apart* from all its parts? No!",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nagasena",
+  "text": "\"Chariot\" is a *name* for parts working together. Useful, but there's no extra chariot-thing hiding inside.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nagasena",
+  "text": "So too with \"Nagasena\": body, feelings, perceptions, intentions, awareness, all flowing and changing. That's *anatta*, \"not-self.\" No fixed, unchanging core.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Remember the pond at the Crossroads? \"Who is looking back?\" This is the Buddhist answer: there's a *process*, not a thing. Freeing, once you stop clinging to it!",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "That night the prince took off his crown, left the palace, and set out to find the end of suffering.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "kisa",
+  "text": "I went to every house in the village. Everyone had a seed to give, but every family had lost someone: a parent, a child, a friend.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The figure you shaped: *{}*. Every label came from an action.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A blank, faceless figure. No name. No purpose. It is waiting to become *someone*.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A little jazz phrase rings out over the clink of cups.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "In Sartre's novel *Nausea*, the hero feels that existence is pointless and sticky, until he hears a jazz record, \"Some of These Days.\" For a moment, the music feels *necessary*. Art as a tiny rescue.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A faded poster: *Søren Kierkegaard*, Copenhagen, 1840s. \"Anxiety is the dizziness of freedom.\"",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Kierkegaard is often called the *father of existentialism*, though his answer was a passionate \"leap of faith.\" His room isn't built yet. It's on the roadmap as a teaser!",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Rain on the rooftops of Paris. Somewhere, a siren.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "During World War II, France was occupied by Nazi Germany (1940–44). Everyday choices became life-and-death: collaborate, resist, or look away. No wonder these thinkers obsessed over *freedom* and *responsibility*.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The espresso machine hisses. A sign over the bar reads *Café de Flore*.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Sartre and Beauvoir practically lived at cafés like the Flore and Les Deux Magots. During the war, the cafés were heated and their hotel rooms weren't, so they wrote there all day.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Hoo! Paris! Every road ends up here. Smell that coffee. Listen to that rain. These people are asking: *if nothing is given to us, not even our purpose, what do we do?*",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sartre",
+  "text": "Mm? *(puffs pipe)*",
+  "file": "js/rooms/cafe.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "sartre",
+  "text": "Too precise, too eager, like a machine. He's *playing at being a waiter*, as if that were all he could be.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sartre",
+  "text": "*Bad faith* is lying to yourself about your freedom: \"I had no choice.\" \"That's just how I am.\" You always have a choice. Even not choosing is a choice.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sartre",
+  "text": "That line from my play *No Exit* gets misread! I didn't mean people are awful. I meant: if we depend entirely on others' judgment to know who we are, *that* becomes a hell.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sartre",
+  "text": "Ah, sit, sit. Jean-Paul Sartre. Writer, philosopher, terrible at being on time. Look at this paper knife on my table.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sartre",
+  "text": "Before it was made, someone *designed* it, for cutting paper. Its purpose, its *essence*, came first. Then it existed.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sartre",
+  "text": "Now: what is *your* purpose? Who designed *you*? I say: no one. You *exist first*, and then you define yourself by what you do. *Existence precedes essence.*",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sartre",
+  "text": "Don't believe me? Here: this blank figure. Let's see who it becomes. Choose for it.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sartre",
+  "text": "Look! A moment ago this was nobody. Now it is {} and {}. Not because it was *born* that way: because of what it *did*.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sartre",
+  "text": "And notice: at every step, you could have chosen *otherwise*. That's the frightening part. We are *condemned to be free*. No excuses, no human nature to blame, no rulebook from the sky.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sartre",
+  "text": "Freedom means *responsibility*. And when you choose, you're showing what you think a human being *should* be. Heavy, eh? Hence the anguish. Hence the coffee.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "beauvoir",
+  "text": "Simone de Beauvoir. Do sit down. What would you like to discuss?",
+  "file": "js/rooms/cafe.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "beauvoir",
+  "text": "In *The Second Sex* (1949) I wrote: *\"One is not born, but rather becomes, a woman.\"* The role is taught and imposed, not a fate. It can be refused and rewritten.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "That book helped spark the modern feminist movement. It's the existentialist idea, \"existence precedes essence,\" turned toward how societies shape people.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "beauvoir",
+  "text": "No! That's the trap. My freedom only means something in a world with *other* free people. *\"To will oneself free is also to will others free.\"*",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "beauvoir",
+  "text": "Someone who is starving, or oppressed, can't exercise their freedom fully. So taking freedom seriously means fighting for *everyone's*. I called this the *ethics of ambiguity*.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "beauvoir",
+  "text": "Partners for fifty years, never married, each with our own lives. We read every word the other wrote. Sometimes I think people forget *I* was a philosopher too, not just \"Sartre's companion.\"",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "waiter",
+  "text": "Bonjour! I am a waiter. *(bows exactly 30 degrees)* A waiter is what I am. I could not possibly be anything else.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "waiter",
+  "text": "What will Monsieur or Madame have?",
+  "file": "js/rooms/cafe.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "waiter",
+  "text": "Café crème. *(pivot, step, step, pivot)* Coming. Precisely. As a waiter does.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "waiter",
+  "text": "…Error. I… am… a waiter. *(clicks heels nervously)* Please don't ask such questions.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sartre",
+  "text": "(murmuring) See? *Bad faith*. He pretends his role is his whole being, so he doesn't have to face his freedom. Of course, he *is* free. He could quit tomorrow and sail to Brazil!",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "camus",
+  "text": "Ah, my friend.",
+  "file": "js/rooms/cafe.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "camus",
+  "text": "Everyone says so! I always denied it. I don't think we \"create\" meaning out of nothing. I think we face the absurd honestly and live *anyway*. A small difference, but it mattered to me.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "camus",
+  "text": "Not violence. Revolt means refusing both despair *and* false comfort. Keep your eyes open, keep living fully: love, create, play football, swim in the sea. *\"In the midst of winter, I found there was, within me, an invincible summer.\"*",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "camus",
+  "text": "Albert Camus. I grew up poor in Algiers: sun, sea, football. I love life so much it hurts. And still I see the problem.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "camus",
+  "text": "We demand meaning. The universe answers with… silence. That clash, our cry and the silent world, I call *the absurd*.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "camus",
+  "text": "Some escape it with false hope. Some give up. I say: *revolt*. Live with the absurd, fully, with eyes open. Let me show you my favorite hero.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "camus",
+  "text": "Step into the painting with me…",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "camus",
+  "text": "*\"The struggle itself toward the heights is enough to fill a man's heart. One must imagine Sisyphus happy.\"*",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "camus",
+  "text": "His rock is his thing. His task is his. And in the moment of walking back down the hill, he is *free*, and stronger than his fate.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "camus",
+  "text": "And down it rolls. The gods condemned Sisyphus to push it up, forever. Pointless. Like many jobs. Like many lives. Again!",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "camus",
+  "text": "Listen: do you hear a rhythm in his effort? The task hasn't changed. *He* is starting to. Again!",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "camus",
+  "text": "Look at his face as he walks back down. He knows the rock will roll again. He *knows*. And he whistles.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Hoo… Sartre: you're free and responsible for what you become. Camus: life may have no given meaning, and you can live it fully anyway.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Look who came, {name}! Everyone you met along the way.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Notice something? Socrates questioning, the Stoics and the Buddha on letting go, Laozi's flowing water, Camus's rock… Different lands, different centuries, *similar questions*.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Philosophy isn't a list of answers to memorize. It's a way of *walking*: wondering, questioning, testing, and choosing how to live.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "More rooms are being built: *Epicurus's Garden*, *Descartes's Stove Room*, *Kant's Clockwork Study*, the *Zen Garden*, *Ubuntu Village*… You'll find them as grey stars on the map.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sartre",
+  "text": "During the war a student came to me with an impossible choice. Watch.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "His brother had been killed in the war. His mother, alone and heartbroken, lived only for him.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:His Mother",
+  "text": "Stay with me, my son. You are all I have left.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:A Resistance fighter",
+  "text": "France needs you. Join us. Fight to free your country.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sartre",
+  "text": "No rulebook could decide for him. Christian ethics says love your neighbor, but which one? Kant says never treat people merely as means, but he must fail someone.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sartre",
+  "text": "I told him: *you are free, so choose*, that is, invent. Whatever he chose, he would be choosing what kind of person he was.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "sartre",
+  "text": "Watch the waiter.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "waiter",
+  "text": "I am a waiter! I bow at exactly the correct angle. I could not *possibly* be anything else!",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A girl is born. Nothing about her is decided yet.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Society",
+  "text": "Be quiet. Be pretty. Don't be too clever. Your job is to please others.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Society",
+  "text": "Girls don't do philosophy, dear. Here is an apron.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "But a role taught is not a fate. She picks up a book and walks her own way.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A person stands under the night sky and asks the biggest question of all.",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "you",
+  "text": "WHY? Why am I here? What is it all *for*?",
+  "file": "js/rooms/cafe.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "…The stars say nothing at all.",
+  "file": "js/rooms/cafe.js",
+  "kind": "narrate"
+ },
+ {
+  "speaker": "owl",
+  "text": "Hoo. Today you might think of advertisers, propaganda, or a social media feed: someone else choosing the shadows you watch.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A pile of spare wooden cutouts: a horse, a tree, a jar, a bird. Flat. Crude. Painted on one side only.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "These are what made your whole world on the wall. The \"real\" horse was a *shadow of a copy*.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The fire is real, or at least *more* real than the shadows. But it stings your eyes. After a lifetime in the dark, even firelight hurts.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Plato says learning is often uncomfortable at first. The truth can feel like an attack on everything you're used to.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "LIGHT! Everything is blinding white. You can't see a thing!",
+  "file": "js/rooms/cave.js",
+  "kind": "narrate"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Slowly… colors. Shapes. Your eyes are adjusting.",
+  "file": "js/rooms/cave.js",
+  "kind": "narrate"
+ },
+ {
+  "speaker": "plato",
+  "text": "Easy, friend! Don't try to look at the Sun yet. You'd only be blinded again. Come here, talk to me.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Darkness. Cold stone. Chains on your wrists and ankles. You've been here your *whole life*. At least, that's how it feels.",
+  "file": "js/rooms/cave.js",
+  "kind": "narrate"
+ },
+ {
+  "speaker": "narrator",
+  "text": "All you have ever seen are shapes moving on the wall in front of you. Every sound seems to come *from* the wall: muffled, echoing.",
+  "file": "js/rooms/cave.js",
+  "kind": "narrate"
+ },
+ {
+  "speaker": "name:Prisoner",
+  "text": "Look, the *horse* again! I called it first!",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Prisoner",
+  "text": "And next comes the *bird*, then the *jar*. I'm the best at predicting. Everyone honors me for it.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Prisoner",
+  "text": "Your turn, newcomer. What's the *realest* thing in the world?",
+  "file": "js/rooms/cave.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "name:Prisoner",
+  "text": "Exactly! What else *could* there be?",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Prisoner",
+  "text": "Behind us?! Ha! There's nothing behind us. Don't talk nonsense.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "But something itches at you. Why do the shapes always come from the same direction? What is *behind* you?",
+  "file": "js/rooms/cave.js",
+  "kind": "narrate"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The chains snap! You stand, turn around, and…",
+  "file": "js/rooms/cave.js",
+  "kind": "narrate"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A *FIRE*! It burns your eyes. Between you and the fire, people walk behind a low wall, carrying *wooden cutouts* above their heads.",
+  "file": "js/rooms/cave.js",
+  "kind": "narrate"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The horse. The bird. The jar. They were never real. They were *shadows of puppets*. The sounds were just echoes.",
+  "file": "js/rooms/cave.js",
+  "kind": "narrate"
+ },
+ {
+  "speaker": "owl",
+  "text": "Hoo… Look around. Talk to the puppeteers. And notice the *tunnel* in the bottom-right corner, leading *up*.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Back in the dark. After the sunlight, you're nearly blind down here. You stumble over a rock.",
+  "file": "js/rooms/cave.js",
+  "kind": "narrate"
+ },
+ {
+  "speaker": "name:Prisoner",
+  "text": "Ha! Look at him. He went up there and came back with *ruined eyes*. He can't even see the shadows anymore!",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "you",
+  "text": "Listen! The shadows aren't real. There's a whole world up there, and a Sun, and real horses…",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Prisoner",
+  "text": "Madness! Nobody else go up there! And if anyone tries to drag *us* up… we'll kill them.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Plato wrote that line on purpose. He was thinking of his teacher *Socrates*, who was executed by Athens for trying to make people see.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Plato said true education isn't pouring knowledge into empty heads. It's *turning the whole soul around*, from shadows toward the light. Nobody can do the climbing for you.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "A passage has opened on the *right side* of the cave, toward the Stoa. And the other road from the Agora is open now too!",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "In the still water: reflections of trees and clouds. Upside down, but in *color*, in *daylight*.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "plato",
+  "text": "Good. First reflections, then the things themselves. The eyes, like the mind, must be led *step by step*.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A *real horse*! Warm, breathing, smelling of grass. It snorts and nudges your hand.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The thing on the wall was a flat grey shadow… of a wooden copy… of *this*.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "AAH! Too bright! Your eyes aren't ready. Start gently: the *reflections in the pond*, then the *real things*.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Slowly, you lift your eyes… to the *Sun*.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "It lights up everything. It makes the grass grow and the seasons turn. Without it, you couldn't see *anything*, not even the shadows below.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "plato",
+  "text": "Yes! For me the Sun stands for the *Form of the Good*: the highest reality, the source of all truth and value. Come here. Let me explain.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "plato",
+  "text": "Welcome to the upper world! I'm Plato. I'm the one who imagined this cave. It's an *allegory*: a story where everything stands for something else.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "plato",
+  "text": "The cave is the world of our *senses*. The shadows are the opinions and appearances we accept without questioning.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "plato",
+  "text": "Your eyes need time. First look at *reflections* in the pond. Then the *real things*: that horse there. Only then, the *Sun* from the hilltop.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "plato",
+  "text": "Reflections first, then things, then the Sun. Step by step, like learning mathematics!",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "plato",
+  "text": "Now. Look at these circles someone drew in the sand.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "plato",
+  "text": "Each one is a bit wobbly. Listen: each sounds slightly *off*. No circle anyone has ever drawn is perfect.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "plato",
+  "text": "Yet you *know* they're imperfect. Compared to *what*? You've never seen a perfect circle with your eyes.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "plato",
+  "text": "You compare them to *the Circle itself*, the *Form* of Circle. Perfect, eternal, unchanging. Not seen with the eyes, but grasped by the *mind*.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "plato",
+  "text": "It's the same with horses. Big ones, small ones, spotted ones all share one Form: *Horseness*. And with Beauty, and Justice. Socrates was searching for the *Form of Justice*!",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "plato",
+  "text": "My student Aristotle will say I've got it backwards, that forms live *inside* real things, not in some other realm. Students! Always arguing.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "plato",
+  "text": "And now the hardest part. Go back *down* into the cave and tell the others what you've seen. The opening is on the left.",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "plato",
+  "text": "Remember: what you see with your eyes changes and decays. What you grasp with reason, like the Forms and mathematics, lasts forever. Or so I believe!",
+  "file": "js/rooms/cave.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A *bianzhong*: a set of bronze bells, each tuned to a different note. Some ancient sets had over 60 bells!",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "For Confucius, music and ritual worked together: ritual gives *order*, music gives *harmony*. A good society needs both.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Gold characters on black lacquer: *Zhengming*, \"the rectification of names.\"",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "A ruler must *act* like a ruler. A father must *act* like a father. If names don't match reality, words lose their meaning, and then nothing can be done right.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Imagine calling a cruel king \"the people's protector.\" Confucius thought fixing the gap between *words* and *deeds* was the first step to fixing a society.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "In the bronze mirror, a boy is about to shove his friend. Then the image flips: the *friend* shoves *him*.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "A student asked me: \"Is there one word to guide your whole life?\" I said: *shu*, \"reciprocity.\" *Do not impose on others what you yourself do not want.*",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Versions of this \"Golden Rule\" appear in many traditions: Hillel in Judaism, Jesus in Christianity, the Mahabharata in Hinduism. Confucius said it around 500 BCE.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "Once, standing by a river, I said: \"It flows on like this, never stopping, day and night.\"",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "People still debate what he meant. Time slipping away? Or steady, ceaseless effort, like the river? Maybe both!",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Yan Hui, a student",
+  "text": "I'm the Master's favorite student, Yan Hui. He never wrote a book. We students wrote down his sayings after he died. They're called the *Analects*.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Yan Hui, a student",
+  "text": "The very first line: *\"Is it not a joy to learn, and to practice what you have learned?\"*",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Yan Hui, a student",
+  "text": "He taught anyone who came with even a small gift of dried meat, rich or poor. That was unusual in his time.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "Welcome, traveler. I am Kong Qiu. My students call me Kongzi, \"Master Kong.\" In the West you'll call me *Confucius*.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "I lived in a time of chaos: warring states, greedy lords, broken families. I asked: how do people live *well together*?",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "My answer: society is like a set of bells. Each *relationship* is one bell. When each is in its proper place, the whole rings in *harmony*.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "But look around. Five relationships have turned their backs on each other. Their bells hang silent.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "Go to each pair and help them find the right way to treat one another. Listen: you'll *hear* when it's right.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "Listen…",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "Harmony. Not sameness: five *different* notes, each in its place, sounding together.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "The heart of it is *ren*: humaneness, warm-heartedness toward others. It starts at home and ripples outward to the village, the state, the world.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "And *li*: ritual, courtesy, manners. Li is how ren becomes *visible*. A bow, a greeting, a respectful silence. Small acts that hold a society together.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "The person who lives this way is a *junzi*, an exemplary person. Not by birth, but by *character*. Anyone can become one, through learning.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "Let me teach you one piece of li. Press *B* to bow. Try it near people. You'll see they answer in kind.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "B to bow! Works everywhere in PhilWorld. The moon gate to the *east* is open now.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "Yes, my friend?",
+  "file": "js/rooms/courtyard.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "confucius",
+  "text": "The junzi seeks the cause in *himself*; the petty person seeks it in *others*. The junzi is calm and at ease; the petty person is always anxious.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "For over 2,000 years! Confucian classics became the basis of China's imperial exams, used to choose government officials from about 600 to 1905 CE.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Today Confucian ideas still shape life in China, Korea, Japan, Vietnam and beyond. They're also hotly debated: some say they encourage too much obedience; others say they're about mutual care.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "courtyardPeople",
+  "text": "Hmph. Talk to the Master first.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "courtyardPeople",
+  "text": "Thank you. Everything feels lighter now.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "courtyardPeople",
+  "text": "Ah, much better. Can you hear our bell?",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "courtyardPeople",
+  "text": "We bowed to each other this morning. It's amazing what that does.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "All five bells ring! Go tell *Confucius*!",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Try again?",
+  "file": "js/rooms/courtyard.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "confucius",
+  "text": "Music shapes the heart. Let me show you what happened when I heard the ancient *Shao* music.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "I didn't notice the taste of meat for three months! I never imagined music could reach such perfection.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "*West*: Ancient Greece. Socrates, Plato, Aristotle, the Stoics… and onward to Nietzsche.\nThe West often asks: *What is real? What can I know?*",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "*East*: China and India. Confucius, Laozi, the Buddha.\nThe East often asks: *How do I live in harmony, with others and with the world?*",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "*North*: the Existentialist Café, Paris. Both roads end there, in the 20th century.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Of course, those are rough generalizations. Every tradition asks *all* the big questions. That's what makes comparing them fun!",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Your reflection looks back at you, rippling.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Carved above the Temple of Apollo at Delphi were two words: *\"Know thyself.\"*",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "So… who is the \"you\" looking back?",
+  "file": "js/rooms/crossroads.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "owl",
+  "text": "Your body replaces most of its cells over the years. Are you a *new* you? Hoo! Hold that puzzle. The Buddha has thoughts about it, out East.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Many agree! But memories fade and change. Hold that puzzle. The Buddha has a surprising answer, out East.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Ha! Socrates would love you. Admitting you don't know is where philosophy starts.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "You wake at a crossroads. The sun is setting. You don't quite remember how you got here…",
+  "file": "js/rooms/crossroads.js",
+  "kind": "narrate"
+ },
+ {
+  "speaker": "owl",
+  "text": "Hoo! A new traveler! Welcome, *{name}*.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "I'm *Glaux*, an owl of Athena, the Greek goddess of wisdom. Owls have been a symbol of philosophy for over 2,000 years.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "A philosopher named Hegel wrote that \"the owl of Minerva spreads its wings only with the falling of dusk.\" Wisdom often arrives *after* the day is done, when we look back.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Fitting, isn't it? Look at that sunset.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Tell me: have you ever wondered *why there is something rather than nothing?*",
+  "file": "js/rooms/crossroads.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "owl",
+  "text": "Then you're already a philosopher. Hoo hoo!",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Well, you just did! See? It's contagious.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "No tests here! You *can't fail* in PhilWorld. You can only wonder.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "This world is made of *rooms*. Each holds one big idea. Talk to people and *touch things*, and the ideas will show themselves. You'll *hear* them too, so keep your ears open.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Arrows or WASD to walk. *E* to interact. *M* opens the roadmap of ideas, *J* your journal, *H* asks me for a hint, *N* toggles sound.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Before you choose a road, look at that *statue of a thinker* by the path. It's pondering the five biggest questions of all.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A stone figure sits chin-on-hand, frozen mid-thought. As you look closer, its questions seem to float up into the air…",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Those five questions are the main *branches* of philosophy. \"Philosophy\" itself comes from Greek: *philo* (love) + *sophia* (wisdom).",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Plato and Aristotle both said philosophy begins in *wonder*: being puzzled by things everyone else takes for granted.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "You earned your first *Insight*! Press *J* any time to reread it. Now the roads are open. *West* or *East*? Your choice!",
+  "file": "js/rooms/crossroads.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "alexander",
+  "text": "I'm Alexander, prince of Macedon. Aristotle was hired by my father to tutor me, from when I was 13.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "alexander",
+  "text": "He taught me ethics, politics, poetry, medicine… and to always seek the *mean* between extremes.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "alexander",
+  "text": "Soon I'm going to conquer the known world, from Greece to India. He'd probably say I *slightly overshot* the mean on ambition.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "(calling over) An acorn! Plant it. Watch what it's *trying* to become.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Every living thing has a *telos*: a built-in goal. The acorn's telos is to become a flourishing oak.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "And a human's? To use *reason* well and live a life of virtue together with others. I call that *eudaimonia*: flourishing, or deep happiness.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Logic! I was the first to write down its rules. Here is a *syllogism*: two premises, one conclusion that MUST follow.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Big circle: *mortal things*. Inside it: *humans*. Inside that: *Socrates*. If the circles are drawn right, the conclusion can't escape!",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "His logic was the standard in Europe and the Islamic world for about 2,000 years. Thinkers like Ibn Sina and Ibn Rushd studied and expanded it.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "I dissected and described over *500 kinds of animals*. I noticed dolphins breathe air, give birth to live young and nurse them with milk.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "So they're more like land mammals than fish! Everyone laughed. About 2,000 years later, biologists agreed with me.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Unlike Plato, Aristotle looked *down* at the world, not up. He collected, sorted and observed. He's often called the first great *scientist*.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "I sort everything: plants that *grow*, animals that grow and *feel and move*, and humans who grow, feel, move and *reason*.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "That tortoise and those sheep each have a *soul* in my sense: what makes a living thing alive and active. Not a ghost; more like its *way of being*.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "To truly understand *anything*, ask four \"why\" questions. I call them the *four causes*. Let's try them on this statue.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "1. The *material* cause: what is it made of? *Marble.*",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "2. The *efficient* cause: what made it? *The sculptor's chisel*, tap, tap, tap.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "3. The *formal* cause: what shape or design makes it *this* thing? *The form of a hero*, which the sculptor had in mind.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "4. The *final* cause: what is it *for*? *To honor a hero*, and inspire citizens.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Notice: for me the form isn't floating in some heaven like Plato's Forms. It's *in* the thing itself.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Remember: virtue is a *habit*. You don't become kind by reading about kindness. You become kind by doing kind things, again and again.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Ah, walk with me! My students are called *Peripatetics*: \"the ones who walk around.\" I think better on my feet.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "My teacher Plato looked up to the heavens for truth. I look *here*: at animals, plants, cities, people. What actually makes a human life go *well*?",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "My answer: *virtue*. And every virtue is a *mean* between two vices: one of too little, one of too much.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Here. Tune these three virtues on this young soldier. Don't look for the exact middle. *Listen* for where it sounds right.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "You found them! Notice the mean wasn't always dead center. Courage leans a little toward boldness, generosity a little toward caution. The mean is *relative to us* and to the situation.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "That takes *practical wisdom*, phronesis. No rulebook can do it for you.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "And virtue is a *habit*. A harpist becomes good by playing the harp; we become brave by doing brave things. Do it until it's who you are.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "The path *west* to the Stoa is open, and so is the other road back at the Agora.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A small rented room in Sils-Maria. A desk, piles of notebooks, medicine bottles, and a pair of very worn walking boots.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "I walk six, eight hours a day here. *\"All truly great thoughts are conceived while walking.\"*",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Nietzsche suffered terrible headaches, stomach pain and near-blindness for most of his life. He wrote anyway, often in short bursts. Pain was something he tried to say *yes* to.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A huge pyramid-shaped boulder by Lake Silvaplana. Nietzsche said a thought struck him right here in August 1881, \"6,000 feet beyond man and time.\"",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Darkness, all the way down. Then two red eyes blink open, looking back up at you.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "*\"Whoever fights monsters should see to it that he does not become a monster. And if you gaze long into an abyss, the abyss also gazes into you.\"*",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Already cracked.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "In my book *Thus Spoke Zarathustra*, the spirit goes through *three transformations*.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "First, the *camel*. It kneels and says: \"Load me up!\" It carries all the heavy values it was handed: duty, tradition, *\"Thou shalt.\"*",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "Then the *lion*. In the desert it meets a great dragon whose every scale reads *\"Thou shalt.\"* The lion roars: *\"I will!\"* It wins its freedom by saying *No*.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "But the lion can't *create*. So last comes the *child*: innocence, forgetting, a game, a new beginning, a sacred *Yes*. The child makes *new* values.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "Hear a story I wrote, in *The Gay Science* (1882). Watch.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "On a bright morning, a madman lights a lantern and runs into the marketplace…",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:The Madman",
+  "text": "\"I seek God! I seek God!\"",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The people there don't believe in God anymore. They laugh. \"Did he get lost? Did he emigrate? Is he hiding?\"",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:The Madman",
+  "text": "\"Where is God? I will tell you. *We have killed him*, you and I. *God is dead.* God remains dead.\"",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:The Madman",
+  "text": "\"I have come too early. This tremendous event is still on its way…\"",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "Don't mistake me. I'm not *cheering*. I'm describing something: in modern Europe, people no longer truly *live by* the old beliefs, yet they still lean on the values those beliefs held up.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "The madman says he came *too early*. Nobody yet sees what it means: if the foundation is gone, what holds up *meaning*, *morality*, *truth*?",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "People still argue about this today. Many religious thinkers strongly disagree with Nietzsche, and that argument is part of philosophy too.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "Ah, a visitor on my mountain! I am Friedrich Nietzsche. Excuse the mustache. It has its own opinions.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "So. Take this hammer. I *philosophize with a hammer*. Not to smash things blindly, but to *tap* the great idols, like a tuning fork, and hear whether they ring *hollow*.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "Those three gleaming pillars on the ledge: tap each one. Listen closely.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "Tap them! All three. Don't be afraid of what you hear.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "One more test, the heaviest. Go sit by the *pyramid rock* by the lake. That's where this thought first came to me.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "Well, friend?",
+  "file": "js/rooms/mountain.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "The *Übermensch*, the \"Overhuman,\" is an ideal: someone who creates their own values and says *yes* to life, with all its suffering.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "\"Man is a rope stretched between animal and Übermensch: a rope over an abyss.\" Ha! You'll see that rope soon.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "Terribly. After my mind collapsed in 1889, my sister edited my notes and later bent my ideas to fit German nationalism and antisemitism, which *I despised*.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "True. Nietzsche wrote openly against antisemites, and fell out with his old friend Wagner partly over it. Scholars spent decades rescuing his real ideas.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "CRASH. The pillars topple and shatter in the snow. Cold wind howls through the empty space where they stood.",
+  "file": "js/rooms/mountain.js",
+  "kind": "narrate"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "There. Do you feel it? Dizziness. As if we're falling in every direction. If nothing is *given* from above, does anything matter at all?",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "That feeling is *nihilism*: \"nothing has value.\" It's the great danger of our age. But it is *not* the end of the story.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "If values aren't handed down to us, then we must *create* them. That is the task: *become who you are*.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "Now, one last test, the heaviest of all. Go sit by the *pyramid rock* by the lake.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "demon",
+  "text": "…What if, one day or night, a *demon* crept after you into your loneliest loneliness and said:",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "demon",
+  "text": "\"This life, as you now live it, you will have to live *once more*, and *innumerable times more*. Every pain, every joy, every thought and sigh, all in the same order.\"",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "demon",
+  "text": "\"Even this spider, and this moonlight between the trees. Even this moment, and I myself. The eternal hourglass of existence, turned over again and again, and you with it, speck of dust!\"",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "How do you answer the demon?",
+  "file": "js/rooms/mountain.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "demon",
+  "text": "Again. The same pains. The same regrets. The same small, grey days. Forever.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "Feel how heavy that is? Then the real question is not \"is it true?\" It's this: *how would you have to live, so that you could say yes to it?*",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Then…",
+  "file": "js/rooms/mountain.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "YES! Hear it? The very same melody, but now you *love* it. Nothing changed except your *yes*.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "That is *amor fati*: love of fate. Not just putting up with what happens, but *loving* it, even the hard parts. Wanting nothing to be different, not forward, not backward, not in all eternity.",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "Look: a *rope* now stretches across the abyss. \"Man is a rope over an abyss.\" Cross it. On the other side, some Parisians have been reading me very closely…",
+  "file": "js/rooms/mountain.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "An hourglass, its sand slowly running out. Beside it, an open notebook in Greek.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "On the hourglass is carved: *MEMENTO MORI*, \"remember that you will die.\"",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "marcus",
+  "text": "Not to be gloomy. To be *awake*. If today were your last, would you spend it complaining about traffic?",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "The Stoics also practiced *premeditatio malorum*: calmly imagining losses in advance, so they wouldn't be crushed by surprise and would appreciate what they have.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A letter signed *Seneca*: Roman statesman, playwright, and Stoic. He wrote 124 letters of advice to his friend Lucilius.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "\"We suffer more often in *imagination* than in reality.\" Most of our fears are about things that never actually happen.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "The Roman orator Cicero described a *Stoic archer*. Do everything you can to aim well. Then let go.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A sudden gust pushes the arrow wide. A miss!",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "THUNK! Bullseye!",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Either way, the Stoic asks only: *did I aim well?* The aim was up to you; the wind wasn't. Hitting is \"preferred,\" but your aim is your *success*.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "Yes, friend?",
+  "file": "js/rooms/stoa.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "Some things are up to us: our judgments, choices and efforts. The rest is not. Don't tie your peace to the second list.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "Sit, sit. My teaching fits in one sentence, the very first line of my *Handbook*:",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "*\"Some things are up to us, and some things are not up to us.\"*",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "Most misery comes from mixing them up. Let's practice. I'll toss things to you. Sort each one: *← not up to me* or *→ up to me*.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "Good. Now listen: *\"People are disturbed not by things, but by their judgments about things.\"*",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "An insult is just sounds. The *story* you tell about it is what hurts, and that story is up to you.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "Go see the Emperor Marcus by his tent. I think… the weather is about to give you a test.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "marcus",
+  "text": "Greetings. I am Marcus Aurelius, Emperor of Rome. Forgive me, I'm writing in my notebook. Talk to Epictetus first. His books taught me most of what I know.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "marcus",
+  "text": "Yes?",
+  "file": "js/rooms/stoa.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "marcus",
+  "text": "Notes to myself. Never meant for anyone else. People will later publish them as my *Meditations*.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "marcus",
+  "text": "Ah, you've learned the sorting. Now let's see it in the body, not just the head. Look at the sea.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "marcus",
+  "text": "A storm. You cannot stop it. You cannot argue with it. Not even an emperor can.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "marcus",
+  "text": "But *inside* you there is a citadel the storm cannot enter, unless you open the gates. Breathe with me.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "marcus",
+  "text": "Listen. The storm is still roaring… but it isn't *inside* you anymore.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "marcus",
+  "text": "I wrote in my notebook: *\"You have power over your mind, not outside events. Realize this, and you will find strength.\"*",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "marcus",
+  "text": "And there, the sun. It too was never up to you. Enjoy it anyway!",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "The path *up* at the end of the colonnade is open. Where it leads, about 1,700 years later, a philosopher will challenge *everything*, including the Stoics.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "zeno",
+  "text": "I'm Zeno, founder of this school. We meet here at the *Stoa Poikile*, the \"Painted Porch.\" That's why they call us *Stoics*.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "zeno",
+  "text": "Want to know how I became a philosopher? It began with a disaster.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A wealthy merchant sails toward Athens, his ship heavy with precious purple dye.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "zeno",
+  "text": "A storm! The waves are too high!",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The ship sinks with everything he owns.",
+  "file": "js/rooms/stoa.js",
+  "kind": "narrate"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Penniless in Athens, he wanders into a bookshop and picks up a book about *Socrates*.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "zeno",
+  "text": "\"Where can I find a man like this?\" I asked. The bookseller pointed to a philosopher walking by. *Follow him*, he said. And I did.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "zeno",
+  "text": "Later I said: *\"I made a prosperous voyage when I suffered shipwreck.\"* Losing everything showed me what truly mattered.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "I was born a *slave*. My name even means \"acquired.\" Let me show you a story they tell about me.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:His Master",
+  "text": "Let's see if you cry out, philosopher.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "(calmly) If you keep twisting, you'll break it.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "(just as calmly) There. Didn't I tell you?",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "Perhaps it's only a legend. But the lesson is true: my leg was never up to me. My *response* was. Later I was freed and taught philosophy in Rome and Greece.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "marcus",
+  "text": "Each morning I write: today I will meet people who are rude, ungrateful, dishonest. Let me show you one such morning.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "marcus",
+  "text": "They act that way out of ignorance. I can't be harmed by them unless I *choose* to be. And I was born to work *with* them, like hands and feet.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "The most powerful man in the world, fighting wars and plague, writing himself reminders to be patient.",
+  "file": "js/rooms/stoa.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A hard grey stone with a deep, smooth groove worn into its top, right beneath a dripping spring.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "*\"Nothing in the world is softer or weaker than water. Yet for attacking the hard and strong, nothing can beat it.\"*",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "Drip by drip, century by century, the soft overcomes the hard. Not by force, but by *persistence* and *yielding*.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "You turn the stone. The sky begins to shift…",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "*Yin* and *yang*. Dark and light, soft and hard, rest and motion. Not enemies: partners. Each contains the seed of the other, and each turns into the other.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "Hear the low tone and the high tone? Alone, each is thin. Together: harmony. *\"When everyone knows beauty as beauty, ugliness is already there.\"* No high without low.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "You pour water into a clay pot. It fills up the empty space inside.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "*\"Thirty spokes share one hub; it is the empty center that makes the wheel useful. Shape clay into a pot; it is the emptiness inside that makes it useful.\"*",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "Everyone admires what *is*. Few notice the power of what *isn't*: the empty room you live in, the silence between notes, the pause before a reply.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A rough, uncarved block of wood.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "*Pu*, the uncarved block. Before it's carved into a bowl or a spoon, it could become *anything*. Simplicity is full of possibility.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "Be like the block: unpretentious, natural, not carved up by ambition and cleverness.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The opening line of the *Tao Te Ching*, said to be written by Laozi on his way out of China.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "As you read it… the words fade away.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "The *Tao*, \"the Way,\" is the source and flow of everything. The moment you put it into words, you've made it smaller. Like trying to hold water in your fist.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "Mm. A traveler. I am called *Laozi*, \"the Old Master.\" Legend says I was keeper of the royal archives, until I grew tired of court life and rode west on this buffalo.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Historians aren't sure Laozi was even one real person! The Tao Te Ching may be a collection by several hands. The legend is still lovely.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "You want to reach the *next valley*? The river goes there. Take the little boat at the dock. Paddle hard!",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "The boat is waiting at the dock.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "Mm?",
+  "file": "js/rooms/valley.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "laozi",
+  "text": "*\"Governing a large country is like cooking a small fish.\"* Poke at it too much and it falls apart. The best leaders are barely noticed. When their work is done, the people say: \"We did it ourselves.\"",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "Ha! The farmer who pulls on his rice shoots to help them grow faster kills them. The lazy farmer lets weeds win. Wu wei is the *third way*: tend, then trust. Act, but don't force.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The river sparkles. You've already learned what it had to teach.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "Reach the far valley. Use the *arrow keys* to paddle. Paddle hard!",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The boat glides gently onto a sandy bank. You arrived without even trying, once you stopped trying.",
+  "file": "js/rooms/valley.js",
+  "kind": "narrate"
+ },
+ {
+  "speaker": "laozi",
+  "text": "Ha! You didn't even pick up the paddle. You're a natural. Most people fight for years before learning that.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "Notice what happened. The harder you paddled, the more you got stuck, spun around and crashed. When you let go, the current carried you *around* every rock.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "This is *wu wei*: \"non-action,\" or better, *effortless action*. Not doing nothing. Acting *with* the flow of things, like a swimmer using the current instead of fighting it.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "laozi",
+  "text": "*\"The Tao does nothing, yet nothing is left undone.\"* The seasons turn, the rivers run, the plants grow. No strain, no fuss.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "The path *east* toward the Bodhi Tree is open. Laozi's ideas will later blend with Buddhism in China, giving rise to *Chan*, known in Japan as *Zen*!",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "zhuangzi",
+  "text": "Mmm… zzz… ah! Oh. I'm *Zhuangzi*. Sorry, I was dreaming. Want to try? Close your eyes…",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "zhuangzi",
+  "text": "Once I, Zhuangzi, dreamt I was a butterfly, fluttering happily, with no idea I was Zhuangzi.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "zhuangzi",
+  "text": "Suddenly I woke up, and there I was, solidly Zhuangzi. But now I can't tell: *was I Zhuangzi dreaming I was a butterfly, or am I a butterfly dreaming I'm Zhuangzi?*",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "zhuangzi",
+  "text": "Maybe the boundaries we draw, between me and not-me, dream and waking, are less fixed than we think. Things keep *transforming* into each other.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:The Gatekeeper",
+  "text": "Old Master! You're leaving the kingdom forever? Then please, before you go, *write down your wisdom* for us!",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Laozi writes about 5,000 characters in two short books. The *Tao Te Ching*: \"The Classic of the Way and Its Power.\"",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Then he rides west through the gate… and is never seen again.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "cookding",
+  "text": "I'm Cook Ding, from a story by *Zhuangzi*. Watch two cooks at work.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:A clumsy cook",
+  "text": "Argh! Another broken knife! I hack and chop and the bone always wins!",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "cookding",
+  "text": "My knife has lasted *nineteen years*. I don't force anything. I *feel* for the natural gaps, and the blade glides through like a dance.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Lord Wenhui",
+  "text": "Excellent! From Cook Ding I have learned how to *live*.",
+  "file": "js/rooms/valley.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Look around! Anything glowing or marked with a *!* wants your attention.",
+  "file": "js/world.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "confucius",
+  "text": "How should a *ruler* and a *minister* treat each other?",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "Blind obedience isn't loyalty! A good minister *speaks up* when the ruler is wrong, respectfully but honestly.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "The ruler leads by virtue; the minister serves loyally and speaks up.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "\"Govern by virtue and you will be like the North Star: it stays in place while all the other stars turn around it.\"",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "Then the state falls apart. Rulers who serve only themselves lose the people's trust, and without trust no state can stand.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "How should a *parent* and a *child* treat each other?",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "Fear isn't respect. Confucius said even dogs and horses get fed. What matters is *reverence* and care, given willingly.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "For Confucius, the family is where we *first* learn to be human. It's the root of every other virtue.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "The parent cares and guides; the child respects, and cares for them when they're old.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "This is *xiao*, filial piety: love and respect flowing up, care and guidance flowing down.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "How should an *elder* and a *younger* sibling treat each other?",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "Kindness from above, respect from below. Each role carries a *duty*, not just a privilege.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "Bossing isn't leading. An elder who isn't kind hasn't earned the younger's respect.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "A family at war with itself can't teach harmony to anyone else.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "How should *spouses* treat each other?",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "In Confucius's day these roles were *unequal*, and later thinkers argued hard about that. The core idea that survives: duties flow *both ways*.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "How should *friends* treat each other?",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "Confucius warned against friends who flatter. A true friend tells you the truth, kindly.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "Friends are equals who are trustworthy and help each other grow.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "The only relationship of *equals* among the five. \"Have no friends who are not as good as yourself\": friends lift each other up.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Interesting! This is what old Cephalus says in Plato's *Republic*. Let's test it.",
+  "file": "js/rooms/agora.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Suppose a friend lends you his sword. Later he goes *mad* and demands it back, raging.",
+  "file": "js/rooms/agora.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "socrates",
+  "text": "You owe it to him. Is it *just* to hand a sword to a madman?",
+  "file": "js/rooms/agora.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Interesting! Polemarchus argues this in the *Republic*. Let's test it.",
+  "file": "js/rooms/agora.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "socrates",
+  "text": "But we often misjudge who our friends really are. Someone who seems friendly might be robbing you!",
+  "file": "js/rooms/agora.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "socrates",
+  "text": "And tell me: does *harming* a person make them better, or worse? Can justice ever make people *worse*?",
+  "file": "js/rooms/agora.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Interesting! Thrasymachus angrily says this in the *Republic*. Let's test it.",
+  "file": "js/rooms/agora.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "socrates",
+  "text": "But rulers make *mistakes*. Sometimes they order things that actually harm themselves.",
+  "file": "js/rooms/agora.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Then obeying them is sometimes *not* in the stronger's interest. So is justice obeying, or benefiting? It can't be both!",
+  "file": "js/rooms/agora.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "buddha",
+  "text": "Life involves *dukkha*: suffering, dissatisfaction, a sense that something is never quite right.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "buddha",
+  "text": "Its cause is *tanha*: craving and clinging, to pleasure, to being, even to not-being.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "buddha",
+  "text": "Suffering *can end*. That ending is *nirvana*: literally \"blowing out,\" like a flame of craving gone quiet.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "buddha",
+  "text": "The *Eightfold Path*: right view, intention, speech, action, livelihood, effort, mindfulness, concentration.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "sartre",
+  "text": "A stranger drops their groceries in the rain.",
+  "file": "js/rooms/cafe.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "sartre",
+  "text": "A free evening, all to yourself.",
+  "file": "js/rooms/cafe.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "sartre",
+  "text": "A friend begs you to lie for them.",
+  "file": "js/rooms/cafe.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "sartre",
+  "text": "You see someone treated unfairly.",
+  "file": "js/rooms/cafe.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:Prisoner",
+  "text": "Go away! You went up there and came back half-blind. Proof that it's dangerous!",
+  "file": "js/rooms/cave.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:Prisoner",
+  "text": "A \"Sun\"? A \"real horse\"? Ha! Sit down and watch the *actual* horse on the wall.",
+  "file": "js/rooms/cave.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:Prisoner",
+  "text": "If anyone tries to drag *me* up there, I'll fight them!",
+  "file": "js/rooms/cave.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:Prisoner",
+  "text": "…Was it really brighter up there? No. No, don't tell me.",
+  "file": "js/rooms/cave.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:Prisoner",
+  "text": "Turn around? Why would I? Everything real is right there on the wall.",
+  "file": "js/rooms/cave.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:Prisoner",
+  "text": "Shh! The jar is coming. I've memorized the order. I'm the best at this.",
+  "file": "js/rooms/cave.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:Prisoner",
+  "text": "You're blocking the horse! Sit down!",
+  "file": "js/rooms/cave.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:Prisoner",
+  "text": "Behind us? There's nothing behind us. There's only the wall.",
+  "file": "js/rooms/cave.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "puppeteer",
+  "text": "Shh! Back to your seat! We just… carry things back and forth. Don't think about it.",
+  "file": "js/rooms/cave.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "puppeteer",
+  "text": "You saw the shadows? That's *my* horse. Nice, isn't it? Painted it myself.",
+  "file": "js/rooms/cave.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "puppeteer",
+  "text": "Who are we? Doesn't matter. Plato never says. Maybe the people who decide what everyone else sees.",
+  "file": "js/rooms/cave.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "narrator",
+  "text": "*Metaphysics* asks: What is *REAL*?\nIs the world just atoms? Do minds exist? What is time?",
+  "file": "js/rooms/crossroads.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "narrator",
+  "text": "*Epistemology* asks: How do I *KNOW*?\nCan I trust my senses? What counts as proof? Could I be dreaming?",
+  "file": "js/rooms/crossroads.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "narrator",
+  "text": "*Ethics* asks: What *SHOULD* I do?\nWhat makes an action right? What is a good life? What do we owe each other?",
+  "file": "js/rooms/crossroads.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "narrator",
+  "text": "*Logic* asks: What makes reasoning *GOOD*?\nWhen does one idea really follow from another? How do we spot bad arguments?",
+  "file": "js/rooms/crossroads.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "narrator",
+  "text": "*Aesthetics* asks: What is *BEAUTY*?\nIs beauty in the object or in the eye? Why does music move us?",
+  "file": "js/rooms/crossroads.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:Prince Siddhartha",
+  "text": "Channa, what is wrong with that man? His back is bent, his hair is white!",
+  "file": "js/rooms/bodhi.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:Channa, the charioteer",
+  "text": "He is *old*, my prince. It comes to everyone who lives long enough. To you too.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:Prince Siddhartha",
+  "text": "And that one, shaking, lying by the road?",
+  "file": "js/rooms/bodhi.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:Channa, the charioteer",
+  "text": "He is *sick*, my prince. Anyone can fall ill, even a king.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:Prince Siddhartha",
+  "text": "Why are they carrying that still body, weeping?",
+  "file": "js/rooms/bodhi.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:Channa, the charioteer",
+  "text": "He has *died*, my prince. Every living thing must die.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:Prince Siddhartha",
+  "text": "And him? He owns nothing, yet his face is so *peaceful*.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:Channa, the charioteer",
+  "text": "He is a monk, a seeker. He has left everything to find a way beyond suffering.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:A passer-by",
+  "text": "Out of my way, old man!",
+  "file": "js/rooms/stoa.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:A passer-by",
+  "text": "The emperor scribbles in his little diary again? Ha!",
+  "file": "js/rooms/stoa.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "name:A passer-by",
+  "text": "(walks past, ignoring his greeting)",
+  "file": "js/rooms/stoa.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "socrates",
+  "text": "So! Did you find out what justice is? …No? Excellent. Keep asking.",
+  "file": "js/rooms/cafe.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "plato",
+  "text": "Even this café is a kind of cave. Shadows of ideas everywhere! Wonderful ones, mind you.",
+  "file": "js/rooms/cafe.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Coffee: a fine thing, in moderation. The mean, always the mean!",
+  "file": "js/rooms/cafe.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "The rain outside? Not up to us. The conversation inside? Very much up to us.",
+  "file": "js/rooms/cafe.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "nietzsche",
+  "text": "These Parisians read me well! Though I'd say: create your values *joyfully*. Dance a little!",
+  "file": "js/rooms/cafe.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "confucius",
+  "text": "A gathering of friends from far away: is this not a delight? I said that, you know.",
+  "file": "js/rooms/cafe.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "laozi",
+  "text": "So many words in this café… Mm. The best ones are the pauses between them.",
+  "file": "js/rooms/cafe.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "buddha",
+  "text": "Every face here will change, and this evening will pass. That is why it is precious.",
+  "file": "js/rooms/cafe.js",
+  "kind": "data"
+ },
+ {
+  "speaker": "owl",
+  "text": "Talk to *Socrates*, the bald man with the white beard. He has a question for you.",
+  "file": "js/rooms/agora.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Talk to Socrates again. He'll show you the fork in the road.",
+  "file": "js/rooms/agora.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "The *upper-left* path leads to Plato's Cave.",
+  "file": "js/rooms/agora.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "The *lower-left* path leads to Aristotle's Lyceum.",
+  "file": "js/rooms/agora.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Sit with the *Buddha* beneath the great tree.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "You carry everything. Return to the *Buddha*.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Talk to the *Buddha* again.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Try the *mandala* with the monk, *Nagasena's chariot*, *Kisa Gotami*, and the *lotus* pond. The path *east* leads to Paris.",
+  "file": "js/rooms/bodhi.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Sit with *Sartre*, the man with round glasses and a pipe, by the blank figure.",
+  "file": "js/rooms/cafe.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Talk to *Camus* by the painting of a hill. He has a friend with a boulder.",
+  "file": "js/rooms/cafe.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Talk to *Camus* or *Sartre* again.",
+  "file": "js/rooms/cafe.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "You've walked every road. Talk to old friends, or press *M* to see everything you've learned.",
+  "file": "js/rooms/cafe.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Talk to *Plato*. He knows how to get used to the light.",
+  "file": "js/rooms/cave.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Start gently: the *reflections in the pond*, then the *real horse*.",
+  "file": "js/rooms/cave.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Your eyes are ready. Walk to the *hilltop* and look at the *Sun*.",
+  "file": "js/rooms/cave.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Talk to *Plato* again. He has something to show you in the sand.",
+  "file": "js/rooms/cave.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "You can go back into the cave and on to the Stoa (right side, inside).",
+  "file": "js/rooms/cave.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Go back *down* into the cave (the dark opening on the left). Tell the others what you saw.",
+  "file": "js/rooms/cave.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Look around: the *puppeteers*, the *cutouts*, the fire. Then take the *tunnel* in the bottom-right corner toward the light.",
+  "file": "js/rooms/cave.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "The path to *the Stoa* is open on the right side of the cave.",
+  "file": "js/rooms/cave.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Struggle against your chains!",
+  "file": "js/rooms/cave.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Talk to *Confucius* on the hall steps.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Set each relationship right. Still out of tune: *{}*.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "All five ring true! Go back to *Confucius*.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Try bowing with *B* near people. The *moon gate* to the east leads to Laozi's Valley.",
+  "file": "js/rooms/courtyard.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "The *thinking statue* to the south-east! Press E next to it.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Two roads: *West* to Ancient Greece, *East* to China and India. You can do both, in any order!",
+  "file": "js/rooms/crossroads.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "The *north door* is open now. The Existentialist Café awaits!",
+  "file": "js/rooms/crossroads.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "You've walked the West. The *East* road holds Confucius, Laozi and the Buddha.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "You've walked the East. The *West* road holds Socrates, Plato, Aristotle and more.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Press *M* to see the roadmap. Golden stars are ideas you've truly understood.",
+  "file": "js/rooms/crossroads.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Catch *Aristotle*. He's pacing back and forth under the covered walkway. He talks while he walks!",
+  "file": "js/rooms/lyceum.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Try the *statue* in the sculptor's corner, the *acorn*, the *scrolls* and the *dolphin* for more of Aristotle's ideas. Then the path *west* to the Stoa.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Talk to the man with the *enormous mustache*. That's Nietzsche.",
+  "file": "js/rooms/mountain.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Tap each of the *three pillars* on the ledge with the hammer (E).",
+  "file": "js/rooms/mountain.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Go sit by the big *pyramid-shaped rock* beside the lake.",
+  "file": "js/rooms/mountain.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "A *rope bridge* now crosses the abyss to the east. Beyond it: Paris, 1940s.",
+  "file": "js/rooms/mountain.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Talk to *Epictetus*, the old man sitting on the bench with a walking stick.",
+  "file": "js/rooms/stoa.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Talk to *Marcus Aurelius*, the emperor by his tent. Something is coming over the sea…",
+  "file": "js/rooms/stoa.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "The path *up* at the end of the colonnade leads to the mountains, 2,000 years later.",
+  "file": "js/rooms/stoa.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Talk to *Laozi*, the old man riding a water buffalo by the river.",
+  "file": "js/rooms/valley.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Get in the *boat* at the little dock and try to reach the next valley.",
+  "file": "js/rooms/valley.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "Explore: the dripping *stone*, the *yin-yang* stone, the *pot*, *Cook Ding*, the sleeping *Zhuangzi*. The path *east* leads to the Bodhi Tree.",
+  "file": "js/rooms/valley.js",
+  "kind": "hint"
+ },
+ {
+  "speaker": "owl",
+  "text": "You've gathered *1 of 10* insights. Press *M* any time to see your roadmap: which ideas echo each other, and which ones clash.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "You've gathered *2 of 10* insights. Press *M* any time to see your roadmap: which ideas echo each other, and which ones clash.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "You've gathered *3 of 10* insights. Press *M* any time to see your roadmap: which ideas echo each other, and which ones clash.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "You've gathered *4 of 10* insights. Press *M* any time to see your roadmap: which ideas echo each other, and which ones clash.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "You've gathered *5 of 10* insights. Press *M* any time to see your roadmap: which ideas echo each other, and which ones clash.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "You've gathered *6 of 10* insights. Press *M* any time to see your roadmap: which ideas echo each other, and which ones clash.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "You've gathered *7 of 10* insights. Press *M* any time to see your roadmap: which ideas echo each other, and which ones clash.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "You've gathered *8 of 10* insights. Press *M* any time to see your roadmap: which ideas echo each other, and which ones clash.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "You've gathered *9 of 10* insights. Press *M* any time to see your roadmap: which ideas echo each other, and which ones clash.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "You've gathered *10 of 10* insights. Press *M* any time to see your roadmap: which ideas echo each other, and which ones clash.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "And you still have the whole *East* road to explore! The door at the bottom of the café leads back to the Crossroads.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "And you still have the whole *West* road to explore! The door at the bottom of the café leads back to the Crossroads.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "You can still walk the *East* road from the Crossroads! The door at the bottom leads back.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "You can still walk the *West* road from the Crossroads! The door at the bottom leads back.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "confucius",
+  "text": "0 of 5 bells ring true. Keep going. And notice: in every pair, duties flow *both ways*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "confucius",
+  "text": "1 of 5 bells ring true. Keep going. And notice: in every pair, duties flow *both ways*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "confucius",
+  "text": "2 of 5 bells ring true. Keep going. And notice: in every pair, duties flow *both ways*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "confucius",
+  "text": "3 of 5 bells ring true. Keep going. And notice: in every pair, duties flow *both ways*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "confucius",
+  "text": "4 of 5 bells ring true. Keep going. And notice: in every pair, duties flow *both ways*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The ruler & minister stand with their backs to each other. Their note sounds sour.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The parent & child stand with their backs to each other. Their note sounds sour.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The elder & younger sibling stand with their backs to each other. Their note sounds sour.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The husband & wife stand with their backs to each other. Their note sounds sour.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The friend & friend stand with their backs to each other. Their note sounds sour.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A gleaming marble pillar, carved: *\"Eternal Heaven.\"* It holds up… something. It looks very solid.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A gleaming marble pillar, carved: *\"Absolute Truth.\"* It holds up… something. It looks very solid.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A gleaming marble pillar, carved: *\"Rules Handed Down.\"* It holds up… something. It looks very solid.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "TOCK… The pillar \"Eternal Heaven\" rings *hollow*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "TOCK… The pillar \"Absolute Truth\" rings *hollow*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "TOCK… The pillar \"Rules Handed Down\" rings *hollow*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "You sorted 0 of 12 at first glance. Notice what's on the *right*: all of it lives *inside you*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "You sorted 1 of 12 at first glance. Notice what's on the *right*: all of it lives *inside you*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "You sorted 2 of 12 at first glance. Notice what's on the *right*: all of it lives *inside you*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "You sorted 3 of 12 at first glance. Notice what's on the *right*: all of it lives *inside you*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "You sorted 4 of 12 at first glance. Notice what's on the *right*: all of it lives *inside you*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "You sorted 5 of 12 at first glance. Notice what's on the *right*: all of it lives *inside you*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "You sorted 6 of 12 at first glance. Notice what's on the *right*: all of it lives *inside you*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "You sorted 7 of 12 at first glance. Notice what's on the *right*: all of it lives *inside you*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "You sorted 8 of 12 at first glance. Notice what's on the *right*: all of it lives *inside you*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "You sorted 9 of 12 at first glance. Notice what's on the *right*: all of it lives *inside you*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "You sorted 10 of 12 at first glance. Notice what's on the *right*: all of it lives *inside you*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "You sorted 11 of 12 at first glance. Notice what's on the *right*: all of it lives *inside you*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "epictetus",
+  "text": "You sorted 12 of 12 at first glance. Notice what's on the *right*: all of it lives *inside you*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "Collect the glittering *treasures* around the garden. 1 left.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "Collect the glittering *treasures* around the garden. 2 left.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "Collect the glittering *treasures* around the garden. 3 left.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "Collect the glittering *treasures* around the garden. 4 left.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "owl",
+  "text": "Collect the glittering *treasures* around the garden. 5 left.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The figure changes: it becomes *kind*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The figure changes: it becomes *busy*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The figure changes: it becomes *mocking*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The figure changes: it becomes *an artist*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The figure changes: it becomes *a thinker*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The figure changes: it becomes *a musician*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The figure changes: it becomes *sleepy*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The figure changes: it becomes *loyal*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The figure changes: it becomes *honest*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The figure changes: it becomes *evasive*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The figure changes: it becomes *brave*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The figure changes: it becomes *cautious*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The figure changes: it becomes *a leader*.",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "You pick up a pile of gold coins. Mine! (*wealth*)",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "You pick up a jeweled crown. Mine! (*power*)",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "You pick up a perfect, sweet mango. Mine! (*pleasure*)",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "You pick up a scroll full of praise for you. Mine! (*praise*)",
+  "file": "js",
+  "kind": "variant"
+ },
+ {
+  "speaker": "narrator",
+  "text": "You pick up a flattering mirror. Mine! (*self-image*)",
+  "file": "js",
+  "kind": "variant"
+ }
+]

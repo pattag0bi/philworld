@@ -119,7 +119,7 @@ Rooms.courtyard = {
           const notes = [60, 62, 64, 67, 69, 72];
           for (let i = 0; i < 6; i++) { AudioSys.play('bell', notes[i], { vol: 0.12, dur: 2.5 }); Rm.ring[i % 5] = G.t; await wait(0.22); }
           await say(null, 'A *bianzhong*: a set of bronze bells, each tuned to a different note. Some ancient sets had over 60 bells!');
-          await say('confucius', 'Music shapes the heart. When I heard the ancient *Shao* music in the state of Qi, I didn\'t notice the taste of meat for three months!');
+          await shaoCutscene();
           await say('owl', 'For Confucius, music and ritual worked together: ritual gives *order*, music gives *harmony*. A good society needs both.');
         },
       }),
@@ -265,4 +265,27 @@ async function pairTalk(P, ents) {
     const again = await ask(null, 'Try again?', ['Yes', 'Later']);
     if (again === 1) return;
   }
+}
+
+async function shaoCutscene() {
+  const K = G.room.ents.find(e => e.id === 'confucius');
+  await say('confucius', 'Music shapes the heart. Let me show you what happened when I heard the ancient *Shao* music.');
+  const C = await cutStart('The state of Qi');
+  const mus = C.actor('mus', { skin: '#e8c095', hairStyle: 'topknot', hairC: '#1d1d2b', robe: '#c0392b', robe2: '#c9a24a', long: true }, 200, 120, { dir: 3, pose: { sit: true } });
+  const cook = C.actor('cook', LOOKS.cookding, 330, 130, { dir: 2 });
+  const bowls = C.prop('bowls', 262, 112, function (g, t) { for (let i = 0; i < (this.n || 0); i++) { ellipse(g, 262, 110 - i * 5, 6, 2, '#8b5a2b'); R(g, '#c0392b', 259, 107 - i * 5, 6, 2); } }, { n: 0 });
+  const mel = [60, 64, 67, 69, 67, 64, 62, 60, 62, 64, 67, 72];
+  mel.forEach((n, i) => AudioSys.play('bell', n, { vol: 0.1, dur: 2 }, i * 0.32));
+  C.emote(K, 'note', 4); C.emote(mus, 'note', 4);
+  K.pose = { closedEyes: true };
+  for (let m = 1; m <= 3; m++) {
+    C.caption(m === 1 ? 'Day one' : m === 2 ? 'One month later' : 'Three months later');
+    await C.walk(cook, 276, 112, 60); bowls.n = m; SFX.coin();
+    C.emote(cook, '?', 1.5);
+    await C.walk(cook, 330, 130, 60);
+    await wait(0.6);
+  }
+  K.pose = {};
+  await say('confucius', 'I didn\'t notice the taste of meat for three months! I never imagined music could reach such perfection.');
+  await C.end();
 }

@@ -85,7 +85,7 @@ function speakerOf(who) {
 }
 const Dialog = {
   cur: null, queue: [],
-  next() { this.cur = null; const n = this.queue.shift(); if (n) n(); },
+  next() { if (typeof Voice !== 'undefined') Voice.stop(); this.cur = null; const n = this.queue.shift(); if (n) n(); },
   open(who, str, choices, o = {}) {
     return new Promise(res => {
       if (this.cur) { this.queue.push(() => this._open(who, str, choices, o, res)); return; }
@@ -99,19 +99,23 @@ const Dialog = {
       const chars = parseRich(str);
       const lines = layoutRich(chars, 464 - (tx - 8) - 14, 13);
       this.cur = { sp, str, chars, lines, total: chars.length, shown: 0, choices, sel: 0, res, tx, blipT: 0, t: 0, o };
+      const c = this.cur;
+      c.voice = (typeof Voice !== 'undefined' && !(sp && sp.name === G.state.name && who === 'you')) ? Voice.play(str) : null;
+      if (c.voice) c.voice.onDuration(d => { c.speed = clamp(c.total / Math.max(0.6, d * 0.85), 22, 70); });
+      if (typeof onDialogLine === 'function') onDialogLine(who, str, c);
     }
   },
   update(dt) {
     const c = this.cur; if (!c) return;
     c.t += dt;
     if (c.shown < c.total) {
-      const speed = c.o.slow ? 28 : 52;
+      const speed = c.speed || (c.o.slow ? 28 : 52);
       const before = Math.floor(c.shown);
       c.shown = Math.min(c.total, c.shown + dt * speed);
       if (Math.floor(c.shown) !== before) {
         c.blipT -= 1;
         const ch = c.chars[Math.floor(c.shown) - 1];
-        if (c.blipT <= 0 && ch && ch.ch !== ' ') { c.blipT = 2; SFX.blip(c.sp ? c.sp.voice || 400 : 330, c.sp && c.sp.look === 'owl' ? 'sine' : 'square'); }
+        if (!c.voice && c.blipT <= 0 && ch && ch.ch !== ' ') { c.blipT = 2; SFX.blip(c.sp ? c.sp.voice || 400 : 330, c.sp && c.sp.look === 'owl' ? 'sine' : 'square'); }
       }
       if (hit('act') && c.t > 0.08) c.shown = c.total;
       return;
@@ -364,7 +368,7 @@ function drawHUD() {
     text('✓ progress saved', 6, 18, { size: 11, color: '#7fd88a' });
     ctx.globalAlpha = 1;
   }
-  const hints = 'H hint · M map · J journal · N ' + (AudioSys.isMuted() ? 'sound off' : 'sound on') + (flag('bow') ? ' · B bow' : '');
+  const hints = 'H hint · M map · J journal · N ' + (AudioSys.isMuted() ? 'sound off' : 'sound') + (Voice.ready() ? ' · V ' + (Voice.isEnabled() ? 'voices' : 'voices off') : '') + ' · P ' + (G.panels === false ? 'pictures off' : 'pictures') + (flag('bow') ? ' · B bow' : '');
   const w = textW(hints, { size: 11 }) + 8;
   ctx.fillStyle = 'rgba(12,10,28,0.5)'; ctx.fillRect(W - w - 4, 4, w, 12);
   text(hints, W - 8, 5, { size: 11, align: 'right', color: UIC.dim });

@@ -121,12 +121,7 @@ Rooms.valley = {
       }),
       npc('cookding', 395, 226, LOOKS.cookding, {
         dir: 2,
-        async interact() {
-          for (let i = 0; i < 4; i++) { SFX.swish(); await wait(0.22); }
-          await say('cookding', 'Shhk… shhk… I\'m Cook Ding, from a story by *Zhuangzi*. My knife has lasted *nineteen years*, still sharp as new.');
-          await say('cookding', 'A clumsy cook hacks and breaks his blade every month. I don\'t force anything. I *feel* for the natural gaps and joints, and the blade glides through like a dance.');
-          await say('owl', 'When the lord heard this, he said: "Excellent! From Cook Ding I\'ve learned how to *live*." That\'s wu wei: skill so deep it becomes effortless.');
-        },
+        interact: () => cookDingCutscene(),
       }),
       npc('zhuangzi', 86, 238, LOOKS.zhuangzi, {
         pose: { sit: true, closedEyes: true }, dir: 0, label: 'Wake the dreamer',
@@ -187,7 +182,7 @@ function drawYinYang(g, cx, cy, r, a) {
 async function laoziTalk() {
   if (!flag('vl_intro')) {
     await say('laozi', 'Mm. A traveler. I am called *Laozi*, "the Old Master." Legend says I was keeper of the royal archives, until I grew tired of court life and rode west on this buffalo.');
-    await say('laozi', 'At the border, a gatekeeper begged me to write my wisdom down. So I wrote about 5,000 characters, the *Tao Te Ching*, then disappeared into the mountains.');
+    await laoziBorderCutscene();
     await say('owl', 'Historians aren\'t sure Laozi was even one real person! The Tao Te Ching may be a collection by several hands. The legend is still lovely.');
     await say('laozi', 'You want to reach the *next valley*? The river goes there. Take the little boat at the dock. Paddle hard!');
     flag('vl_intro', 1);
@@ -320,4 +315,50 @@ async function butterflyDream(Rm) {
   await say('zhuangzi', 'Once I, Zhuangzi, dreamt I was a butterfly, fluttering happily, with no idea I was Zhuangzi.');
   await say('zhuangzi', 'Suddenly I woke up, and there I was, solidly Zhuangzi. But now I can\'t tell: *was I Zhuangzi dreaming I was a butterfly, or am I a butterfly dreaming I\'m Zhuangzi?*');
   await say('zhuangzi', 'Maybe the boundaries we draw, between me and not-me, dream and waking, are less fixed than we think. Things keep *transforming* into each other.');
+}
+
+async function laoziBorderCutscene() {
+  const L = G.room.ents.find(e => e.id === 'laozi'), home = [L.x, L.y];
+  const C = await cutStart('The western pass · long, long ago');
+  const keeper = C.actor('keeper', { skin: '#e8c095', hairStyle: 'topknot', hairC: '#1d1d2b', robe: '#8b1e2b', robe2: '#c9a24a', hat: 'helmet' }, 430, 166, { dir: 2 });
+  const gate = C.prop('gate', 446, 170, (g) => { R(g, '#8b1e2b', 444, 132, 4, 40); R(g, '#8b1e2b', 470, 132, 4, 40); R(g, '#3a3a42', 440, 128, 38, 6); }, { z: 100 });
+  await C.walk(L, 400, 166, 30);
+  C.emote(keeper, '!', 2);
+  await say({ name: 'The Gatekeeper', look: keeper.look, voice: 250 }, 'Old Master! You\'re leaving the kingdom forever? Then please, before you go, *write down your wisdom* for us!');
+  C.emote(L, '...', 2.5); await wait(1);
+  const scroll = C.prop('scroll', 412, 150, (g, t) => { ICONS.scroll(g, 414, 140 + Math.sin(t * 2)); drawSpark(g, 422, 132, t); }, {});
+  for (let i = 0; i < 5; i++) { SFX.paper(); await wait(0.35); }
+  await say(null, 'Laozi writes about 5,000 characters in two short books. The *Tao Te Ching*: "The Classic of the Way and Its Power."');
+  C.emote(keeper, 'heart', 2); keeper.pose = { bow: true };
+  await wait(0.8); keeper.pose = {};
+  await C.walk(L, 500, 166, 25);
+  await say(null, 'Then he rides west through the gate… and is never seen again.');
+  scroll.alpha = 0; await C.fadeActor(keeper, 0, 0.8);
+  L.x = home[0] + 60; L.y = home[1];
+  await C.walk(L, home[0], home[1], 40);
+  L.dir = 0;
+  await C.end();
+}
+
+async function cookDingCutscene() {
+  const D = G.room.ents.find(e => e.id === 'cookding');
+  await say('cookding', 'I\'m Cook Ding, from a story by *Zhuangzi*. Watch two cooks at work.');
+  const C = await cutStart('The kitchen of Lord Wenhui');
+  const lord = C.actor('lord', LOOKS.ruler, 340, 200, { dir: 3 });
+  const clumsy = C.actor('clumsy', { skin: '#d8a070', hairStyle: 'spiky', hairC: '#1d1d2b', robe: '#8a7050', robe2: '#ecf0f1' }, 360, 236, { dir: 3 });
+  const blade = C.prop('blade', 0, 0, function (g, t) { if (!this.on) return; R(g, '#bdc3c7', this.x, this.y, 6, 1); R(g, '#8b5a2b', this.x - 3, this.y, 3, 1); }, {});
+  for (let i = 0; i < 4; i++) { clumsy.pose = { armsUp: true }; await wait(0.15); clumsy.pose = {}; SFX.thud(); SFX.crack(); shake(0.15); await wait(0.25); }
+  SFX.snap(); C.emote(clumsy, 'angry', 2);
+  await say({ name: 'A clumsy cook', look: clumsy.look, voice: 300 }, 'Argh! Another broken knife! I hack and chop and the bone always wins!');
+  await C.fadeActor(clumsy, 0, 0.5);
+  C.emote(D, '...', 2); await wait(0.8);
+  blade.on = true;
+  const notes = [69, 72, 74, 76, 79, 76, 74, 72];
+  for (let i = 0; i < 8; i++) { blade.x = 382 + Math.sin(i * 0.8) * 10; blade.y = 230 + (i % 3); SFX.swish(); AudioSys.play('flute', notes[i], { vol: 0.07, dur: 0.6 }); await wait(0.28); }
+  blade.on = false;
+  C.emote(D, 'note', 2);
+  await say('cookding', 'My knife has lasted *nineteen years*. I don\'t force anything. I *feel* for the natural gaps, and the blade glides through like a dance.');
+  C.emote(lord, 'idea', 2.5);
+  await say({ name: 'Lord Wenhui', look: lord.look, voice: 250 }, 'Excellent! From Cook Ding I have learned how to *live*.');
+  await C.end();
 }

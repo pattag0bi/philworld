@@ -23,6 +23,8 @@ Then open http://localhost:8765. Headphones are recommended.
 - **H**: hint from Glaux the owl
 - **N**: sound on/off
 - **B**: bow (unlocked at Confucius's courtyard)
+- **V**: voices on/off
+- **P**: story pictures on/off
 
 ## Rooms
 
@@ -48,6 +50,21 @@ Then open http://localhost:8765. Headphones are recommended.
 - `js/world.js`: rooms, player, doors, collisions
 - `js/rooms/*.js`: one file per room
 - `js/main.js`: loop, title screen, character creator
+
+## Show, don't tell
+
+Every line of dialog comes with a story picture: a panel that illustrates what is being said, built from a library of about 75 pixel motifs picked by keywords in the line. The big stories are acted out as cutscenes in the rooms themselves: Socrates' trial, the Oracle, the gadfly, Zeno's shipwreck, Epictetus's leg, Marcus's morning, the madman with the lantern, the Shao music, Laozi at the border, Cook Ding, the Four Sights, Kisa Gotami, the waiter's bad faith, Beauvoir's "becoming", the absurd, and Sartre's student.
+
+## Voices (Sarvam AI)
+
+Every character is voiced with [Sarvam AI](https://www.sarvam.ai/)'s Bulbul v4 English (India) voices. The clips are generated once and shipped in `audio/voice/`; the API key is never part of the game.
+
+```bash
+export SARVAM_API_KEY=...   # your key, kept out of git
+cd tools && npm install && npm run extract && npm run voices
+```
+
+`tools/voices.json` decides which Sarvam persona voices each character. Change one and run `npm run voices` again; only the changed lines are regenerated. Use `npm run voices -- --sample` to try 12 lines first.
 
 ## Saving
 

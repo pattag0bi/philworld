@@ -158,15 +158,28 @@ async function metamorphoses(Rm) {
 }
 
 async function madmanParable() {
-  showVignette((v, t) => {
-    R(v, '#87ceeb', 0, 0, 160, 50); R(v, '#d8c8a8', 0, 50, 160, 40); disc(v, 140, 14, 7, '#fff8d0');
-    drawPerson(v, 78, 76, { skin: '#f0caa8', hairStyle: 'spiky', hairC: '#3a2a1a', robe: '#5a4a3a', robe2: '#3a2a1a', beard: '#3a2a1a' }, 0, Math.floor(t * 6) % 4, { hold: (g, x, y) => { R(g, '#c9a24a', x + 5, y - 14, 3, 4); R(g, '#f7dc6f', x + 6, y - 13, 1, 2); } });
-    for (let i = 0; i < 4; i++) { const x = 20 + i * 36 + (i > 1 ? 30 : 0); drawPerson(v, x, 82, { skin: '#eab994', hairStyle: 'short', hairC: '#2b1d14', robe: ['#2e86c1', '#c0392b', '#27ae60', '#8e44ad'][i], hat: i % 2 ? 'beret' : null }, i < 2 ? 3 : 2, 0, { smile: true, bob: Math.round(Math.sin(t * 10 + i)) }); }
-  }, { title: 'The Madman (The Gay Science, 1882)' });
-  await say('nietzsche', 'Hear a story I wrote. A madman lights a lantern on a bright morning and runs into the marketplace, crying: "I seek God! I seek God!"');
-  await say('nietzsche', 'The people there don\'t believe in God anymore. They laugh. "Did he get lost? Did he emigrate?"');
-  await say('nietzsche', 'The madman glares: *"God is dead. God remains dead. And we have killed him."*');
-  hideVignette();
+  await say('nietzsche', 'Hear a story I wrote, in *The Gay Science* (1882). Watch.');
+  const C = await cutStart('The Madman · a parable');
+  const crowd = [];
+  const spots = [[200, 196], [236, 214], [276, 200], [312, 222], [250, 236]];
+  spots.forEach(([x, y], i) => crowd.push(C.actor('c' + i, { skin: ['#eab994', '#f0caa8', '#c98e62'][i % 3], hairStyle: ['short', 'bun', 'curly'][i % 3], hairC: '#2b1d14', robe: ['#2e86c1', '#c0392b', '#27ae60', '#8e44ad', '#d4ac0d'][i], robe2: '#1d1d2b', hat: i % 2 ? 'beret' : null }, x, y, { dir: 1 })));
+  const mad = C.actor('madman', { skin: '#f0caa8', hairStyle: 'spiky', hairC: '#3a2a1a', robe: '#5a4a3a', robe2: '#3a2a1a', beard: '#3a2a1a', beardLen: 2 }, -10, 210, { dir: 3 });
+  mad.pose = { hold: (g, x, y) => { R(g, '#c9a24a', x + 5, y - 14, 3, 5); R(g, `rgba(255,220,120,${0.7 + 0.3 * Math.sin(G.t * 9)})`, x + 6, y - 13, 1, 3); } };
+  await say(null, 'On a bright morning, a madman lights a lantern and runs into the marketplace…');
+  await C.walk(mad, 256, 216, 80);
+  C.emote(mad, '!', 2);
+  await say({ name: 'The Madman', look: mad.look, voice: 260 }, '"I seek God! I seek God!"');
+  crowd.forEach((c, i) => { c.dir = c.x < mad.x ? 3 : 2; setTimeout(() => C.emote(c, 'ha', 2.5), i * 150); });
+  for (let i = 0; i < 6; i++) AudioSys.play('sine', 200 + Math.random() * 160, { hz: true, wave: 'sawtooth', dur: 0.12, vol: 0.02 }, i * 0.12);
+  await say(null, 'The people there don\'t believe in God anymore. They laugh. "Did he get lost? Did he emigrate? Is he hiding?"');
+  C.emote(mad, 'angry', 3);
+  await say({ name: 'The Madman', look: mad.look, voice: 260 }, '"Where is God? I will tell you. *We have killed him*, you and I. *God is dead.* God remains dead."');
+  crowd.forEach(c => C.emote(c, '?', 2.5));
+  SFX.shatter(); mad.pose = {};
+  await say({ name: 'The Madman', look: mad.look, voice: 260 }, '"I have come too early. This tremendous event is still on its way…"');
+  await C.walk(mad, 500, 216, 70);
+  await Promise.all(crowd.map(c => C.fadeActor(c, 0, 0.8)));
+  await C.end();
   await say('nietzsche', 'Don\'t mistake me. I\'m not *cheering*. I\'m describing something: in modern Europe, people no longer truly *live by* the old beliefs, yet they still lean on the values those beliefs held up.');
   await say('nietzsche', 'The madman says he came *too early*. Nobody yet sees what it means: if the foundation is gone, what holds up *meaning*, *morality*, *truth*?');
   await say('owl', 'People still argue about this today. Many religious thinkers strongly disagree with Nietzsche, and that argument is part of philosophy too.');

@@ -219,7 +219,10 @@ function update(dt) {
   beginInput();
   G.t += dt; G.dt = dt;
   AudioSys.tick(dt);
-  if (hit('mute') && !(G.screen === 'creator' && Creator.row === 0)) { const m = AudioSys.toggleMute(); notice(m ? 'Sound off (N to turn on)' : 'Sound on', 1.5); }
+  const typing = G.screen === 'creator' && Creator.row === 0;
+  if (hit('mute') && !typing) { const m = AudioSys.toggleMute(); if (m) Voice.stop(); notice(m ? 'Sound off (N to turn on)' : 'Sound on', 1.5); }
+  if (hit('voice') && !typing && Voice.ready()) { const v = Voice.toggle(); notice(v ? 'Voices on' : 'Voices off (V to turn on)', 1.5); }
+  if (hit('pictures') && !typing && G.screen === 'game') { G.panels = G.panels === false; try { localStorage.setItem('philworld-panels', G.panels ? '1' : '0'); } catch (e) { } notice(G.panels ? 'Story pictures on' : 'Story pictures off (P to turn on)', 1.5); }
   // fade
   if (G.fade < G.fadeTo) G.fade = Math.min(G.fadeTo, G.fade + dt * 3);
   else if (G.fade > G.fadeTo) G.fade = Math.max(G.fadeTo, G.fade - dt * 2.5);
@@ -261,10 +264,11 @@ function render() {
   else if (G.screen === 'creator') drawCreatorUI();
   else if (G.screen === 'game') {
     if (G.activity && G.activity.ui) { try { G.activity.ui(ctx, G.t); } catch (e) { console.error(e); } }
-    if (!G.activity) drawDoorSigns();
+    if (!G.activity && !G.cutscene) drawDoorSigns();
     if (canControl()) drawPrompt();
     drawVignetteTitle();
-    if (!G.overlay && !G.activity) drawHUD();
+    if (!G.overlay && !G.activity && !G.cutscene) drawHUD();
+    drawCaption();
     drawToast();
     Dialog.draw();
     Overlay.draw();

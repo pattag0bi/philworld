@@ -144,28 +144,28 @@ function pick2(r, a) { return a[Math.floor(r() * a.length)]; }
 
 async function thinkerScene() {
   const Q = [
-    { b: 'Metaphysics', q: 'What is *REAL*?', note: 'Is the world just atoms? Do minds exist? What is time?', n: 60, draw(v, t) { // tree & its shadow & a dream bubble
+    { b: 'Metaphysics', q: 'What is *REAL*?', note: 'Is the world just atoms? Do minds exist? What is time?', line: '*Metaphysics* asks: What is *REAL*?\nIs the world just atoms? Do minds exist? What is time?', n: 60, draw(v, t) { // tree & its shadow & a dream bubble
       R(v, '#1a2a3a', 0, 0, 160, 90); for (let i = 0; i < 30; i++) R(v, '#fff', (i * 53) % 160, (i * 31) % 50, 1, 1);
       drawTree(v, 60, 70, { leaf: '#5a8a3a' }); R(v, 'rgba(0,0,0,0.5)', 60, 70, 40, 4);
       disc(v, 120, 30, 16, '#d8c8f0'); disc(v, 104, 50, 3, '#d8c8f0'); disc(v, 98, 58, 2, '#d8c8f0'); drawTree(v, 120, 42, { leaf: '#9a7ad0', size: 0.6 });
       qmark(v, 116, 8 + Math.sin(t * 3) * 2, '#f7c948');
     } },
-    { b: 'Epistemology', q: 'How do I *KNOW*?', note: 'Can I trust my senses? What counts as proof? Could I be dreaming?', n: 64, draw(v, t) {
+    { b: 'Epistemology', q: 'How do I *KNOW*?', note: 'Can I trust my senses? What counts as proof? Could I be dreaming?', line: '*Epistemology* asks: How do I *KNOW*?\nCan I trust my senses? What counts as proof? Could I be dreaming?', n: 64, draw(v, t) {
       R(v, '#2a2440', 0, 0, 160, 90);
       ellipse(v, 70, 45, 30, 16, '#f5f5f5'); disc(v, 70 + Math.sin(t * 2) * 8, 45, 9, '#3a6ea5'); disc(v, 70 + Math.sin(t * 2) * 8, 45, 4, '#111');
       ring(v, 118, 40, 12, '#c9a24a', 2); line(v, 126, 50, 140, 66, '#8b5a2b'); line(v, 127, 50, 141, 66, '#8b5a2b');
     } },
-    { b: 'Ethics', q: 'What *SHOULD* I do?', note: 'What makes an action right? What is a good life? What do we owe each other?', n: 67, draw(v, t) {
+    { b: 'Ethics', q: 'What *SHOULD* I do?', note: 'What makes an action right? What is a good life? What do we owe each other?', line: '*Ethics* asks: What *SHOULD* I do?\nWhat makes an action right? What is a good life? What do we owe each other?', n: 67, draw(v, t) {
       R(v, '#2a3a2a', 0, 0, 160, 90); R(v, '#c9a66b', 74, 50, 12, 40); for (let i = 0; i < 40; i++) { R(v, '#c9a66b', 80 - i * 1.6, 50 - i, 8, 1); R(v, '#c9a66b', 76 + i * 1.6, 50 - i, 8, 1); }
       drawPerson(v, 80, 76, playerLook(), 1, 0, {}); qmark(v, 77, 24 + Math.sin(t * 3) * 2, '#f7c948');
     } },
-    { b: 'Logic', q: 'What makes reasoning *GOOD*?', note: 'When does one idea really follow from another? How do we spot bad arguments?', n: 71, draw(v, t) {
+    { b: 'Logic', q: 'What makes reasoning *GOOD*?', note: 'When does one idea really follow from another? How do we spot bad arguments?', line: '*Logic* asks: What makes reasoning *GOOD*?\nWhen does one idea really follow from another? How do we spot bad arguments?', n: 71, draw(v, t) {
       R(v, '#1a2a40', 0, 0, 160, 90);
       const k = Math.floor(t * 1.5) % 4;
       [['A', 30], ['B', 80], ['C', 130]].forEach(([s, x], i) => { R(v, i < k ? '#f7c948' : '#5a6a8a', x - 12, 33, 24, 24); R(v, '#1a2a40', x - 4, 41, 8, 8); });
       R(v, '#e8d5a8', 44, 44, 22, 2); R(v, '#e8d5a8', 94, 44, 22, 2); R(v, '#e8d5a8', 64, 42, 2, 6); R(v, '#e8d5a8', 114, 42, 2, 6);
     } },
-    { b: 'Aesthetics', q: 'What is *BEAUTY*?', note: 'Is beauty in the object or in the eye? Why does music move us?', n: 74, draw(v, t) {
+    { b: 'Aesthetics', q: 'What is *BEAUTY*?', note: 'Is beauty in the object or in the eye? Why does music move us?', line: '*Aesthetics* asks: What is *BEAUTY*?\nIs beauty in the object or in the eye? Why does music move us?', n: 74, draw(v, t) {
       R(v, '#3a2a3a', 0, 0, 160, 90);
       R(v, '#8b5a2b', 18, 16, 56, 44); R(v, '#f5e8c8', 22, 20, 48, 36); disc(v, 46, 38, 8, '#e74c3c'); disc(v, 40, 34, 5, '#f39c12');
       for (let i = 0; i < 5; i++) { const a = t * 1.5 + i * 1.26; disc(v, 116 + Math.cos(a) * 9, 40 + Math.sin(a) * 9, 5, '#f78fb3'); } disc(v, 116, 40, 4, '#f7c948'); R(v, '#27ae60', 115, 50, 2, 30);
@@ -175,7 +175,7 @@ async function thinkerScene() {
   for (const it of Q) {
     showVignette(it.draw, { title: it.b });
     AudioSys.play('bell', it.n, { vol: 0.12, dur: 2.5 }); AudioSys.play('bell', it.n + 7, { vol: 0.06, dur: 2.5 }, 0.15);
-    await say(null, `*${it.b}* asks: ${it.q}\n${it.note}`);
+    await say(null, it.line);
   }
   hideVignette();
   if (!hasInsight('wonder')) {

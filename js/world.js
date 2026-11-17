@@ -240,7 +240,7 @@ function drawWorld(t) {
   for (const e of list) e.draw(g, t);
   if (Rm.over) Rm.over(g, t);
   // markers
-  if (!act) for (const e of Rm.ents) {
+  if (!act && !G.cutscene) for (const e of Rm.ents) {
     if (e.hidden || !e.interact || (e.enabled && !e.enabled())) continue;
     const m = e.mark ? e.mark() : (flag('seen:' + G.roomId + ':' + e.id) ? null : 'spark');
     if (m === '!') drawExclaim(g, e.x, e.y - (e.ph || 26) - 2, t);
@@ -248,4 +248,5 @@ function drawWorld(t) {
   }
   if (act && act.draw) act.draw(g, t);
   drawVignette();
+  drawLetterbox();
 }
