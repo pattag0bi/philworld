@@ -359,6 +359,11 @@ function drawHUD() {
   ctx.fillStyle = 'rgba(12,10,28,0.55)'; ctx.fillRect(4, 4, 58, 13);
   ctx.fillStyle = UIC.hl; ctx.fillRect(10, 6, 2, 9); ctx.fillRect(7, 9, 8, 3);
   text(`${n}/10`, 20, 4, { size: 13, color: UIC.hl });
+  if (G.savedAt != null && G.t - G.savedAt < 2) {
+    ctx.globalAlpha = Math.min(1, 2 - (G.t - G.savedAt));
+    text('✓ progress saved', 6, 18, { size: 11, color: '#7fd88a' });
+    ctx.globalAlpha = 1;
+  }
   const hints = 'H hint · M map · J journal · N ' + (AudioSys.isMuted() ? 'sound off' : 'sound on') + (flag('bow') ? ' · B bow' : '');
   const w = textW(hints, { size: 11 }) + 8;
   ctx.fillStyle = 'rgba(12,10,28,0.5)'; ctx.fillRect(W - w - 4, 4, w, 12);

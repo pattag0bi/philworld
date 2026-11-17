@@ -7,7 +7,9 @@ const Creator = { row: 0, rows: ['Name', 'Hair', 'Hair color', 'Skin', 'Outfit',
 
 function startTitle() {
   G.screen = 'title'; G.fadeTo = 0;
-  Title.hasSave = !!loadSave();
+  const s = loadSave();
+  Title.hasSave = !!s;
+  Title.info = s ? `Saved: ${s.name} · ${(s.insights || []).length}/10 insights · ${(MAP_NODES.find(n => n.id === s.room) || {}).name || ''}` : '';
   Title.sel = 0;
   AudioSys.setScene('title');
 }
@@ -32,7 +34,10 @@ async function startGame(fromSave) {
   G.screen = 'game';
   G.fade = 1; G.fadeTo = 1;
   G.room = null;
-  await goto(G.state.room || 'crossroads');
+  const room = G.state.room || 'crossroads', pos = G.state.pos;
+  if (fromSave && pos && pos[0] === room) await goto(room, pos[1], pos[2], pos[3]);
+  else await goto(room);
+  if (fromSave) notice(`Welcome back, *${G.state.name}*! ✦ ${G.state.insights.length}/10 insights`, 3);
 }
 
 // ---------------- title / creator drawing
@@ -90,6 +95,8 @@ function drawTitleUI() {
     const sel = i === Title.sel;
     text((sel ? '▶ ' : '  ') + o, 240, 134 + i * 16, { size: 16, align: 'center', color: sel ? '#f7c948' : '#e8d5a8' });
   });
+  if (Title.hasSave && Title.info) text(Title.info, 240, 172, { size: 13, align: 'center', color: '#9a8fb8' });
+  if (Title.hasSave && opts[Title.sel] === 'New journey') text('(starting over replaces your saved journey)', 240, 186, { size: 12, align: 'center', color: '#c0604a' });
   text('arrows / WASD to move · E or Space to interact · headphones recommended', 240, 258, { size: 12, align: 'center', color: '#9a8fb8' });
 }
 

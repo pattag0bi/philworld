@@ -72,6 +72,7 @@ async function goto(id, sx, sy, dir) {
     player.hidden = false; player.frozen = false; player.slow = 1; player.pose = {};
     Rm.ents = Rm.build ? Rm.build() : [];
     Rm.bgc = prerender(Rm);
+    if (sx != null && blocked(sx, sy)) { sx = null; sy = null; } // saved spot no longer valid: use the room's entrance
     owl.x = player.x - 14; owl.y = player.y - 4; owl.perch = null; owl.hidden = !flag('owlMet');
     AudioSys.setScene(Rm.scene || id);
     AudioSys.setMuffle(Rm.muffle || 18000, 0.6);
@@ -147,6 +148,9 @@ function updateWorld(dt) {
     owl.x = lerp(owl.x, owl.tx, Math.min(1, dt * 3)); owl.y = lerp(owl.y, owl.ty, Math.min(1, dt * 3));
   }
 
+  // remember where the player is standing (quietly, every few seconds)
+  G.posSaveT = (G.posSaveT || 0) - dt;
+  if (ctl && G.posSaveT <= 0) { G.posSaveT = 4; rememberPosition(); save(true); }
   if (!ctl) { G.prompt = null; return; }
   // doors
   for (const e of Rm.ents) {
@@ -195,6 +199,14 @@ function updateWorld(dt) {
   if (hit('map')) openMap();
   if (hit('journal')) openJournal();
 }
+
+function rememberPosition() {
+  if (!G.room || G.screen !== 'game') return;
+  if (G.roomId === 'cave' && Rooms.cave.view === 'out') { G.state.pos = null; return; }
+  G.state.pos = [G.roomId, Math.round(player.x), Math.round(player.y), player.dir];
+}
+addEventListener('pagehide', () => { if (G.screen === 'game') { if (canControl()) rememberPosition(); save(true); } });
+addEventListener('visibilitychange', () => { if (document.hidden && G.screen === 'game') { if (canControl()) rememberPosition(); save(true); } });
 
 async function owlHint() {
   if (!flag('owlMet')) return;

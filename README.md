@@ -49,4 +49,8 @@ Then open http://localhost:8765. Headphones are recommended.
 - `js/rooms/*.js`: one file per room
 - `js/main.js`: loop, title screen, character creator
 
-Progress saves automatically in the browser (localStorage).
+## Saving
+
+Progress saves automatically: your character, insights, finished puzzles, the room you're in, and where you're standing (every few seconds, and whenever you close or switch away from the tab). Choose **Continue journey** on the title screen to pick up where you left off.
+
+Saves live in each player's own browser, so progress doesn't carry over to another device or browser, and clearing site data erases it.

@@ -61,7 +61,9 @@ function newState() {
 }
 G.state = newState();
 const SAVE_KEY = 'philworld-save-v1';
-function save() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(G.state)); } catch (e) { } }
+function save(quiet) {
+  try { localStorage.setItem(SAVE_KEY, JSON.stringify(G.state)); if (!quiet) G.savedAt = G.t; } catch (e) { }
+}
 function loadSave() { try { const s = localStorage.getItem(SAVE_KEY); return s ? JSON.parse(s) : null; } catch (e) { return null; } }
 function clearSave() { try { localStorage.removeItem(SAVE_KEY); } catch (e) { } }
 function flag(k, v) {
