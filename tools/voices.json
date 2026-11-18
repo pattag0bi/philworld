@@ -87,8 +87,9 @@
     "pace": 1
   },
   "buddha": {
-    "voice": "dev_en_recovery",
-    "pace": 0.88
+    "provider": "elevenlabs",
+    "voice": "hFQrYDzYrL911RhwvoCO",
+    "stability": 0.5
   },
   "monk": {
     "voice": "deven_en_conversation",
