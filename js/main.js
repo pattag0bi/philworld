@@ -222,6 +222,7 @@ function update(dt) {
   AudioSys.tick(dt);
   const typing = G.screen === 'creator' && Creator.row === 0;
   if (hit('mute') && !typing) { const m = AudioSys.toggleMute(); if (m) Voice.stop(); notice(m ? 'Sound off (N to turn on)' : 'Sound on', 1.5); }
+  if (hit('fullscreen') && !typing) toggleFullscreen();
   if (hit('voice') && !typing && Voice.ready()) { const v = Voice.toggle(); notice(v ? 'Voices on' : 'Voices off (V to turn on)', 1.5); }
   if (hit('pictures') && !typing && G.screen === 'game') { G.panels = G.panels === false; try { localStorage.setItem('philworld-panels', G.panels ? '1' : '0'); } catch (e) { } notice(G.panels ? 'Story pictures on' : 'Story pictures off (P to turn on)', 1.5); }
   // fade

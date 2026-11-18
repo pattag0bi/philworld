@@ -93,7 +93,7 @@ function hasInsight(id) { return G.state.insights.includes(id); }
 const KEYMAP = {
   up: ['arrowup', 'w'], down: ['arrowdown', 's'], left: ['arrowleft', 'a'], right: ['arrowright', 'd'],
   act: ['e', ' ', 'enter'], map: ['m'], journal: ['j'], mute: ['n'], esc: ['escape'],
-  bow: ['b'], hint: ['h'], voice: ['v'], pictures: ['p'], settings: ['o'],
+  bow: ['b'], hint: ['h'], voice: ['v'], pictures: ['p'], settings: ['o'], fullscreen: ['f'],
 };
 const keys = {};
 let pressQ = {}, pressed = {};
@@ -127,6 +127,21 @@ function hit(a) {
 }
 function anyKey() { const r = Object.keys(pressed).length > 0; pressed = {}; return r; }
 function beginInput() { pressed = pressQ; pressQ = {}; }
+
+// ---------- fullscreen (F, the settings page, or the phone menu button)
+const fsEl = () => document.fullscreenElement || document.webkitFullscreenElement;
+function fullscreenOK() { const d = document.documentElement; return !!(d.requestFullscreen || d.webkitRequestFullscreen); }
+function toggleFullscreen() {
+  const d = document.documentElement;
+  if (!fullscreenOK()) { notice('Fullscreen isn\'t available here. On iPhone, use Share > Add to Home Screen.', 4); return; }
+  try {
+    if (fsEl()) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    else {
+      const p = (d.requestFullscreen || d.webkitRequestFullscreen).call(d, { navigationUI: 'hide' });
+      Promise.resolve(p).then(() => screen.orientation && screen.orientation.lock && screen.orientation.lock('landscape')).catch(() => { });
+    }
+  } catch (e) { }
+}
 
 // ---------- timers & async scripting
 let timers = [], frameWaiters = [];

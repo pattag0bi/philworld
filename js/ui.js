@@ -425,6 +425,7 @@ const Settings = {
       { label: 'Sound effects', kind: 'slider', key: 'effects', val: s.effects },
       { label: 'Spoken lines', kind: 'toggle', get: () => Voice.isEnabled(), set: () => Voice.toggle() },
       { label: 'Story pictures', kind: 'toggle', get: () => G.panels !== false, set: () => { G.panels = G.panels === false; try { localStorage.setItem('philworld-panels', G.panels ? '1' : '0'); } catch (e) { } } },
+      { label: 'Fullscreen', kind: 'toggle', get: () => !!fsEl(), set: () => toggleFullscreen() },
       { label: 'Close', kind: 'close' },
     ];
   },
@@ -466,6 +467,6 @@ const Settings = {
         text(on ? 'On' : 'Off', x + w - 12, y + 2, { size: 15, align: 'right', color: on ? '#7fd88a' : '#c0604a' });
       }
     });
-    text('↑ ↓ choose  ·  ← → change  ·  O / Esc close', 240, 258, { size: 12, align: 'center', color: UIC.dim });
+    text('↑ ↓ choose  ·  ← → change  ·  F fullscreen  ·  O / Esc close', 240, 258, { size: 12, align: 'center', color: UIC.dim });
   },
 };

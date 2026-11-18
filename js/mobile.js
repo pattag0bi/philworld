@@ -18,6 +18,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
 }
 
 if (TOUCH) (function () {
+  const standaloneApp = matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches || !!navigator.standalone;
   document.body.classList.add('touch');
   fracScale = true;
   reserveFn = () => Math.round(0.6 * (Math.min(0.27 * innerHeight, 120) + 12)); // let the pad overlap the game's empty margin a little
@@ -39,7 +40,7 @@ if (TOUCH) (function () {
     [/\(arrow keys\)/g, '(D-pad)'],
     [/arrows: explore {3}· {3}M \/ Esc: close/, 'D-pad: explore   ·   A: close'],
     [/J \/ Esc close/, 'A: close'],
-    [/↑ ↓ choose {2}· {2}← → change {2}· {2}O \/ Esc close/, 'D-pad: choose / change  ·  A on Close'],
+    [/↑ ↓ choose {2}· {2}← → change {2}· {2}F fullscreen {2}· {2}O \/ Esc close/, 'D-pad: choose / change  ·  A on Close'],
     [/Type your name · ↓ \(arrow\) or Enter for next/, 'Tap the name to type · D-pad ↓ for next'],
     [/↑↓ choose · ←→ change · E to begin on the last row/, 'Tap a row (or D-pad) · A on the last row'],
     [/press any key to begin/, 'tap to begin'],
@@ -74,7 +75,7 @@ if (TOUCH) (function () {
     color:#f4ead2; font:20px/1 system-ui,sans-serif; display:flex; align-items:center; justify-content:center; }
   #tmenu button:active { background:rgba(247,201,72,.5); }
   #tmenu button[hidden] { display:none; }
-  body:not([data-screen=game]) #tmenu button:not(#tm-set) { display:none; }
+  body:not([data-screen=game]) #tmenu button:not(#tm-set):not(#tm-fs) { display:none; }
   body[data-screen=boot] #tmenu, body[data-screen=boot] #pad, body[data-screen=boot] #abtn { display:none; }
   body[data-screen=creator] #tmenu, body[data-screen=creator] #abtn { display:none; }
   body[data-screen=title] #abtn { }
@@ -95,6 +96,7 @@ if (TOUCH) (function () {
       <button id="tm-hint" aria-label="Hint">💡</button>
       <button id="tm-map" aria-label="Map">🗺️</button>
       <button id="tm-jou" aria-label="Journal">📖</button>
+      <button id="tm-fs" aria-label="Fullscreen">⛶</button>
       <button id="tm-set" aria-label="Settings">⚙️</button>
     </div>`;
   document.body.appendChild(tc);
@@ -159,7 +161,9 @@ if (TOUCH) (function () {
 
   // ---------- menu buttons just press the matching key
   const press = (id, k) => document.getElementById(id).addEventListener('pointerdown', e => { pressQ[k] = true; unlock(); buzz(8); e.preventDefault(); });
-  press('tm-map', 'm'); press('tm-jou', 'j'); press('tm-hint', 'h'); press('tm-set', 'o'); press('tm-bow', 'b');
+  press('tm-map', 'm'); press('tm-jou', 'j'); press('tm-hint', 'h'); press('tm-set', 'o'); press('tm-bow', 'b'); press('tm-fs', 'f');
+
+  if (!fullscreenOK() || standaloneApp) document.getElementById('tm-fs').hidden = true;
 
   // show / hide what makes sense for the current screen
   const bowBtn = document.getElementById('tm-bow');
@@ -198,18 +202,6 @@ if (TOUCH) (function () {
       }
     }
   };
-
-  // ---------- fullscreen + landscape lock where the browser allows it (Android; iPhone uses "Add to Home Screen")
-  const standalone = matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches || navigator.standalone;
-  let triedFs = false;
-  addEventListener('pointerdown', () => {
-    if (triedFs || standalone) return; triedFs = true;
-    const el = document.documentElement;
-    try {
-      const p = el.requestFullscreen && el.requestFullscreen({ navigationUI: 'hide' });
-      Promise.resolve(p).then(() => screen.orientation && screen.orientation.lock && screen.orientation.lock('landscape')).catch(() => { });
-    } catch (e) { }
-  }, { once: false });
 
   // ---------- phones background tabs hard: stop sound when hidden, resume after
   document.addEventListener('visibilitychange', () => { if (document.hidden) Voice.stop(); });
