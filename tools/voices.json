@@ -1,5 +1,5 @@
 {
-  "_note": "Speaker -> Sarvam bulbul:v4-flash persona. Change a voice here, then run `npm run voices` again: only changed lines are regenerated.",
+  "_note": "Speaker -> voice. Default provider is Sarvam bulbul:v4-flash; entries with provider:\"elevenlabs\" use ElevenLabs eleven_v4 (stability: lower = more expressive). Change one, run npm run voices: only changed lines regenerate.",
   "_model": "bulbul:v4-flash",
   "_language": "en-IN",
   "narrator": {
@@ -11,72 +11,80 @@
     "pace": 1.05
   },
   "socrates": {
-    "voice": "girish_en_documentary",
-    "pace": 1.0
+    "provider": "elevenlabs",
+    "voice": "z3zYFzY2KtTTLjvOecBO",
+    "stability": 0.35
   },
   "youngPlato": {
     "voice": "ojas_en_social",
     "pace": 1.05
   },
   "plato": {
-    "voice": "shubh_en_narration",
-    "pace": 0.95
+    "provider": "elevenlabs",
+    "voice": "cir0mbQgrFs79o0HZw73",
+    "stability": 0.4
   },
   "sophist": {
     "voice": "nachiket_en_ads",
     "pace": 1.1
   },
   "aristotle": {
-    "voice": "dev_en_conversational",
-    "pace": 1.05
+    "provider": "elevenlabs",
+    "voice": "PuE3KplJhtUIrmFbZ1Yn",
+    "stability": 0.4
   },
   "alexander": {
-    "voice": "ashwin_en_sports_energetic",
-    "pace": 1.05
+    "provider": "elevenlabs",
+    "voice": "IKne3meq5aSn9XLyUdCD",
+    "stability": 0.3
   },
   "epictetus": {
     "voice": "rohan_en_recovery",
     "pace": 0.95
   },
   "marcus": {
-    "voice": "shubh_en_audiobook",
-    "pace": 0.92
+    "provider": "elevenlabs",
+    "voice": "kVHl2v7Y1yGWEyAY48K9",
+    "stability": 0.45
   },
   "zeno": {
     "voice": "deven_en_conversation",
-    "pace": 1.0
+    "pace": 1
   },
   "nietzsche": {
-    "voice": "varun_en_suspense",
-    "pace": 1.0
+    "provider": "elevenlabs",
+    "voice": "xUhgmlNVtYqwebbWmCfd",
+    "stability": 0.3
   },
   "demon": {
     "voice": "rustom_en_suspense",
     "pace": 0.8
   },
   "confucius": {
-    "voice": "girish_en_devotional",
-    "pace": 0.92
+    "provider": "elevenlabs",
+    "voice": "PyMZFI2sitc2HbXqPlKW",
+    "stability": 0.45
   },
   "name:Yan Hui, a student": {
     "voice": "kalpit_en_edtech",
-    "pace": 1.0
+    "pace": 1
   },
   "courtyardPeople": {
     "voice": "roopa_en_conversational",
-    "pace": 1.0
+    "pace": 1
   },
   "laozi": {
-    "voice": "shubh_en_narration_gentle",
-    "pace": 0.85
+    "provider": "elevenlabs",
+    "voice": "Qc0X0JnOfc5XzetLVusF",
+    "stability": 0.5
   },
   "zhuangzi": {
     "voice": "sunny_en_social",
-    "pace": 1.0
+    "pace": 1
   },
   "cookding": {
     "voice": "kalpit_en_edtech",
-    "pace": 1.0
+    "pace": 1
   },
   "buddha": {
     "voice": "dev_en_recovery",
@@ -92,7 +100,7 @@
   },
   "nagasena": {
     "voice": "ashwin_en_sports",
-    "pace": 1.0
+    "pace": 1
   },
   "sartre": {
     "voice": "varun_en_ads",
@@ -100,11 +108,11 @@
   },
   "beauvoir": {
     "voice": "simran_en_narration",
-    "pace": 1.0
+    "pace": 1
   },
   "camus": {
     "voice": "rohan_en_recovery",
-    "pace": 1.0
+    "pace": 1
   },
   "waiter": {
     "voice": "nachiket_en_ads",
@@ -112,7 +120,7 @@
   },
   "name:Prisoner": {
     "voice": "rustom_en_suspense",
-    "pace": 1.0
+    "pace": 1
   },
   "puppeteer": {
     "voice": "varun_en_suspense",
@@ -141,7 +149,7 @@
   },
   "name:Crito": {
     "voice": "deven_en_conversation",
-    "pace": 1.0
+    "pace": 1
   },
   "name:His Mother": {
     "voice": "chandrika_en_stories",
@@ -153,7 +161,7 @@
   },
   "name:Society": {
     "voice": "neha_en_customer",
-    "pace": 1.0
+    "pace": 1
   },
   "name:The Madman": {
     "voice": "ashwin_en_sports_energetic",
@@ -161,11 +169,11 @@
   },
   "name:His Master": {
     "voice": "varun_en_ads",
-    "pace": 1.0
+    "pace": 1
   },
   "name:The Gatekeeper": {
     "voice": "kalpit_en_edtech",
-    "pace": 1.0
+    "pace": 1
   },
   "name:A clumsy cook": {
     "voice": "sunny_en_social",
@@ -189,7 +197,7 @@
   },
   "name:Your friend Nikias": {
     "voice": "ojas_en_social",
-    "pace": 1.0
+    "pace": 1
   },
   "name:Nikias, raging": {
     "voice": "ashwin_en_sports_energetic",
@@ -201,15 +209,15 @@
   },
   "name:A grumpy stranger": {
     "voice": "rustom_en_suspense",
-    "pace": 1.0
+    "pace": 1
   },
   "name:The grumpy stranger": {
     "voice": "rustom_en_suspense",
-    "pace": 1.0
+    "pace": 1
   },
   "name:The Ruler": {
     "voice": "shubh_en_audiobook",
-    "pace": 1.0
+    "pace": 1
   },
   "name:A little girl": {
     "voice": "nupur_en_kids",
@@ -221,7 +229,7 @@
   },
   "name:Milo of Croton, champion wrestler": {
     "voice": "ashwin_en_sports_energetic",
-    "pace": 1.0
+    "pace": 1
   },
   "name:King Philip": {
     "voice": "shubh_en_audiobook",
@@ -240,7 +248,9 @@
     "pace": 1.05
   },
   "name:King Alexander": {
-    "voice": "ashwin_en_sports_energetic",
-    "pace": 1.05
-  }
+    "provider": "elevenlabs",
+    "voice": "IKne3meq5aSn9XLyUdCD",
+    "stability": 0.3
+  },
+  "_elevenModel": "eleven_v4"
 }
