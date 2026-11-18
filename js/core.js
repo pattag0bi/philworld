@@ -9,20 +9,37 @@ const buf = document.createElement('canvas'); buf.width = W; buf.height = H;
 const g = buf.getContext('2d');
 let SCALE = 1, OX = 0, OY = 0;
 
+// Phone notches / home bars: keep the game inside the safe area.
+const _safeProbe = document.createElement('div');
+_safeProbe.style.cssText = 'position:fixed;left:0;top:0;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)';
+document.body.appendChild(_safeProbe);
+function safeInsets() {
+  const cs = getComputedStyle(_safeProbe);
+  return { t: parseFloat(cs.paddingTop) || 0, r: parseFloat(cs.paddingRight) || 0, b: parseFloat(cs.paddingBottom) || 0, l: parseFloat(cs.paddingLeft) || 0 };
+}
+let fracScale = false;
+let reserveFn = null; // phones: how many css px each side the on-screen pad/buttons may cover
 function resize() {
   const dpr = window.devicePixelRatio || 1;
   canvas.width = Math.floor(innerWidth * dpr);
   canvas.height = Math.floor(innerHeight * dpr);
   canvas.style.width = innerWidth + 'px';
   canvas.style.height = innerHeight + 'px';
-  let s = Math.min(canvas.width / W, canvas.height / H);
-  if (s >= 2) s = Math.floor(s);
+  const si = safeInsets();
+  const rs = reserveFn ? reserveFn() : 0;
+  const aw = canvas.width - (si.l + si.r + 2 * rs) * dpr, ah = canvas.height - (si.t + si.b) * dpr;
+  let s = Math.min(aw / W, ah / H);
+  // whole-number scaling keeps pixels crisp; on phones fall back to fractional when that would waste >15% of the screen
+  if (s >= 2) { const f = Math.floor(s); if (!fracScale || f >= s * 0.85) s = f; }
   SCALE = s;
-  OX = Math.floor((canvas.width - W * s) / 2);
-  OY = Math.floor((canvas.height - H * s) / 2);
+  OX = Math.floor((si.l + rs) * dpr + (aw - W * s) / 2);
+  OY = Math.floor(si.t * dpr + (ah - H * s) / 2);
 }
 addEventListener('resize', resize);
+addEventListener('orientationchange', () => setTimeout(resize, 200));
 resize();
+// Touch devices: mobile.js swaps this for a version that rewrites key hints ("Press E" -> "Tap A").
+let T = s => s;
 
 const G = {
   t: 0, dt: 0, screen: 'boot',
@@ -83,6 +100,7 @@ let pressQ = {}, pressed = {};
 function keyName(e) { return e.key === ' ' ? ' ' : (e.key || '').toLowerCase(); }
 addEventListener('keydown', e => {
   if (e.metaKey || e.ctrlKey) return;
+  if (e.target && e.target.tagName === 'INPUT') return; // the phone's name box handles its own typing
   const k = keyName(e);
   if (!e.repeat) pressQ[k] = true;
   keys[k] = true;
@@ -92,9 +110,14 @@ addEventListener('keydown', e => {
 });
 addEventListener('keyup', e => { keys[keyName(e)] = false; });
 addEventListener('blur', () => { for (const k in keys) keys[k] = false; });
+function toGame(e) { const r = canvas.getBoundingClientRect(), d = window.devicePixelRatio || 1; return [((e.clientX - r.left) * d - OX) / SCALE, ((e.clientY - r.top) * d - OY) / SCALE]; }
 canvas.addEventListener('pointerdown', () => {
-  pressQ['e'] = true;
+  if (G.screen !== 'title' && G.screen !== 'creator') pressQ['e'] = true; // menus use onTap below
   if (typeof AudioSys !== 'undefined') AudioSys.unlock();
+});
+// Menu screens handle taps themselves (G.onTap(x, y) in game pixels). Fired on release so a text box can take focus.
+canvas.addEventListener('pointerup', e => {
+  if ((G.screen === 'title' || G.screen === 'creator') && G.onTap) { const [x, y] = toGame(e); G.onTap(x, y); }
 });
 function down(a) { return KEYMAP[a].some(k => keys[k]); }
 function hit(a) {

@@ -1,6 +1,6 @@
 # PhilWorld
 
-A small pixel-art RPG for exploring philosophy. You walk through 10 rooms, meet thinkers, and come to understand each big idea by *doing* something, seeing it, and hearing it. All art and sound effects are generated in code. The background music is real recorded tracks (see *Music credits*), and the character voices come from ElevenLabs (Socrates, Plato, Aristotle, Alexander, Confucius, Laozi, Marcus, Nietzsche) and Sarvam AI (everyone else).
+A small pixel-art RPG for exploring philosophy. You walk through 10 rooms, meet thinkers, and come to understand each big idea by *doing* something, seeing it, and hearing it. All art and sound effects are generated in code. The background music is real recorded tracks (see *Music credits*), and the character voices come from ElevenLabs (Socrates, Plato, Aristotle, Alexander, Confucius, Laozi, Buddha, Marcus, Nietzsche) and Sarvam AI (everyone else).
 
 ## Play it
 
@@ -13,6 +13,10 @@ cd ~/philworld && python3 -m http.server 8765
 ```
 
 Then open http://localhost:8765. Headphones are recommended.
+
+## On a phone
+
+Play in landscape. On iPhone use Safari's *Share → Add to Home Screen*; on Android use *Install app*. It then runs fullscreen and works offline: music and voice clips are saved on the phone as you hear them (see `sw.js`; bump `VERSION` there to force a refresh). On-screen controls are in `js/mobile.js`: a D-pad on the left, **A** on the right, and map / journal / hint / bow / settings buttons in a column on the right edge. Add `?touch=1` to the URL to try them on a desktop. `python3 tools/make-icons.py` redraws the app icons.
 
 ## Controls
 

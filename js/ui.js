@@ -19,6 +19,7 @@ function panel(x, y, w, h, o = {}) {
   ctx.fillRect(x + 2, y + 2, w - 4, 1); ctx.fillRect(x + 2, y + h - 3, w - 4, 1); ctx.fillRect(x + 2, y + 2, 1, h - 4); ctx.fillRect(x + w - 3, y + 2, 1, h - 4);
 }
 function text(str, x, y, o = {}) {
+  str = T(str);
   ctx.font = o.title ? TFONT(o.size || 8) : FONT(o.size || 13);
   ctx.textAlign = o.align || 'left';
   if (o.shadow !== false) { ctx.fillStyle = 'rgba(0,0,0,0.6)'; ctx.fillText(str, x + 0.6, y + 0.6); }
@@ -30,6 +31,7 @@ function textW(str, o = {}) { ctx.font = o.title ? TFONT(o.size || 8) : FONT(o.s
 
 // ---------- rich text (*highlight*)
 function parseRich(s) {
+  s = T(s);
   const out = []; let hl = false;
   for (const ch of s) { if (ch === '*') { hl = !hl; continue; } out.push({ ch, hl }); }
   return out;
@@ -368,6 +370,7 @@ function drawHUD() {
     text('✓ progress saved', 6, 18, { size: 11, color: '#7fd88a' });
     ctx.globalAlpha = 1;
   }
+  if (document.body.classList.contains('touch')) return; // phones have on-screen buttons instead
   const hints = 'H hint · M map · J journal · O settings' + (AudioSys.isMuted() ? ' · N sound off' : '') + (flag('bow') ? ' · B bow' : '');
   const w = textW(hints, { size: 11 }) + 8;
   ctx.fillStyle = 'rgba(12,10,28,0.5)'; ctx.fillRect(W - w - 4, 4, w, 12);

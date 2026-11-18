@@ -53,6 +53,13 @@ const AudioSys = (() => {
     dorianJazz: [0, 2, 3, 5, 7, 9, 10],
   };
 
+  // Phones: silence everything while the app is in the background, resume on return.
+  document.addEventListener('visibilitychange', () => {
+    if (!ac) return;
+    if (document.hidden) { if (ac.state === 'running') ac.suspend().catch(() => { }); }
+    else if (ac.state === 'suspended') ac.resume().catch(() => { });
+  });
+
   function unlock() {
     if (!ac) {
       try { ac = new (window.AudioContext || window.webkitAudioContext)(); setup(); }

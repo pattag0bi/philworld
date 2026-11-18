@@ -2,14 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#140c2c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PhilWorld">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <title>PhilWorld</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 <style>
   html, body { margin: 0; height: 100%; background: #0b0a12; overflow: hidden; }
-  canvas { display: block; image-rendering: pixelated; image-rendering: crisp-edges; cursor: default; }
+  canvas { position: fixed; left: 0; top: 0; display: block; touch-action: none; image-rendering: pixelated; image-rendering: crisp-edges; cursor: default; }
 </style>
 </head>
 <body>
@@ -34,5 +42,6 @@
 <script src="js/rooms/bodhi.js?v=3"></script>
 <script src="js/rooms/cafe.js?v=3"></script>
 <script src="js/main.js?v=3"></script>
+<script src="js/mobile.js?v=3"></script>
 </body>
 </html>
