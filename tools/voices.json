@@ -185,8 +185,9 @@
     "pace": 0.95
   },
   "name:Prince Siddhartha": {
-    "voice": "ojas_en_social",
-    "pace": 0.95
+    "provider": "elevenlabs",
+    "voice": "hFQrYDzYrL911RhwvoCO",
+    "stability": 0.4
   },
   "name:Channa, the charioteer": {
     "voice": "deven_en_conversation",
