@@ -17,7 +17,7 @@ const Voice = (() => {
     if (!cur) return;
     try { cur.pause(); } catch (e) { }
     cur = null;
-    AudioSys.setMusicVol(0.55, 0.6);
+    AudioSys.duck(false);
   }
   // Starts the clip for this line. Returns { onDuration(cb) } or null if there is no clip.
   function play(text) {
@@ -26,13 +26,13 @@ const Voice = (() => {
     const id = manifest[normVoiceKey(text)];
     if (!id) return null;
     const a = new Audio('audio/voice/' + id + '.mp3');
-    a.volume = 1;
+    a.volume = Math.min(1, AudioSys.voiceLevel());
     cur = a;
-    AudioSys.setMusicVol(0.22, 0.3);
+    AudioSys.duck(true);
     const h = { audio: a, cb: null, onDuration(cb) { this.cb = cb; if (isFinite(a.duration) && a.duration) cb(a.duration); } };
     a.addEventListener('loadedmetadata', () => { if (h.cb && isFinite(a.duration)) h.cb(a.duration); });
-    a.addEventListener('ended', () => { if (cur === a) { cur = null; AudioSys.setMusicVol(0.55, 0.8); } });
-    a.play().catch(() => { if (cur === a) cur = null; });
+    a.addEventListener('ended', () => { if (cur === a) { cur = null; AudioSys.duck(false); } });
+    a.play().catch(() => { if (cur === a) { cur = null; AudioSys.duck(false); } });
     return h;
   }
   function toggle() {
@@ -41,5 +41,6 @@ const Voice = (() => {
     if (!enabled) stop();
     return enabled;
   }
-  return { play, stop, toggle, isEnabled: () => enabled, ready: () => !!manifest, has: t => !!(manifest && manifest[normVoiceKey(t)]) };
+  function setVolume(v) { if (cur) cur.volume = Math.min(1, v); }
+  return { play, stop, setVolume, toggle, isEnabled: () => enabled, ready: () => !!manifest, has: t => !!(manifest && manifest[normVoiceKey(t)]) };
 })();

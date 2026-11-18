@@ -76,7 +76,7 @@ function hasInsight(id) { return G.state.insights.includes(id); }
 const KEYMAP = {
   up: ['arrowup', 'w'], down: ['arrowdown', 's'], left: ['arrowleft', 'a'], right: ['arrowright', 'd'],
   act: ['e', ' ', 'enter'], map: ['m'], journal: ['j'], mute: ['n'], esc: ['escape'],
-  bow: ['b'], hint: ['h'], voice: ['v'], pictures: ['p'],
+  bow: ['b'], hint: ['h'], voice: ['v'], pictures: ['p'], settings: ['o'],
 };
 const keys = {};
 let pressQ = {}, pressed = {};

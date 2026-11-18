@@ -21,6 +21,7 @@ Then open http://localhost:8765. Headphones are recommended.
 - **M**: roadmap of ideas
 - **J**: journal
 - **H**: hint from Glaux the owl
+- **O**: settings (volume for music, voices and sound effects)
 - **N**: sound on/off
 - **B**: bow (unlocked at Confucius's courtyard)
 - **V**: voices on/off

@@ -11,7 +11,7 @@ function refreshTitleSave() {
   Title.info = s ? `Saved: ${s.name} · ${(s.insights || []).length}/10 insights · ${(MAP_NODES.find(n => n.id === s.room) || {}).name || ''}` : '';
 }
 function titleOptions() {
-  return Title.hasSave ? ['Continue journey', 'New journey', 'Copy save code', 'Enter save code'] : ['New journey', 'Enter save code'];
+  return Title.hasSave ? ['Continue journey', 'New journey', 'Copy save code', 'Enter save code', 'Settings'] : ['New journey', 'Enter save code', 'Settings'];
 }
 function startTitle() {
   G.screen = 'title'; G.fadeTo = 0;
@@ -126,6 +126,7 @@ function updateTitle() {
     if (o === 'Continue journey') startGame(true);
     else if (o === 'Copy save code') copySaveCode();
     else if (o === 'Enter save code') enterSaveCode();
+    else if (o === 'Settings') Settings.show();
     else startCreator();
   }
 }
@@ -138,7 +139,7 @@ function drawTitleUI() {
     text((sel ? '▶ ' : '  ') + o, 240, 126 + i * 14, { size: 15, align: 'center', color: sel ? '#f7c948' : '#e8d5a8' });
   });
   if (Title.hasSave && Title.info) text(Title.info, 240, 184, { size: 13, align: 'center', color: '#9a8fb8' });
-  const tip = { 'New journey': Title.hasSave ? '(starting over replaces your saved journey)' : '', 'Copy save code': 'copy a code to move your progress to another browser or device', 'Enter save code': 'paste a code from another browser to continue your journey here' }[opts[Title.sel]];
+  const tip = { 'New journey': Title.hasSave ? '(starting over replaces your saved journey)' : '', 'Copy save code': 'copy a code to move your progress to another browser or device', 'Enter save code': 'paste a code from another browser to continue your journey here', 'Settings': 'volume for music, voices and sound effects' }[opts[Title.sel]];
   if (tip) text(tip, 240, 172, { size: 12, align: 'center', color: opts[Title.sel] === 'New journey' ? '#c0604a' : '#9a8fb8' });
   text('arrows / WASD to move · E or Space to interact · headphones recommended', 240, 258, { size: 12, align: 'center', color: '#9a8fb8' });
 }
@@ -229,7 +230,9 @@ function update(dt) {
   if (G.flash > 0) G.flash = Math.max(0, G.flash - dt * (G.flashDecay || 1.5));
   if (G.shake > 0) G.shake = Math.max(0, G.shake - dt);
 
-  if (G.screen === 'boot') { if (anyKey()) { AudioSys.unlock(); startTitle(); } }
+  if (Settings.open) Settings.update(dt);
+  else if (hit('settings') && !typing && (G.screen === 'title' || (G.screen === 'game' && !G.overlay))) Settings.show();
+  else if (G.screen === 'boot') { if (anyKey()) { AudioSys.unlock(); startTitle(); } }
   else if (G.screen === 'title') updateTitle();
   else if (G.screen === 'creator') updateCreator();
   else if (G.screen === 'game') {
@@ -275,6 +278,7 @@ function render() {
     Overlay.draw();
     drawMsg();
   }
+  Settings.draw();
   ctx.restore();
 }
 function frame(now) {

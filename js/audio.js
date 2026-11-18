@@ -6,6 +6,12 @@ const AudioSys = (() => {
   let ac = null, master, comp, roomFilter, musicBus, ambBus, sfxBus, revSend, reverb, noiseBuf;
   let muted = false;
   try { muted = localStorage.getItem('philworld-muted') === '1'; } catch (e) { }
+  // Player volume settings (0..1), saved per browser. Shown on the Settings page.
+  const SET_DEF = { master: 0.8, music: 0.5, voice: 1, effects: 0.8 };
+  const settings = Object.assign({}, SET_DEF);
+  try { Object.assign(settings, JSON.parse(localStorage.getItem('philworld-settings') || '{}')); } catch (e) { }
+  let duckGain, musicUser, fxUser, ambUser, ducked = false;
+  const DUCK = 0.3; // music level while someone speaks (about -10 dB)
   let scene = null, sceneName = null, pendingScene = null;
   let layers = [];
   let musicOverride = null;
@@ -64,14 +70,19 @@ const AudioSys = (() => {
     return b;
   }
   function setup() {
-    master = ac.createGain(); master.gain.value = muted ? 0 : 0.85;
+    master = ac.createGain(); master.gain.value = masterLevel();
     comp = ac.createDynamicsCompressor(); comp.threshold.value = -16; comp.ratio.value = 4;
     master.connect(comp); comp.connect(ac.destination);
     roomFilter = ac.createBiquadFilter(); roomFilter.type = 'lowpass'; roomFilter.frequency.value = 18000; roomFilter.Q.value = 0.8;
     roomFilter.connect(master);
-    musicBus = ac.createGain(); musicBus.gain.value = 0.55; musicBus.connect(roomFilter);
-    ambBus = ac.createGain(); ambBus.gain.value = 0.7; ambBus.connect(roomFilter);
-    sfxBus = ac.createGain(); sfxBus.gain.value = 0.75; sfxBus.connect(master);
+    // music: musicBus (rooms/cutscenes set this) -> duck (voices) -> player music volume
+    musicUser = ac.createGain(); musicUser.gain.value = settings.music; musicUser.connect(roomFilter);
+    duckGain = ac.createGain(); duckGain.gain.value = ducked ? DUCK : 1; duckGain.connect(musicUser);
+    musicBus = ac.createGain(); musicBus.gain.value = 0.55; musicBus.connect(duckGain);
+    ambUser = ac.createGain(); ambUser.gain.value = settings.effects; ambUser.connect(roomFilter);
+    fxUser = ac.createGain(); fxUser.gain.value = settings.effects; fxUser.connect(master);
+    ambBus = ac.createGain(); ambBus.gain.value = 0.7; ambBus.connect(ambUser);
+    sfxBus = ac.createGain(); sfxBus.gain.value = 0.75; sfxBus.connect(fxUser);
     reverb = ac.createConvolver(); reverb.buffer = impulse(2.6, 2.4);
     revSend = ac.createGain(); revSend.gain.value = 0.4; revSend.connect(reverb); reverb.connect(roomFilter);
     noiseBuf = ac.createBuffer(1, ac.sampleRate * 2, ac.sampleRate);
@@ -410,11 +421,28 @@ const AudioSys = (() => {
   function setMusicVol(v, ti = 0.8) { if (ac) musicBus.gain.setTargetAtTime(v, ac.currentTime, ti / 3); }
   // Custom cutscene music (e.g. Nietzsche's recurrence melody) temporarily replaces the room track.
   function setMusic(m) { musicOverride = m; mus.step = 0; if (ac) { mus.next = ac.currentTime + 0.05; fadeTrack(m ? 0.0001 : TRACK_VOL, m ? 1 : 3); } }
+  function masterLevel() { return muted ? 0 : 1.06 * settings.master; }
   function toggleMute() {
     muted = !muted;
     try { localStorage.setItem('philworld-muted', muted ? '1' : '0'); } catch (e) { }
-    if (ac) master.gain.setTargetAtTime(muted ? 0 : 0.85, ac.currentTime, 0.05);
+    if (ac) master.gain.setTargetAtTime(masterLevel(), ac.currentTime, 0.05);
     return muted;
+  }
+  // Lower the music while a voice line plays; quick dip, slow recovery.
+  function duck(on) {
+    ducked = !!on;
+    if (ac && duckGain) duckGain.gain.setTargetAtTime(on ? DUCK : 1, ac.currentTime, on ? 0.08 : 0.35);
+  }
+  function setSetting(k, v) {
+    if (!(k in SET_DEF)) return;
+    settings[k] = Math.max(0, Math.min(1, Math.round(v * 10) / 10));
+    try { localStorage.setItem('philworld-settings', JSON.stringify(settings)); } catch (e) { }
+    if (!ac) return;
+    const t = ac.currentTime;
+    if (k === 'master') master.gain.setTargetAtTime(masterLevel(), t, 0.05);
+    if (k === 'music') musicUser.gain.setTargetAtTime(settings.music, t, 0.05);
+    if (k === 'effects') fxUser.gain.setTargetAtTime(settings.effects, t, 0.05);
+    if (k === 'effects') ambUser.gain.setTargetAtTime(settings.effects, t, 0.05);
   }
 
   // ---------------- sound effects
@@ -461,8 +489,9 @@ const AudioSys = (() => {
 
   return {
     unlock, setScene, tick, setMuffle, setMusicVol, setMusic, layer, play, midi, SC, I: () => I,
+    duck, setSetting, settings: () => Object.assign({}, settings), voiceLevel: () => (muted ? 0 : settings.master * settings.voice),
     sfx: S, ev: EV, toggleMute, isMuted: () => muted, ready: () => !!ac, now, scene: () => sceneName,
-    track: () => track && { name: track.name, ok: track.ok, paused: track.el.paused, time: track.el.currentTime, gain: track.gain.gain.value },
+    track: () => track && { name: track.name, ok: track.ok, paused: track.el.paused, time: track.el.currentTime, gain: track.gain.gain.value, duck: duckGain.gain.value, music: musicUser.gain.value },
   };
 })();
 const SFX = AudioSys.sfx;

@@ -368,7 +368,7 @@ function drawHUD() {
     text('✓ progress saved', 6, 18, { size: 11, color: '#7fd88a' });
     ctx.globalAlpha = 1;
   }
-  const hints = 'H hint · M map · J journal · N ' + (AudioSys.isMuted() ? 'sound off' : 'sound') + (Voice.ready() ? ' · V ' + (Voice.isEnabled() ? 'voices' : 'voices off') : '') + ' · P ' + (G.panels === false ? 'pictures off' : 'pictures') + (flag('bow') ? ' · B bow' : '');
+  const hints = 'H hint · M map · J journal · O settings' + (AudioSys.isMuted() ? ' · N sound off' : '') + (flag('bow') ? ' · B bow' : '');
   const w = textW(hints, { size: 11 }) + 8;
   ctx.fillStyle = 'rgba(12,10,28,0.5)'; ctx.fillRect(W - w - 4, 4, w, 12);
   text(hints, W - 8, 5, { size: 11, align: 'right', color: UIC.dim });
@@ -408,3 +408,61 @@ function drawPrompt() {
   text('E', x - w / 2 + 4, y - 6, { size: 12, color: '#1a1020', shadow: false });
   text(label, x - w / 2 + 15, y - 6, { size: 12 });
 }
+
+// ---------- settings page (O, or "Settings" on the title screen)
+const Settings = {
+  open: false, sel: 0, t: 0,
+  rows() {
+    const s = AudioSys.settings();
+    return [
+      { label: 'Sound', kind: 'toggle', get: () => !AudioSys.isMuted(), set: () => { if (AudioSys.toggleMute()) Voice.stop(); } },
+      { label: 'Master volume', kind: 'slider', key: 'master', val: s.master },
+      { label: 'Music', kind: 'slider', key: 'music', val: s.music },
+      { label: 'Voices', kind: 'slider', key: 'voice', val: s.voice },
+      { label: 'Sound effects', kind: 'slider', key: 'effects', val: s.effects },
+      { label: 'Spoken lines', kind: 'toggle', get: () => Voice.isEnabled(), set: () => Voice.toggle() },
+      { label: 'Story pictures', kind: 'toggle', get: () => G.panels !== false, set: () => { G.panels = G.panels === false; try { localStorage.setItem('philworld-panels', G.panels ? '1' : '0'); } catch (e) { } } },
+      { label: 'Close', kind: 'close' },
+    ];
+  },
+  show() { this.open = true; this.sel = 0; this.t = 0; SFX.paper(); },
+  close() { this.open = false; SFX.select(); },
+  update(dt) {
+    this.t += dt;
+    const rows = this.rows();
+    if (hit('up')) { this.sel = (this.sel + rows.length - 1) % rows.length; SFX.select(); }
+    if (hit('down')) { this.sel = (this.sel + 1) % rows.length; SFX.select(); }
+    const r = rows[this.sel];
+    const chg = hit('left') ? -1 : hit('right') ? 1 : 0;
+    if (r.kind === 'slider' && chg) {
+      AudioSys.setSetting(r.key, r.val + chg * 0.1);
+      if (r.key === 'voice' || r.key === 'master') Voice.setVolume(AudioSys.voiceLevel());
+      SFX.select();
+    }
+    if (r.kind === 'toggle' && (chg || hit('act'))) { r.set(); SFX.confirm(); }
+    if ((r.kind === 'close' && hit('act')) || hit('esc') || hit('settings')) this.close();
+  },
+  draw() {
+    if (!this.open) return;
+    ctx.fillStyle = 'rgba(10,6,20,0.8)'; ctx.fillRect(0, 0, W, H);
+    const rows = this.rows(), x = 110, w = 260, y0 = 46, rh = 20;
+    panel(x, 18, w, y0 - 18 + rows.length * rh + 14);
+    text('SETTINGS', 240, 26, { title: true, size: 8, align: 'center', color: UIC.hl });
+    rows.forEach((r, i) => {
+      const y = y0 + i * rh, sel = i === this.sel, c = sel ? UIC.hl : UIC.ink;
+      if (r.kind === 'close') { text((sel ? '▶ ' : '') + 'Close', 240, y + 2, { size: 15, align: 'center', color: c }); return; }
+      text((sel ? '▶ ' : '  ') + r.label, x + 12, y + 2, { size: 15, color: c });
+      if (r.kind === 'slider') {
+        const bx = x + 140, bw = 80;
+        ctx.fillStyle = '#3a3050'; ctx.fillRect(bx, y + 8, bw, 4);
+        ctx.fillStyle = sel ? UIC.hl : UIC.border; ctx.fillRect(bx, y + 8, Math.round(bw * r.val), 4);
+        ctx.fillRect(bx + Math.round(bw * r.val) - 1, y + 5, 3, 10);
+        text(Math.round(r.val * 100) + '%', x + w - 12, y + 2, { size: 14, align: 'right', color: sel ? UIC.hl : UIC.dim });
+      } else {
+        const on = r.get();
+        text(on ? 'On' : 'Off', x + w - 12, y + 2, { size: 15, align: 'right', color: on ? '#7fd88a' : '#c0604a' });
+      }
+    });
+    text('↑ ↓ choose  ·  ← → change  ·  O / Esc close', 240, 258, { size: 12, align: 'center', color: UIC.dim });
+  },
+};
