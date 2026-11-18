@@ -34,6 +34,7 @@ for (const l of lines) {
   const c = cast[l.speaker] === undefined ? cast.narrator : cast[l.speaker];
   if (!c) continue;                                  // e.g. the player ("you") is not voiced
   const text = ttsText(l.text);
+  if (!/[A-Za-z]/.test(text)) continue;             // pauses like "…" have nothing to say
   const id = crypto.createHash('sha1').update(c.voice + '|' + (c.pace || 1) + '|' + text).digest('hex').slice(0, 14);
   manifest[normKey(l.text)] = id;
   const file = path.join(OUT, id + '.mp3');
