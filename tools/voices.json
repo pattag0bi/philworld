@@ -104,20 +104,24 @@
     "pace": 1
   },
   "sartre": {
-    "voice": "varun_en_ads",
-    "pace": 1.05
+    "provider": "elevenlabs",
+    "voice": "eBAnahjDCcJXJUL16cEY",
+    "stability": 0.35
   },
   "beauvoir": {
-    "voice": "simran_en_narration",
-    "pace": 1
+    "provider": "elevenlabs",
+    "voice": "dTmTLshIypwp08eftJH6",
+    "stability": 0.4
   },
   "camus": {
-    "voice": "rohan_en_recovery",
-    "pace": 1
+    "provider": "elevenlabs",
+    "voice": "CKPSX8kOS9MJCGVaFNok",
+    "stability": 0.45
   },
   "waiter": {
-    "voice": "nachiket_en_ads",
-    "pace": 1.15
+    "provider": "elevenlabs",
+    "voice": "SF4mnzAUghHAXQCNqFsU",
+    "stability": 0.3
   },
   "name:Prisoner": {
     "voice": "rustom_en_suspense",
