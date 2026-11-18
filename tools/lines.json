@@ -79,19 +79,31 @@
  },
  {
   "speaker": "socrates",
-  "text": "Here it is: *What is justice?*",
+  "text": "Here it is: *What is justice?* Not an example of it. What justice *is*, in every case.",
   "file": "js/rooms/agora.js",
   "kind": "say"
  },
  {
   "speaker": "socrates",
-  "text": "What is justice? Give me your best answer.",
+  "text": "Here's how my game works. You give me a *rule*: \"justice means ___.\" Then we test your rule on a real situation.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "A true definition must work in *every* case. If we find even *one* case where your rule gives the wrong answer, that case is called a *counterexample*, and we need a better rule.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "So: what is justice? Give me your best rule.",
   "file": "js/rooms/agora.js",
   "kind": "ask"
  },
  {
   "speaker": "socrates",
-  "text": "Hmm. Then try again: *what is justice?*",
+  "text": "Then let's try another rule. *What is justice?*",
   "file": "js/rooms/agora.js",
   "kind": "ask"
  },
@@ -326,6 +338,240 @@
  {
   "speaker": "socrates",
   "text": "Sting! Now it's awake. Annoying? Yes. Useful? Also yes. A city that never gets questioned falls asleep.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Your rule: *justice means always telling the truth and giving back what you owe.* Old Cephalus, a rich merchant in Plato's *Republic*, says exactly this. Watch.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Your friend Nikias",
+  "text": "Will you keep my sword safe while I travel? Give it back whenever I ask.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "You promise. Now you *owe* him the sword.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Nikias, raging",
+  "text": "GIVE ME MY SWORD! I'm going to get my neighbour Dion. Where is he hiding?!",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Your friend has gone *mad* with rage. And you happen to know exactly where Dion is hiding.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Your rule says: *give back what you owe, and tell the truth.* What do you do?",
+  "file": "js/rooms/agora.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Your rule made you *arm a madman* and send him straight to his victim. Was that *just*?",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Of course you keep it. Almost anyone would. But notice: your *rule* told you to give it back and tell the truth.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Here is the problem. The rule says \"give it back,\" yet giving it back would be *wrong*. A true definition of justice can never tell us to do something unjust.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Paying debts and telling the truth are *usually* just, but not *always*. So they can't be what justice *is*. One counterexample, and the rule breaks.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Your rule: *justice means helping your friends and harming your enemies.* Polemarchus, Cephalus's son, defends this one. It has *two* weak spots. Watch the first.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:A smiling stranger",
+  "text": "Hello, dear friend! What a lovely day. Let me carry that heavy purse for you!",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:A grumpy stranger",
+  "text": "Hmph. Out of my way.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Your rule says: help your friends. Which one is your *friend*?",
+  "file": "js/rooms/agora.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The smiling \"friend\" runs off with your purse.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:The grumpy stranger",
+  "text": "You dropped this coin back there. Here. Don't lose it.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "You chose the smiler, like most of us would. We judge friends by how they *seem*.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "A good guess! But most people judge friends by how they *seem*.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "So your rule would have you *help the thief* and *harm the honest man*. We can be wrong about who our friends and enemies really are.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Now the second weak spot, the deeper one. What happens when you *harm* someone? Watch.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Someone shoves the grumpy man, just to \"harm an enemy.\"",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "He storms off angrier than before, and smashes a potter's jars on his way.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "See? Harm a horse and it becomes a *worse* horse. Harm a person and they grow more bitter and *less* just, and the harm spreads.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Can *justice* ever make people *less* just?",
+  "file": "js/rooms/agora.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Think of it this way: can *heat* make things colder? Can *goodness* make people worse? Justice that breeds injustice isn't justice.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Exactly. That would be like *heat* making things colder.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "So a just person doesn't harm *anyone*, not even enemies. Your rule breaks twice.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Your rule: *justice is whatever benefits the stronger.* In the *Republic*, Thrasymachus bursts in shouting this. His idea:",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Rulers make laws that benefit *themselves*, then call obeying those laws \"justice.\" So your rule really says two things at once. Watch.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:The Ruler",
+  "text": "NEW LAW! Cut down every olive tree! I want firewood to heat my palace!",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "The people obey the law. That's \"justice,\" according to your rule.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:The Ruler",
+  "text": "Where is my olive oil? No olives to sell! My treasury is empty! I'm *ruined*!",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Your rule says two things: (1) justice is *obeying the rulers' laws*, and (2) justice is *what benefits the rulers*. The people obeyed, and it *hurt* the ruler.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "So, by your rule: was the people's obedience just or unjust?",
+  "file": "js/rooms/agora.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Exactly! You found it yourself. One rule, two opposite answers.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "But by part two it was *unjust*, since it harmed the stronger. One rule, two opposite answers!",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "But by part one it was *just*, since they obeyed. One rule, two opposite answers!",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "socrates",
+  "text": "Rulers make *mistakes*, so \"obeying the stronger\" and \"benefiting the stronger\" can come apart. A rule that contradicts itself can't be the definition of justice.",
+  "file": "js/rooms/agora.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Thrasymachus also claims that injustice *pays* better than justice. Plato spends the rest of the *Republic*, ten whole books, answering him.",
   "file": "js/rooms/agora.js",
   "kind": "say"
  },
@@ -2721,60 +2967,6 @@
   "speaker": "confucius",
   "text": "The only relationship of *equals* among the five. \"Have no friends who are not as good as yourself\": friends lift each other up.",
   "file": "js/rooms/courtyard.js",
-  "kind": "data"
- },
- {
-  "speaker": "socrates",
-  "text": "Interesting! This is what old Cephalus says in Plato's *Republic*. Let's test it.",
-  "file": "js/rooms/agora.js",
-  "kind": "data"
- },
- {
-  "speaker": "socrates",
-  "text": "Suppose a friend lends you his sword. Later he goes *mad* and demands it back, raging.",
-  "file": "js/rooms/agora.js",
-  "kind": "data"
- },
- {
-  "speaker": "socrates",
-  "text": "You owe it to him. Is it *just* to hand a sword to a madman?",
-  "file": "js/rooms/agora.js",
-  "kind": "data"
- },
- {
-  "speaker": "socrates",
-  "text": "Interesting! Polemarchus argues this in the *Republic*. Let's test it.",
-  "file": "js/rooms/agora.js",
-  "kind": "data"
- },
- {
-  "speaker": "socrates",
-  "text": "But we often misjudge who our friends really are. Someone who seems friendly might be robbing you!",
-  "file": "js/rooms/agora.js",
-  "kind": "data"
- },
- {
-  "speaker": "socrates",
-  "text": "And tell me: does *harming* a person make them better, or worse? Can justice ever make people *worse*?",
-  "file": "js/rooms/agora.js",
-  "kind": "data"
- },
- {
-  "speaker": "socrates",
-  "text": "Interesting! Thrasymachus angrily says this in the *Republic*. Let's test it.",
-  "file": "js/rooms/agora.js",
-  "kind": "data"
- },
- {
-  "speaker": "socrates",
-  "text": "But rulers make *mistakes*. Sometimes they order things that actually harm themselves.",
-  "file": "js/rooms/agora.js",
-  "kind": "data"
- },
- {
-  "speaker": "socrates",
-  "text": "Then obeying them is sometimes *not* in the stronger's interest. So is justice obeying, or benefiting? It can't be both!",
-  "file": "js/rooms/agora.js",
   "kind": "data"
  },
  {

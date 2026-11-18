@@ -186,5 +186,29 @@
   "name:A passer-by": {
     "voice": "nachiket_en_ads",
     "pace": 1.05
+  },
+  "name:Your friend Nikias": {
+    "voice": "ojas_en_social",
+    "pace": 1.0
+  },
+  "name:Nikias, raging": {
+    "voice": "ashwin_en_sports_energetic",
+    "pace": 1.15
+  },
+  "name:A smiling stranger": {
+    "voice": "nachiket_en_ads",
+    "pace": 1.1
+  },
+  "name:A grumpy stranger": {
+    "voice": "rustom_en_suspense",
+    "pace": 1.0
+  },
+  "name:The grumpy stranger": {
+    "voice": "rustom_en_suspense",
+    "pace": 1.0
+  },
+  "name:The Ruler": {
+    "voice": "shubh_en_audiobook",
+    "pace": 1.0
   }
 }
