@@ -159,7 +159,8 @@ async function metamorphoses(Rm) {
 
 async function madmanParable() {
   await say('nietzsche', 'Hear a story I wrote, in *The Gay Science* (1882). Watch.');
-  const C = await cutStart('The Madman · a parable');
+  const C = await cutStart();
+  await C.stage(STAGES.street({ style: 'town' }), 'The Madman · a parable');
   const crowd = [];
   const spots = [[200, 196], [236, 214], [276, 200], [312, 222], [250, 236]];
   spots.forEach(([x, y], i) => crowd.push(C.actor('c' + i, { skin: ['#eab994', '#f0caa8', '#c98e62'][i % 3], hairStyle: ['short', 'bun', 'curly'][i % 3], hairC: '#2b1d14', robe: ['#2e86c1', '#c0392b', '#27ae60', '#8e44ad', '#d4ac0d'][i], robe2: '#1d1d2b', hat: i % 2 ? 'beret' : null }, x, y, { dir: 1 })));

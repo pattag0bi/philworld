@@ -329,9 +329,10 @@ async function zenoCutscene() {
   await say('zeno', 'Later I said: *"I made a prosperous voyage when I suffered shipwreck."* Losing everything showed me what truly mattered.');
 }
 async function epictetusLegCutscene() {
-  const E = G.room.ents.find(e => e.id === 'epictetus');
   await say('epictetus', 'I was born a *slave*. My name even means "acquired." Let me show you a story they tell about me.');
-  const C = await cutStart('Rome, around 70 CE');
+  const C = await cutStart();
+  await C.stage(STAGES.hall({ style: 'roman' }), 'Rome, around 70 CE');
+  const E = C.cast('epictetus', 196, 150, { dir: 3, pose: { sit: true } });
   const master = C.actor('master', { skin: '#eab994', hairStyle: 'short', hairC: '#1d1d2b', robe: '#f5f5f5', robe2: '#8b1e2b', sash: '#8b1e2b', long: true }, 500, 150, { dir: 2 });
   await C.walk(master, 222, 146, 50); C.face(master, E);
   C.emote(master, 'angry', 2);
@@ -349,9 +350,10 @@ async function epictetusLegCutscene() {
 }
 
 async function marcusMorningCutscene() {
-  const Mc = G.room.ents.find(e => e.id === 'marcus'), home = [Mc.x, Mc.y];
   await say('marcus', 'Each morning I write: today I will meet people who are rude, ungrateful, dishonest. Let me show you one such morning.');
-  const C = await cutStart('A Roman army camp · 170s CE');
+  const C = await cutStart();
+  await C.stage(STAGES.camp({ style: 'roman' }), 'A Roman army camp · 170s CE');
+  const Mc = C.cast('marcus', 100, 236, { dir: 3 });
   const people = [
     [{ skin: '#eab994', hairStyle: 'short', hairC: '#3a2a1a', robe: '#c0392b', hat: 'helmet' }, 'angry', 'Out of my way, old man!'],
     [{ skin: '#c98e62', hairStyle: 'curly', hairC: '#1d1d2b', robe: '#8e44ad', robe2: '#e0c060', long: true }, 'ha', 'The emperor scribbles in his little diary again? Ha!'],
@@ -368,7 +370,6 @@ async function marcusMorningCutscene() {
     await C.walk(p, -20, 236, 80);
   }
   await say('marcus', 'They act that way out of ignorance. I can\'t be harmed by them unless I *choose* to be. And I was born to work *with* them, like hands and feet.');
-  await C.walk(Mc, home[0], home[1], 40); Mc.dir = 3;
   await C.end();
   await say('owl', 'The most powerful man in the world, fighting wars and plague, writing himself reminders to be patient.');
 }

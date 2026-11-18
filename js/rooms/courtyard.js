@@ -268,24 +268,26 @@ async function pairTalk(P, ents) {
 }
 
 async function shaoCutscene() {
-  const K = G.room.ents.find(e => e.id === 'confucius');
   await say('confucius', 'Music shapes the heart. Let me show you what happened when I heard the ancient *Shao* music.');
-  const C = await cutStart('The state of Qi');
-  const mus = C.actor('mus', { skin: '#e8c095', hairStyle: 'topknot', hairC: '#1d1d2b', robe: '#c0392b', robe2: '#c9a24a', long: true }, 200, 120, { dir: 3, pose: { sit: true } });
-  const cook = C.actor('cook', LOOKS.cookding, 330, 130, { dir: 2 });
-  const bowls = C.prop('bowls', 262, 112, function (g, t) { for (let i = 0; i < (this.n || 0); i++) { ellipse(g, 262, 110 - i * 5, 6, 2, '#8b5a2b'); R(g, '#c0392b', 259, 107 - i * 5, 6, 2); } }, { n: 0 });
+  const C = await cutStart();
+  await C.stage(STAGES.hall({ style: 'chinese' }), 'The state of Qi');
+  const K = C.cast('confucius', 250, 158, { dir: 2, pose: { sit: true } });
+  const players = [0, 1, 2].map(i => C.actor('mus' + i, { skin: '#e8c095', hairStyle: 'topknot', hairC: '#1d1d2b', robe: ['#c0392b', '#8b1e2b', '#c0392b'][i], robe2: '#c9a24a', long: true }, 120 + i * 30, 130 + (i % 2) * 10, { dir: 3, pose: { sit: true } }));
+  const rack = C.prop('rack', 150, 118, (g) => { R(g, '#5a3a1a', 104, 100, 92, 3); R(g, '#5a3a1a', 106, 100, 3, 22); R(g, '#5a3a1a', 191, 100, 3, 22); for (let i = 0; i < 7; i++) { R(g, '#c9a24a', 112 + i * 11, 103, 1, 3); ellipse(g, 112 + i * 11, 110, 3, 4, '#a07a2a'); } }, { z: 110 });
+  const cook = C.actor('cook', LOOKS.cookding, 400, 166, { dir: 2 });
+  const bowls = C.prop('bowls', 274, 160, function (g, t) { for (let i = 0; i < (this.n || 0); i++) { ellipse(g, this.x, this.y - i * 5, 6, 2, '#8b5a2b'); R(g, '#c0392b', this.x - 3, this.y - 3 - i * 5, 6, 2); } }, { n: 0 });
   const mel = [60, 64, 67, 69, 67, 64, 62, 60, 62, 64, 67, 72];
   mel.forEach((n, i) => AudioSys.play('bell', n, { vol: 0.1, dur: 2 }, i * 0.32));
-  C.emote(K, 'note', 4); C.emote(mus, 'note', 4);
-  K.pose = { closedEyes: true };
+  C.emote(K, 'note', 4); players.forEach(p => C.emote(p, 'note', 4));
+  K.pose = { sit: true, closedEyes: true };
   for (let m = 1; m <= 3; m++) {
     C.caption(m === 1 ? 'Day one' : m === 2 ? 'One month later' : 'Three months later');
-    await C.walk(cook, 276, 112, 60); bowls.n = m; SFX.coin();
+    await C.walk(cook, 290, 162, 60); bowls.n = m; SFX.coin();
     C.emote(cook, '?', 1.5);
-    await C.walk(cook, 330, 130, 60);
+    await C.walk(cook, 400, 166, 60);
     await wait(0.6);
   }
-  K.pose = {};
+  K.pose = { sit: true };
   await say('confucius', 'I didn\'t notice the taste of meat for three months! I never imagined music could reach such perfection.');
   await C.end();
 }

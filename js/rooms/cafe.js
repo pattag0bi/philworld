@@ -342,7 +342,8 @@ async function finale() {
 
 async function studentCutscene() {
   await say('sartre', 'During the war a student came to me with an impossible choice. Watch.');
-  const C = await cutStart('Paris, 1940 · the occupation');
+  const C = await cutStart();
+  await C.stage(STAGES.street({ style: 'paris1940' }), 'Paris, 1940 · the occupation');
   const st = C.actor('student', { skin: '#f0caa8', hairStyle: 'short', hairC: '#5a3a22', robe: '#5d6d7e', robe2: '#2c3e50', legs: '#2c3e50' }, 240, 200, { dir: 0 });
   const mom = C.actor('mother', { skin: '#e8c0a0', hairStyle: 'bun', hairC: '#bbb', robe: '#7a6a8a', robe2: '#4a3a5a', long: true }, 150, 196, { dir: 3 });
   const res = C.actor('resist', { skin: '#e0b090', hairStyle: 'short', hairC: '#2a1a10', robe: '#4a4a3a', robe2: '#2a2a1a', hat: 'beret', legs: '#2a2a1a' }, 330, 196, { dir: 2 });
@@ -392,9 +393,9 @@ async function becomingCutscene() {
   await C.end();
 }
 async function absurdCutscene() {
-  const C = await cutStart('The absurd');
-  const man = C.actor('man', playerLook(), 240, 200, { dir: 1 });
-  C.set((g, t) => { vgrad(g, 0, 0, W, H, '#05050f', '#1a1a3a', 10); for (let i = 0; i < 80; i++) R(g, '#fff', (i * 97) % W, (i * 41) % 180, 1, 1); R(g, '#2a2a3a', 0, 210, W, 62); });
+  const C = await cutStart();
+  await C.stage(STAGES.night(), 'The absurd');
+  const man = C.actor('man', playerLook(), 240, 230, { dir: 1 });
   await say(null, 'A person stands under the night sky and asks the biggest question of all.');
   man.pose = { armsUp: true }; C.emote(man, '?', 3);
   await say('you', 'WHY? Why am I here? What is it all *for*?');

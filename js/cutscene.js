@@ -2,6 +2,7 @@
 // ============================================================
 // PhilWorld — cutscenes: characters act out the stories in the room.
 // Use inside a script:  const C = await cutStart('Athens, 399 BCE'); ... await C.end();
+// Stories set somewhere else go on a stage (C.stage) so the room itself is left alone.
 // ============================================================
 G.letterbox = 0;
 G.caption = null;
@@ -62,22 +63,48 @@ async function cutStart(caption) {
     async fadeActor(a, to, dur = 0.8) { const from = a.alpha; let t = 0; while (t < dur) { t += await nextFrame(); a.alpha = lerp(from, to, Math.min(1, t / dur)); } },
     async black(on, dur) { G.fadeTo = on ? 1 : 0; await waitFade(); if (dur) await wait(dur); },
     caption(s) { G.caption = s ? { s, t0: G.t } : null; },
-    // swap the room for a temporary set (e.g. a prison cell); call C.unset() to go back
-    set(draw, keep = []) {
-      C.unset();
-      C._hidden = G.room.ents.filter(e => !actors.includes(e) && !keep.includes(e) && !e.hidden);
-      C._hidden.forEach(e => e.hidden = true);
-      C._ph = [player.hidden, owl.hidden]; player.hidden = true; owl.hidden = true;
-      C._set = C.prop('set', 0, 0, draw, { z: -999 });
+    // A stage is a separate place for the story: its own backdrop, floor and sounds.
+    // The real room is set aside untouched and comes back exactly as it was on C.end() (or C.leave()).
+    //   await C.stage(STAGES.palace({ style: 'india' }), 'Kapilavastu');
+    // Actors from the previous stage are dropped unless listed in o.carry.
+    async stage(spec, caption, o = {}) {
+      await C.black(true);
+      const carry = o.carry || [];
+      if (!C._real) C._real = { room: G.room, ph: [player.hidden, owl.hidden], tint: G.tint };
+      else if (G.room.exit) G.room.exit(G.room);
+      const S = Object.assign({ name: 'stage', isStage: true, walls: [], surface: () => 'stone' }, spec);
+      S.ents = carry.slice();
+      S.bgc = prerender(S);
+      G.room = S; G.tint = null; G.toast = null;
+      player.hidden = true; owl.hidden = true;
+      if (S.muffle) AudioSys.setMuffle(S.muffle, 0.6);
+      if (S.enter) S.enter(S);
+      C.caption(caption === undefined ? null : caption);
+      if (o.dark) return S;
+      await C.black(false);
+      return S;
     },
-    unset() {
-      if (!C._set) return;
-      C._hidden.forEach(e => e.hidden = false); [player.hidden, owl.hidden] = C._ph;
-      G.room.ents = G.room.ents.filter(e => e !== C._set); C._set = null;
+    // Go back to the real room mid-cutscene (actors made on the stage are dropped).
+    async leave(o = {}) {
+      if (!C._real) return;
+      if (G.fadeTo < 1) await C.black(true);
+      if (G.room.exit) G.room.exit(G.room);
+      const r = C._real; C._real = null;
+      G.room = r.room; [player.hidden, owl.hidden] = r.ph; G.tint = r.tint;
+      AudioSys.setMuffle(G.room.muffle || 18000, 0.6);
+      C.caption(o.caption || null);
+      if (!o.dark) await C.black(false);
+    },
+    get staged() { return !!C._real; },
+    // A stand-in for one of the room's people, for use on a stage (the real one stays home).
+    cast(id, x, y, o = {}) {
+      const e = (C._real ? C._real.room : G.room).ents.find(e => e.id === id);
+      return C.actor(id, (e && e.look) || {}, x, y, Object.assign({ pose: {} }, o));
     },
     async end() {
-      C.unset();
+      if (C._real) await C.leave({ dark: true });
       G.caption = null;
+      if (G.fadeTo > 0) await C.black(false);
       while (G.letterbox > 0) { G.letterbox = Math.max(0, G.letterbox - (await nextFrame()) * 3); }
       G.room.ents = G.room.ents.filter(e => !actors.includes(e));
       G.cutscene = false;

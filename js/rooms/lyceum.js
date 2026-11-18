@@ -263,9 +263,9 @@ async function raiseAlexander() {
   const AX = G.room.ents.find(e => e.id === 'alexander'), axHome = [AX.x, AX.y];
   AX.hidden = true;
   const YOUNG = Object.assign({}, LOOKS.alexander, { hat: null, robe: '#c0392b', robe2: '#c0a040' });
-  let C = await cutStart('Pella, Macedon · 344 BCE');
+  const C = await cutStart();
+  await C.stage(STAGES.palace({ style: 'greek' }), 'Pella, Macedon · 344 BCE');
   G.alexShow = true;
-  player.x = 220; player.y = 150; player.dir = 3;
   const al = C.actor('alex', YOUNG, 260, 150, { dir: 3 });
   // --- Scene 1: Bucephalus (timing mini-game)
   const horse = C.prop('horse', 400, 150, function (g, t) { drawBucephalus(g, this.x + (this.warn && !this.rear ? Math.round(Math.sin(t * 40)) : 0), this.y, this.rear, t); }, { rear: false, z: 150 });
@@ -311,7 +311,7 @@ async function raiseAlexander() {
   await say('aristotle', cScore === 0 ? 'Brave, but *careful*: he moved when it was right and waited when it wasn\'t. That is courage.' : cScore > 0 ? 'He got there, but by charging in when the horse was dangerous. Too much daring is *recklessness*.' : 'He got there, but he hesitated so long he nearly lost the chance. Too little daring is *cowardice*.');
   horse.alpha = 0; philip.alpha = 0; al.x = 260; al.y = 150;
   // --- Scene 2: the beggar at the gate (generosity)
-  C.caption('The palace gate, a few months later');
+  await C.black(true); C.caption('The palace gate, a few months later'); await C.black(false);
   const beg = C.actor('beggar', { skin: '#c98e62', hairStyle: 'long', hairC: '#6a6a6a', beard: '#6a6a6a', beardLen: 3, robe: '#7a6a5a', robe2: '#5a4a3a', long: true }, 360, 150, { dir: 2, pose: { sit: true } });
   C.emote(beg, '...', 2.5);
   await say({ name: 'An old soldier, begging', look: beg.look, voice: 200 }, 'Young prince… I fought for your father for twenty years. Now I have nothing. Could you spare anything?');
@@ -323,7 +323,7 @@ async function raiseAlexander() {
   else { await C.walk(al, 344, 150, 50); for (let i = 0; i < 6; i++) { SFX.coin(); await wait(0.1); } const tre = C.actor('treasurer', { skin: '#eab994', hairStyle: 'bald', hairC: '#bbb', robe: '#2e86c1', robe2: '#c9a24a', long: true }, 300, 120, { dir: 0 }); C.emote(tre, '!', 2); tre.pose = { closedEyes: true }; await say({ name: 'The royal treasurer', look: tre.look, voice: 300 }, 'The *whole* treasury?! But… how will we pay the army?'); await say('aristotle', 'Giving with no sense of measure isn\'t generosity. It\'s *wastefulness*, and soon there\'s nothing left to give anyone.'); tre.alpha = 0; }
   beg.alpha = 0; al.x = 260;
   // --- Scene 3: the feast (self-control)
-  C.caption('A royal feast');
+  await C.stage(STAGES.hall({ style: 'greek' }), 'A royal feast', { carry: [al] });
   const feast = C.prop('feast', 0, 0, (g, t) => { R(g, '#6b4a2b', 280, 150, 140, 6); for (let i = 0; i < 6; i++) { ICONS[['apple', 'mango', 'coin'][i % 3]](g, 290 + i * 22, 144); } for (let i = 0; i < 3; i++) { R(g, '#c9a24a', 300 + i * 40, 140, 4, 6); } }, { z: 151 });
   const guests = [0, 1, 2].map(i => C.actor('g' + i, { skin: ['#eab994', '#c98e62', '#e8b48f'][i], hairStyle: 'curly', hairC: '#2b1d14', beard: '#2b1d14', beardLen: 1, robe: ['#8e44ad', '#16a085', '#d35400'][i], robe2: '#c9a24a', long: true }, 300 + i * 50, 130, { dir: 0, pose: { sit: true } }));
   await C.walk(al, 290, 156, 50); al.dir = 1;
@@ -337,7 +337,7 @@ async function raiseAlexander() {
   else { for (let i = 0; i < 4; i++) { al.x += 4 * (i % 2 ? -1 : 1); C.emote(al, 'ha', 1); AudioSys.play('sine', 300 + i * 60, { hz: true, wave: 'sawtooth', dur: 0.15, vol: 0.04 }); await wait(0.35); } al.pose = { armsUp: true }; C.emote(cleitus, 'angry', 2.5); shake(0.2); SFX.shatter(); await say('alexander', 'I am the GREATEST! Greater than my father! Greater than any of you!'); al.pose = {}; await say('aristotle', 'When pleasure takes over, you stop being in charge of yourself. That is *indulgence*, and it makes people do things they regret.'); }
   feast.alpha = 0; guests.forEach(g => g.alpha = 0); al.x = 260; al.y = 150;
   // --- Scene 4: the battle (his habit acts for him)
-  C.caption('Battle of Chaeronea · 338 BCE · Alexander is 18');
+  await C.stage(STAGES.field(), 'Battle of Chaeronea · 338 BCE · Alexander is 18', { carry: [al] });
   await say(null, 'Years have passed. Alexander leads the cavalry in his first great battle.');
   await say('aristotle', 'This time, *you don\'t choose*. Watch what his habits make him do.');
   const enemy = [0, 1, 2].map(i => C.actor('e' + i, { skin: '#e8b48f', hairStyle: 'short', robe: '#2e86c1', robe2: '#1b4f72', hat: 'helmet' }, 400 + (i % 2) * 14, 130 + i * 14, { dir: 2 }));
@@ -359,16 +359,14 @@ async function raiseAlexander() {
   }
   G.alex.courage.push(ch > 0.34 ? 1 : ch < -0.34 ? -1 : 0);
   await say('aristotle', 'Did you see? You didn\'t choose that. His *habit* did. We become what we repeatedly do. Every choice you made for him has been carving his character, like water carving stone.');
-  enemy.forEach(e => e.alpha = 0); allies.forEach(a => a.alpha = 0);
-  await C.end();
-  await alexanderEnding(al, YOUNG);
+  await alexanderEnding(C);
   G.alexShow = false;
   AX.hidden = false; AX.x = axHome[0]; AX.y = axHome[1];
 }
 
 // ---------- 3. the man he becomes
-async function alexanderEnding() {
-  const C = await cutStart('Alexander the Great, years later');
+async function alexanderEnding(C) {
+  await C.stage(STAGES.camp({ style: 'macedon' }), 'Alexander the Great, years later');
   const KING = Object.assign({}, LOOKS.alexander, { hat: 'crown', robe: '#8e44ad', robe2: '#f1c40f', long: true });
   const k = C.actor('king', KING, 300, 150, { dir: 0 });
   const w = { courage: habitWord('courage'), generosity: habitWord('generosity'), temperance: habitWord('temperance') };

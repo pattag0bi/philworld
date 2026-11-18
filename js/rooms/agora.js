@@ -279,38 +279,28 @@ async function trialCutscene() {
   await C.walkAll(jurors.map((j, i) => [j, 520, 150 + (i % 2) * 22, 90]));
   mel.alpha = 0;
   // the prison: friends gather
-  await C.black(true, 0.6);
-  C.caption('A prison cell, one month later');
-  C.set((g, t) => {
-    tex(g, 0, 0, W, H, '#3a3430', ['#2e2824', '#4a423c'], 0.2, 7);
-    for (let y = 0; y < 100; y += 12) for (let x = (y / 12 % 2) * 14; x < W; x += 28) R(g, '#2a2420', x, y, 1, 12);
-    R(g, '#2a2420', 0, 100, W, 3);
-    R(g, '#1a1410', 200, 20, 80, 50); R(g, '#c8d8e8', 204, 24, 72, 42); for (let i = 0; i < 6; i++) R(g, '#3a3430', 210 + i * 12, 24, 3, 42);
-    g.fillStyle = 'rgba(220,230,255,0.08)'; g.beginPath(); g.moveTo(204, 66); g.lineTo(276, 66); g.lineTo(320, 200); g.lineTo(170, 200); g.fill();
-    R(g, '#5a4a3a', 180, 160, 30, 8);
-  }, [S]);
+  await C.stage(STAGES.cell(), 'A prison cell, one month later', { dark: true });
+  S.x = home[0]; S.y = home[1]; S.dir = 0;
+  const Sc = C.cast('socrates', 236, 146, { dir: 0 });
   const crito = C.actor('crito', CITIZEN(2), 266, 150, { dir: 2 });
   const f2 = C.actor('f2', CITIZEN(3), 250, 170, { dir: 1 });
   const f3 = C.actor('f3', CITIZEN(5), 214, 166, { dir: 1 });
-  S.x = 236; S.y = 146; S.dir = 0;
   await C.black(false);
   await say({ name: 'Crito', look: crito.look, voice: 260 }, 'Socrates, everything is ready. The guards are bribed. A ship is waiting. *Escape tonight!*');
-  C.face(S, crito);
+  C.face(Sc, crito);
   await say('socrates', 'Dear Crito. Should I break the laws that raised me, just to save my own skin? Would that be *just*? No. I won\'t run.');
   const jailer = C.actor('jailer', LOOKS.puppeteer, 480, 200, { dir: 2 });
-  await C.walk(jailer, 262, 168, 35); C.face(jailer, S);
+  await C.walk(jailer, 262, 168, 35); C.face(jailer, Sc);
   C.emote(crito, 'tear', 4); C.emote(f2, 'tear', 4); C.emote(f3, 'tear', 4);
   await say(null, 'The jailer brings the cup. The friends weep. Socrates comforts *them*.');
   await say('socrates', 'Why cry? We have spent our lives practicing for this: caring for the soul more than the body. Let us go calmly.');
-  C.emote(S, '...', 3);
+  C.emote(Sc, '...', 3);
   await wait(1.2);
   AudioSys.play('pad', 45, { vol: 0.08, dur: 6 }); AudioSys.play('pad', 52, { vol: 0.06, dur: 6 });
   await C.black(true, 1.2);
   await narrate('He drank calmly, talking with his friends about the soul until the end.');
   await say('owl', 'Plato was too ill to be there that day. He wrote the scene later, in the *Phaedo*. Socrates died for the right to keep asking questions.');
   await C.end();
-  S.x = home[0]; S.y = home[1]; S.dir = 0;
-  await C.black(false);
 }
 
 async function gadflyCutscene() {

@@ -323,7 +323,8 @@ async function chariotScene(Rm) {
 }
 
 async function fourSightsCutscene() {
-  const C = await cutStart('Kapilavastu · the four sights');
+  const C = await cutStart();
+  await C.stage(STAGES.palace({ style: 'india', road: true }), 'Kapilavastu · the four sights');
   const prince = C.actor('prince', { skin: '#d9a066', hairStyle: 'short', hairC: '#1d1d2b', robe: '#f1c40f', robe2: '#c0392b', hat: 'crown', long: true }, 150, 190, { dir: 3 });
   const ch = C.actor('channa', { skin: '#c98e62', hairStyle: 'topknot', hairC: '#1d1d2b', robe: '#ecf0f1', robe2: '#8b5a2b' }, 132, 196, { dir: 3 });
   const passers = [
@@ -350,7 +351,10 @@ async function fourSightsCutscene() {
     if (speed) await Promise.all(actors.map(x => C.walk(x, x.x - 300, x.y, speed * 1.5)));
     actors.forEach(x => x.alpha = 0);
   }
+  await C.black(true);
   C.caption('That night');
+  G.tint = 'rgba(16,14,52,0.5)';
+  await C.black(false);
   prince.look = Object.assign({}, prince.look, { hat: null, robe: '#e07b1a', robe2: '#b05a10' });
   SFX.sparkle();
   await say(null, 'That night the prince took off his crown, left the palace, and set out to find the end of suffering.');
@@ -358,18 +362,18 @@ async function fourSightsCutscene() {
   await C.end();
 }
 async function kisaCutscene() {
-  const K = G.room.ents.find(e => e.id === 'kisa'), home = [K.x, K.y];
-  const C = await cutStart('Kisa Gotami and the mustard seed');
+  const C = await cutStart();
+  await C.stage(STAGES.village({ dusk: true }), 'Kisa Gotami and the mustard seed');
+  const K = C.cast('kisa', 100, 212, { dir: 3 });
   const houses = [];
   const xs = [160, 220, 280, 340, 400];
-  xs.forEach((x, i) => houses.push(C.prop('h' + i, x, 252, function (g, t) {
-    R(g, '#c8a070', x - 12, 230, 24, 22); for (let k = 0; k < 8; k++) R(g, '#a07a3a', x - 14 + k * 0.5, 222 + k, 28 - k, 1);
-    R(g, '#3a2a1a', x - 3, 240, 6, 12);
-    if (this.lit) { R(g, '#f7dc6f', x + 5, 236, 5, 5); drawFlame(g, x + 7, 256, t + i, 0.5); }
+  xs.forEach((x, i) => houses.push(C.prop('h' + i, x, 200, function (g, t) {
+    R(g, '#c8a070', x - 12, 178, 24, 22); for (let k = 0; k < 8; k++) R(g, '#a07a3a', x - 14 + k * 0.5, 170 + k, 28 - k, 1);
+    R(g, '#3a2a1a', x - 3, 188, 6, 12);
+    if (this.lit) { R(g, '#f7dc6f', x + 5, 184, 5, 5); drawFlame(g, x + 7, 206, t + i, 0.5); }
   }, {})));
-  G.tint = 'rgba(20,20,50,0.35)';
   for (let i = 0; i < houses.length; i++) {
-    await C.walk(K, xs[i], 262, 45);
+    await C.walk(K, xs[i], 212, 45);
     K.dir = 1;
     await wait(0.4);
     houses[i].lit = true;
@@ -378,10 +382,7 @@ async function kisaCutscene() {
     await wait(0.8);
   }
   await say('kisa', 'I went to every house in the village. Everyone had a seed to give, but every family had lost someone: a parent, a child, a friend.');
-  K.pose = { sit: true };
-  await wait(1);
-  G.tint = null;
-  await C.walk(K, home[0], home[1], 60);
-  K.pose = {}; K.dir = 3;
+  K.dir = 0; K.pose = { sit: true };
+  await wait(1.5);
   await C.end();
 }

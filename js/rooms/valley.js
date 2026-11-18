@@ -318,43 +318,43 @@ async function butterflyDream(Rm) {
 }
 
 async function laoziBorderCutscene() {
-  const L = G.room.ents.find(e => e.id === 'laozi'), home = [L.x, L.y];
-  const C = await cutStart('The western pass · long, long ago');
-  const keeper = C.actor('keeper', { skin: '#e8c095', hairStyle: 'topknot', hairC: '#1d1d2b', robe: '#8b1e2b', robe2: '#c9a24a', hat: 'helmet' }, 430, 166, { dir: 2 });
-  const gate = C.prop('gate', 446, 170, (g) => { R(g, '#8b1e2b', 444, 132, 4, 40); R(g, '#8b1e2b', 470, 132, 4, 40); R(g, '#3a3a42', 440, 128, 38, 6); }, { z: 100 });
-  await C.walk(L, 400, 166, 30);
+  const C = await cutStart();
+  await C.stage(STAGES.pass(), 'The western pass · long, long ago');
+  const L = C.cast('laozi', 290, 166, { dir: 3 });
+  const keeper = C.actor('keeper', { skin: '#e8c095', hairStyle: 'topknot', hairC: '#1d1d2b', robe: '#8b1e2b', robe2: '#c9a24a', hat: 'helmet' }, 400, 168, { dir: 2 });
+  await C.walk(L, 372, 166, 30);
   C.emote(keeper, '!', 2);
   await say({ name: 'The Gatekeeper', look: keeper.look, voice: 250 }, 'Old Master! You\'re leaving the kingdom forever? Then please, before you go, *write down your wisdom* for us!');
   C.emote(L, '...', 2.5); await wait(1);
-  const scroll = C.prop('scroll', 412, 150, (g, t) => { ICONS.scroll(g, 414, 140 + Math.sin(t * 2)); drawSpark(g, 422, 132, t); }, {});
+  const scroll = C.prop('scroll', 384, 150, (g, t) => { ICONS.scroll(g, 386, 140 + Math.sin(t * 2)); drawSpark(g, 394, 132, t); }, {});
   for (let i = 0; i < 5; i++) { SFX.paper(); await wait(0.35); }
   await say(null, 'Laozi writes about 5,000 characters in two short books. The *Tao Te Ching*: "The Classic of the Way and Its Power."');
   C.emote(keeper, 'heart', 2); keeper.pose = { bow: true };
   await wait(0.8); keeper.pose = {};
-  await C.walk(L, 500, 166, 25);
+  scroll.alpha = 0;
+  await C.walk(L, 520, 166, 25);
   await say(null, 'Then he rides west through the gate… and is never seen again.');
-  scroll.alpha = 0; await C.fadeActor(keeper, 0, 0.8);
-  L.x = home[0] + 60; L.y = home[1];
-  await C.walk(L, home[0], home[1], 40);
-  L.dir = 0;
+  await wait(0.6);
   await C.end();
 }
 
 async function cookDingCutscene() {
-  const D = G.room.ents.find(e => e.id === 'cookding');
   await say('cookding', 'I\'m Cook Ding, from a story by *Zhuangzi*. Watch two cooks at work.');
-  const C = await cutStart('The kitchen of Lord Wenhui');
-  const lord = C.actor('lord', LOOKS.ruler, 340, 200, { dir: 3 });
-  const clumsy = C.actor('clumsy', { skin: '#d8a070', hairStyle: 'spiky', hairC: '#1d1d2b', robe: '#8a7050', robe2: '#ecf0f1' }, 360, 236, { dir: 3 });
-  const blade = C.prop('blade', 0, 0, function (g, t) { if (!this.on) return; R(g, '#bdc3c7', this.x, this.y, 6, 1); R(g, '#8b5a2b', this.x - 3, this.y, 3, 1); }, {});
+  const C = await cutStart();
+  await C.stage(STAGES.kitchen(), 'The kitchen of Lord Wenhui');
+  const lord = C.actor('lord', LOOKS.ruler, 326, 166, { dir: 3, pose: { sit: true } });
+  const clumsy = C.actor('clumsy', { skin: '#d8a070', hairStyle: 'spiky', hairC: '#1d1d2b', robe: '#8a7050', robe2: '#ecf0f1' }, 372, 214, { dir: 3 });
+  const D = C.cast('cookding', 372, 214, { dir: 3, alpha: 0 });
+  const blade = C.prop('blade', 0, 0, function (g, t) { if (!this.on) return; R(g, '#bdc3c7', this.x, this.y, 6, 1); R(g, '#8b5a2b', this.x - 3, this.y, 3, 1); }, { z: 300 });
   for (let i = 0; i < 4; i++) { clumsy.pose = { armsUp: true }; await wait(0.15); clumsy.pose = {}; SFX.thud(); SFX.crack(); shake(0.15); await wait(0.25); }
   SFX.snap(); C.emote(clumsy, 'angry', 2);
   await say({ name: 'A clumsy cook', look: clumsy.look, voice: 300 }, 'Argh! Another broken knife! I hack and chop and the bone always wins!');
   await C.fadeActor(clumsy, 0, 0.5);
+  await C.fadeActor(D, 1, 0.5);
   C.emote(D, '...', 2); await wait(0.8);
   blade.on = true;
   const notes = [69, 72, 74, 76, 79, 76, 74, 72];
-  for (let i = 0; i < 8; i++) { blade.x = 382 + Math.sin(i * 0.8) * 10; blade.y = 230 + (i % 3); SFX.swish(); AudioSys.play('flute', notes[i], { vol: 0.07, dur: 0.6 }); await wait(0.28); }
+  for (let i = 0; i < 8; i++) { blade.x = 390 + Math.sin(i * 0.8) * 10; blade.y = 189 + (i % 3); SFX.swish(); AudioSys.play('flute', notes[i], { vol: 0.07, dur: 0.6 }); await wait(0.28); }
   blade.on = false;
   C.emote(D, 'note', 2);
   await say('cookding', 'My knife has lasted *nineteen years*. I don\'t force anything. I *feel* for the natural gaps, and the blade glides through like a dance.');

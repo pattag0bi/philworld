@@ -1,9 +1,9 @@
 // PhilWorld service worker: lets the game install to a home screen and keep playing offline.
 // Code/data: network first (so updates arrive), cache as the fallback.
 // Audio (music + voice clips): cache first, filled as you play. Fonts: stale-while-revalidate.
-const VERSION = 'philworld-v1';
+const VERSION = 'philworld-v2';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png',
-  'js/core.js', 'js/audio.js', 'js/gfx.js', 'js/data.js', 'js/ui.js', 'js/voice.js', 'js/scenes.js', 'js/cutscene.js', 'js/world.js',
+  'js/core.js', 'js/audio.js', 'js/gfx.js', 'js/data.js', 'js/ui.js', 'js/voice.js', 'js/scenes.js', 'js/stages.js', 'js/cutscene.js', 'js/world.js',
   'js/rooms/crossroads.js', 'js/rooms/agora.js', 'js/rooms/cave.js', 'js/rooms/lyceum.js', 'js/rooms/stoa.js', 'js/rooms/mountain.js',
   'js/rooms/courtyard.js', 'js/rooms/valley.js', 'js/rooms/bodhi.js', 'js/rooms/cafe.js', 'js/main.js', 'js/mobile.js', 'audio/voice/manifest.json'];
 
