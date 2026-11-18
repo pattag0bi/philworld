@@ -12,6 +12,54 @@ const TOUCH = (() => {
   } catch (e) { return false; }
 })();
 
+
+// ---------- "Play offline": save every music track and voice clip into the service worker's cache
+const Offline = (() => {
+  // the service worker names its cache 'philworld-<version>' (VERSION in sw.js); use whichever is live
+  const cacheName = async () => (await caches.keys()).filter(k => k.startsWith('philworld-')).sort().pop() || 'philworld-v1';
+  let state = 'idle', done = 0, total = 0, failed = 0, urls = null;
+  try { if (localStorage.getItem('philworld-offline') === '1') state = 'saved'; } catch (e) { }
+  const supported = () => 'caches' in window && 'serviceWorker' in navigator;
+  async function list() {
+    if (urls) return urls;
+    const m = await (await fetch('audio/voice/manifest.json')).json();
+    const ids = [...new Set(Object.values(m))];
+    urls = [...AudioSys.TRACKS.map(n => 'audio/music/' + n + '.mp3'), ...ids.map(i => 'audio/voice/' + i + '.mp3')];
+    return urls;
+  }
+  async function start() {
+    if (state === 'busy') return;
+    state = 'busy'; done = 0; failed = 0;
+    try {
+      // wait for the service worker to be installed so its cache exists under the right name
+      await Promise.race([navigator.serviceWorker.ready, new Promise(r => setTimeout(r, 5000))]);
+      const all = await list(), c = await caches.open(await cacheName());
+      total = all.length;
+      try { navigator.storage && navigator.storage.persist && navigator.storage.persist(); } catch (e) { }
+      let i = 0;
+      const worker = async () => {
+        while (i < all.length) {
+          const u = all[i++];
+          try {
+            if (!(await c.match(u))) { const r = await fetch(u); if (!r.ok || r.status !== 200) throw new Error(r.status); await c.put(u, r); }
+          } catch (e) { failed++; }
+          done++;
+        }
+      };
+      await Promise.all([worker(), worker(), worker(), worker()]);
+      state = failed ? 'error' : 'saved';
+      try { localStorage.setItem('philworld-offline', failed ? '0' : '1'); } catch (e) { }
+    } catch (e) { state = 'error'; }
+  }
+  function status() {
+    if (state === 'busy') return { text: `Saving ${Math.floor(100 * done / Math.max(1, total))}%`, color: '#f7c948' };
+    if (state === 'saved') return { text: 'Saved ✓', color: '#7fd88a' };
+    if (state === 'error') return { text: `Retry (${failed} failed)`, color: '#c0604a' };
+    return { text: 'Download (~66 MB)', color: '#f7c948' };
+  }
+  return { supported, start, status };
+})();
+
 // ---------- offline: register the service worker (needs https or localhost)
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
   addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => { }));
@@ -56,6 +104,7 @@ if (TOUCH) (function () {
   // ---------- DOM
   const css = document.createElement('style');
   css.textContent = `
+  html, body.touch { touch-action:none; -webkit-text-size-adjust:100%; }
   body.touch { -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; -webkit-tap-highlight-color:transparent; touch-action:none; overscroll-behavior:none; }
   #tc { position:fixed; inset:0; pointer-events:none; z-index:5; font-family:'Press Start 2P',monospace; }
   #tc > * { pointer-events:auto; touch-action:none; }
@@ -111,6 +160,14 @@ if (TOUCH) (function () {
   addEventListener('touchmove', e => { if (e.target !== nameBox) e.preventDefault(); }, { passive: false });
   addEventListener('touchstart', e => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
 
+  // iOS can still zoom on double-tap / pinch even with user-scalable=no: block the gestures and snap back if a zoom sneaks in
+  let lastEnd = 0;
+  addEventListener('touchend', e => { const n = Date.now(); if (n - lastEnd < 350 && e.target !== nameBox) e.preventDefault(); lastEnd = n; }, { passive: false });
+  const meta = document.querySelector('meta[name=viewport]'), metaTxt = meta && meta.content;
+  function unzoom() { if (meta) { meta.content = metaTxt + ',minimum-scale=1'; setTimeout(() => { meta.content = metaTxt; }, 60); } }
+  if (window.visualViewport) visualViewport.addEventListener('resize', () => { if (visualViewport.scale > 1.02 && document.activeElement !== nameBox) unzoom(); });
+  nameBox.addEventListener('blur', () => setTimeout(unzoom, 50));
+
   const unlock = () => { if (typeof AudioSys !== 'undefined') AudioSys.unlock(); };
   const buzz = n => { try { navigator.vibrate && navigator.vibrate(n); } catch (e) { } };
 
@@ -126,15 +183,22 @@ if (TOUCH) (function () {
     }
     cur = n;
   }
+  const inMenu = () => G.screen !== 'game' || Settings.open || G.overlay || Dialog.cur;
   function padMove(e) {
     const r = pad.getBoundingClientRect(), R = r.width / 2;
     let dx = e.clientX - (r.left + R), dy = e.clientY - (r.top + R);
     const m = Math.hypot(dx, dy);
     if (m > R) { dx = dx / m * R; dy = dy / m * R; }
     nub.style.transform = `translate(${dx * 0.55}px,${dy * 0.55}px)`;
-    const dz = R * 0.28;
-    // a direction counts when its axis passes the dead zone and is not much weaker than the other axis (so diagonals need both)
     const ax = Math.abs(dx), ay = Math.abs(dy);
+    // in menus / dialogs / settings only the stronger axis counts and the dead zone is wider, so a drifting thumb can't change values
+    if (inMenu()) {
+      const dzm = R * 0.42;
+      setDir({ l: dx < -dzm && ax >= ay ? 1 : 0, r: dx > dzm && ax > ay ? 1 : 0, u: dy < -dzm && ay > ax ? 1 : 0, d: dy > dzm && ay >= ax ? 1 : 0 });
+      return;
+    }
+    const dz = R * 0.28;
+    // while walking a direction counts when its axis passes the dead zone and is not much weaker than the other axis (diagonals need both)
     setDir({
       l: dx < -dz && ax > ay * 0.45 ? 1 : 0, r: dx > dz && ax > ay * 0.45 ? 1 : 0,
       u: dy < -dz && ay > ax * 0.45 ? 1 : 0, d: dy > dz && ay > ax * 0.45 ? 1 : 0,
@@ -147,10 +211,9 @@ if (TOUCH) (function () {
   // held direction repeats in menus / sliders (walking uses the held key itself)
   setInterval(() => {
     if (padId === null) return;
-    const menu = G.screen !== 'game' || Settings.open || G.overlay || Dialog.cur;
-    if (!menu) return;
+    if (!inMenu()) return;
     const now = performance.now();
-    if (now - heldSince > 380 && now - lastRep > 130) { lastRep = now; for (const k in cur) if (cur[k]) pressQ[NAMES[k]] = true; }
+    if (now - heldSince > 450 && now - lastRep > 170) { lastRep = now; for (const k in cur) if (cur[k]) pressQ[NAMES[k]] = true; }
   }, 40);
 
   // ---------- A button (hold = hold E, for "hold to approach")
@@ -185,9 +248,7 @@ if (TOUCH) (function () {
   G.onTap = (x, y) => {
     unlock();
     if (G.screen === 'title') {
-      const opts = titleOptions();
-      const i = Math.floor((y - 124) / 14);
-      if (x > 120 && x < 360 && i >= 0 && i < opts.length) { Title.sel = i; pressQ['e'] = true; }
+      titleTap(x, y);
     } else if (G.screen === 'creator') {
       const i = Math.floor((y - 56) / 26);
       if (x < 200 || i < 0 || i > 5 || y - 56 - i * 26 > 22) return;

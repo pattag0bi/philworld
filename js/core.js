@@ -77,16 +77,37 @@ function newState() {
   };
 }
 G.state = newState();
-const SAVE_KEY = 'philworld-save-v1';
+// Three save slots. G.slot is the one being played; save() always writes to it.
+const SLOTS = 3, LEGACY_KEY = 'philworld-save-v1', SLOT_PREF = 'philworld-lastslot';
+const slotKey = n => `philworld-slot-${n}`;
+G.slot = 1;
 function save(quiet) {
-  try { localStorage.setItem(SAVE_KEY, JSON.stringify(G.state)); if (!quiet) G.savedAt = G.t; } catch (e) { }
+  try { G.state.ts = Date.now(); localStorage.setItem(slotKey(G.slot), JSON.stringify(G.state)); localStorage.setItem(SLOT_PREF, String(G.slot)); if (!quiet) G.savedAt = G.t; } catch (e) { }
 }
-function loadSave() { try { const s = localStorage.getItem(SAVE_KEY); return s ? JSON.parse(s) : null; } catch (e) { return null; } }
-function clearSave() { try { localStorage.removeItem(SAVE_KEY); } catch (e) { } }
+function loadSave(n = G.slot) { try { const s = localStorage.getItem(slotKey(n)); return s ? JSON.parse(s) : null; } catch (e) { return null; } }
+function clearSave(n = G.slot) { try { localStorage.removeItem(slotKey(n)); } catch (e) { } }
+function lastSlot() { try { return +localStorage.getItem(SLOT_PREF) || 0; } catch (e) { return 0; } }
+// the old single save becomes slot 1
+function migrateSaves() {
+  try {
+    const old = localStorage.getItem(LEGACY_KEY);
+    if (old && !localStorage.getItem(slotKey(1))) { localStorage.setItem(slotKey(1), old); localStorage.setItem(SLOT_PREF, '1'); }
+    if (old) localStorage.removeItem(LEGACY_KEY);
+  } catch (e) { }
+}
+migrateSaves();
 function flag(k, v) {
   if (v === undefined) return G.state.flags[k];
   G.state.flags[k] = v; save(); return v;
 }
+// Testing: open every locked door. ?all=1 turns it on (remembered), ?all=0 turns it off; also a row in Settings.
+G.openAll = (() => {
+  try {
+    const m = /[?&]all=([01])/.exec(location.search);
+    if (m) localStorage.setItem('philworld-openall', m[1]);
+    return localStorage.getItem('philworld-openall') === '1';
+  } catch (e) { return false; }
+})();
 function hasInsight(id) { return G.state.insights.includes(id); }
 
 // ---------- input
@@ -112,11 +133,12 @@ addEventListener('keyup', e => { keys[keyName(e)] = false; });
 addEventListener('blur', () => { for (const k in keys) keys[k] = false; });
 function toGame(e) { const r = canvas.getBoundingClientRect(), d = window.devicePixelRatio || 1; return [((e.clientX - r.left) * d - OX) / SCALE, ((e.clientY - r.top) * d - OY) / SCALE]; }
 canvas.addEventListener('pointerdown', () => {
-  if (G.screen !== 'title' && G.screen !== 'creator') pressQ['e'] = true; // menus use onTap below
+  if (G.screen !== 'title' && G.screen !== 'creator' && !Settings.open) pressQ['e'] = true; // menus use onTap below
   if (typeof AudioSys !== 'undefined') AudioSys.unlock();
 });
 // Menu screens handle taps themselves (G.onTap(x, y) in game pixels). Fired on release so a text box can take focus.
 canvas.addEventListener('pointerup', e => {
+  if (Settings.open) { const [x, y] = toGame(e); Settings.tap(x, y); return; }
   if ((G.screen === 'title' || G.screen === 'creator') && G.onTap) { const [x, y] = toGame(e); G.onTap(x, y); }
 });
 function down(a) { return KEYMAP[a].some(k => keys[k]); }

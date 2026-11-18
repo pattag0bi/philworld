@@ -66,6 +66,9 @@ const AudioSys = (() => {
       catch (e) { ac = null; return; }
     }
     if (ac.state === 'suspended') ac.resume();
+    // iPhone: play even with the ring/silent switch on (iOS 16.4+)
+    try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) { }
+    if (typeof Voice !== 'undefined' && Voice.unlock) Voice.unlock();
   }
   function impulse(sec, decay) {
     const len = Math.floor(ac.sampleRate * sec);
@@ -495,7 +498,7 @@ const AudioSys = (() => {
   };
 
   return {
-    unlock, setScene, tick, setMuffle, setMusicVol, setMusic, layer, play, midi, SC, I: () => I,
+    unlock, ctx: () => ac, TRACKS, setScene, tick, setMuffle, setMusicVol, setMusic, layer, play, midi, SC, I: () => I,
     duck, setSetting, settings: () => Object.assign({}, settings), voiceLevel: () => (muted ? 0 : settings.master * settings.voice),
     sfx: S, ev: EV, toggleMute, isMuted: () => muted, ready: () => !!ac, now, scene: () => sceneName,
     track: () => track && { name: track.name, ok: track.ok, paused: track.el.paused, time: track.el.currentTime, gain: track.gain.gain.value, duck: duckGain.gain.value, music: musicUser.gain.value },

@@ -417,7 +417,7 @@ const Settings = {
   open: false, sel: 0, t: 0,
   rows() {
     const s = AudioSys.settings();
-    return [
+    const rows = [
       { label: 'Sound', kind: 'toggle', get: () => !AudioSys.isMuted(), set: () => { if (AudioSys.toggleMute()) Voice.stop(); } },
       { label: 'Master volume', kind: 'slider', key: 'master', val: s.master },
       { label: 'Music', kind: 'slider', key: 'music', val: s.music },
@@ -426,8 +426,27 @@ const Settings = {
       { label: 'Spoken lines', kind: 'toggle', get: () => Voice.isEnabled(), set: () => Voice.toggle() },
       { label: 'Story pictures', kind: 'toggle', get: () => G.panels !== false, set: () => { G.panels = G.panels === false; try { localStorage.setItem('philworld-panels', G.panels ? '1' : '0'); } catch (e) { } } },
       { label: 'Fullscreen', kind: 'toggle', get: () => !!fsEl(), set: () => toggleFullscreen() },
-      { label: 'Close', kind: 'close' },
+      { label: 'Open all doors (test)', kind: 'toggle', get: () => !!G.openAll, set: () => { G.openAll = !G.openAll; try { localStorage.setItem('philworld-openall', G.openAll ? '1' : '0'); } catch (e) { } } },
     ];
+    if (typeof Offline !== 'undefined' && Offline.supported()) rows.push({ label: 'Play offline', kind: 'action', status: () => Offline.status(), run: () => Offline.start() });
+    rows.push({ label: 'Close', kind: 'close' });
+    return rows;
+  },
+  geom(n) { return { x: 110, w: 260, y0: 46, rh: n > 9 ? 18 : 20 }; },
+  // a tap on the settings page (game pixels): select the row, then act on it
+  tap(px, py) {
+    const rows = this.rows(), { x, w, y0, rh } = this.geom(rows.length);
+    const i = Math.floor((py - y0) / rh);
+    if (px < x || px > x + w || i < 0 || i >= rows.length) return;
+    this.sel = i; const r = rows[i];
+    if (r.kind === 'slider') {
+      const bx = x + 140, bw = 80;
+      if (px >= bx - 8 && px <= bx + bw + 8) {
+        AudioSys.setSetting(r.key, Math.round(clamp((px - bx) / bw, 0, 1) * 10) / 10);
+        if (r.key === 'voice' || r.key === 'master') Voice.setVolume(AudioSys.voiceLevel());
+        SFX.select();
+      }
+    } else pressQ['e'] = true;
   },
   show() { this.open = true; this.sel = 0; this.t = 0; SFX.paper(); },
   close() { this.open = false; SFX.select(); },
@@ -444,12 +463,13 @@ const Settings = {
       SFX.select();
     }
     if (r.kind === 'toggle' && (chg || hit('act'))) { r.set(); SFX.confirm(); }
+    if (r.kind === 'action' && hit('act')) { r.run(); SFX.confirm(); }
     if ((r.kind === 'close' && hit('act')) || hit('esc') || hit('settings')) this.close();
   },
   draw() {
     if (!this.open) return;
     ctx.fillStyle = 'rgba(10,6,20,0.8)'; ctx.fillRect(0, 0, W, H);
-    const rows = this.rows(), x = 110, w = 260, y0 = 46, rh = 20;
+    const rows = this.rows(), { x, w, y0, rh } = this.geom(rows.length);
     panel(x, 18, w, y0 - 18 + rows.length * rh + 14);
     text('SETTINGS', 240, 26, { title: true, size: 8, align: 'center', color: UIC.hl });
     rows.forEach((r, i) => {
@@ -462,11 +482,14 @@ const Settings = {
         ctx.fillStyle = sel ? UIC.hl : UIC.border; ctx.fillRect(bx, y + 8, Math.round(bw * r.val), 4);
         ctx.fillRect(bx + Math.round(bw * r.val) - 1, y + 5, 3, 10);
         text(Math.round(r.val * 100) + '%', x + w - 12, y + 2, { size: 14, align: 'right', color: sel ? UIC.hl : UIC.dim });
+      } else if (r.kind === 'action') {
+        const st = r.status();
+        text(st.text, x + w - 12, y + 2, { size: 15, align: 'right', color: st.color || UIC.hl });
       } else {
         const on = r.get();
         text(on ? 'On' : 'Off', x + w - 12, y + 2, { size: 15, align: 'right', color: on ? '#7fd88a' : '#c0604a' });
       }
     });
-    text('↑ ↓ choose  ·  ← → change  ·  F fullscreen  ·  O / Esc close', 240, 258, { size: 12, align: 'center', color: UIC.dim });
+    text('↑ ↓ choose  ·  ← → change  ·  F fullscreen  ·  O / Esc close', 240, 262, { size: 12, align: 'center', color: UIC.dim });
   },
 };

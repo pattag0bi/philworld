@@ -20,8 +20,7 @@ function shade(hex, amt) {
   return out;
 }
 
-function playerLook() {
-  const L = G.state.look;
+function playerLook(L = G.state.look) {
   return {
     skin: SKINS[L.skin], hairStyle: HAIR_STYLES[L.hair], hairC: HAIR_COLORS[L.hairC],
     robe: ROBES[L.robe][0], robe2: ROBES[L.robe][1], legs: '#4a3626',

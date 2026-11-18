@@ -22,6 +22,7 @@ function thing(id, x, y, draw, o = {}) {
 }
 function door(id, zone, to, sx, sy, o = {}) {
   // zone: [x,y,w,h]; spawn sx,sy in target room
+  if (o.locked) { const lk0 = o.locked; o = Object.assign({}, o, { locked: () => !G.openAll && lk0() }); }
   return Object.assign({
     id, zone, to, sx, sy, isDoor: true, x: zone[0] + zone[2] / 2, y: zone[1] + zone[3] / 2,
     draw(g, t) {
@@ -250,3 +251,5 @@ function drawWorld(t) {
   drawVignette();
   drawLetterbox();
 }
+// console helper for testing: warp('cafe') or warp('agora', 200, 150)
+function warp(room, x, y) { goto(room, x, y); }

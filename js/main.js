@@ -2,28 +2,39 @@
 // ============================================================
 // PhilWorld — main loop, title screen, character creator
 // ============================================================
-const Title = { sel: 0, hasSave: false, t: 0 };
+const Title = { mode: 'main', sel: 0, slotSel: 0, row: 0, act: 0, confirm: false, slots: [], rects: [], t0: 0 };
 const Creator = { row: 0, rows: ['Name', 'Hair', 'Hair color', 'Skin', 'Outfit', 'Begin journey'] };
 
 function refreshTitleSave() {
-  const s = loadSave();
-  Title.hasSave = !!s;
-  Title.info = s ? `Saved: ${s.name} · ${(s.insights || []).length}/10 insights · ${(MAP_NODES.find(n => n.id === s.room) || {}).name || ''}` : '';
+  Title.slots = [];
+  for (let n = 1; n <= SLOTS; n++) Title.slots.push(loadSave(n));
+  const l = lastSlot();
+  Title.last = Title.slots[l - 1] ? l : (Title.slots.findIndex(x => x) + 1) || 0; // slot to "Continue"
 }
-function titleOptions() {
-  return Title.hasSave ? ['Continue journey', 'New journey', 'Copy save code', 'Enter save code', 'Settings'] : ['New journey', 'Enter save code', 'Settings'];
+function mainOptions() { return Title.last ? ['Continue', 'Journeys', 'Settings'] : ['Begin journey', 'Settings']; }
+function slotActions(n) {
+  if (Title.confirm) return ['Yes, delete it', 'Keep it'];
+  return Title.slots[n] ? ['Continue', 'Copy code', 'Delete'] : ['Begin', 'Paste code'];
 }
 function startTitle() {
   G.screen = 'title'; G.fadeTo = 0;
   refreshTitleSave();
-  Title.sel = 0;
+  Object.assign(Title, { mode: 'main', sel: 0, row: 0, act: 0, confirm: false, t0: G.t });
+  Title.slotSel = Math.max(0, Title.last - 1);
   AudioSys.setScene('title');
+}
+function ago(ts) {
+  if (!ts) return '';
+  const m = Math.floor((Date.now() - ts) / 60000);
+  if (m < 1) return 'just now'; if (m < 60) return m + ' min ago';
+  const h = Math.floor(m / 60); if (h < 24) return h + (h === 1 ? ' hour ago' : ' hours ago');
+  const d = Math.floor(h / 24); return d + (d === 1 ? ' day ago' : ' days ago');
 }
 
 // ---------------- save codes: move progress between browsers / devices
 const CODE_PREFIX = 'PHILWORLD-';
-function makeSaveCode() {
-  const s = loadSave(); if (!s) return null;
+function makeSaveCode(n) {
+  const s = loadSave(n); if (!s) return null;
   return CODE_PREFIX + btoa(unescape(encodeURIComponent(JSON.stringify(s))));
 }
 function readSaveCode(code) {
@@ -33,28 +44,29 @@ function readSaveCode(code) {
   if (!s || typeof s !== 'object' || !Array.isArray(s.insights) || !s.look || !s.room || !Rooms[s.room]) throw new Error('bad save');
   return Object.assign(newState(), s);
 }
-async function copySaveCode() {
-  const code = makeSaveCode(); if (!code) return;
+async function copySaveCode(n) {
+  const code = makeSaveCode(n); if (!code) return;
   let ok = false;
   try { await navigator.clipboard.writeText(code); ok = true; } catch (e) { }
   for (const k in keys) keys[k] = false;
-  if (ok) notice('Save code *copied*! Open PhilWorld in the other browser, choose *Enter save code*, and paste it.', 5);
-  else { window.prompt('Copy this save code, then paste it into PhilWorld in the other browser:', code); notice('Paste that code into *Enter save code* on the other browser.', 4); }
+  if (ok) notice('Save code *copied*! Open PhilWorld in the other browser, pick an empty journey, and choose *Paste code*.', 5);
+  else { window.prompt('Copy this save code, then paste it into PhilWorld in the other browser:', code); notice('Paste that code into *Paste code* on the other browser.', 4); }
 }
-function enterSaveCode() {
+function enterSaveCode(n) {
   const code = window.prompt('Paste your PhilWorld save code:');
   for (const k in keys) keys[k] = false;
   if (!code) return;
   try {
     const s = readSaveCode(code);
-    G.state = s; save(true);
-    refreshTitleSave(); Title.sel = 0;
+    G.slot = n; G.state = s; save(true);
+    refreshTitleSave(); Title.row = 0;
     SFX.chime();
-    notice(`Welcome back, *${s.name}*! Journey restored (${s.insights.length}/10 insights). Choose *Continue journey*.`, 5);
+    notice(`Welcome back, *${s.name}*! Journey restored (${s.insights.length}/10 insights).`, 5);
   } catch (e) { SFX.boing(); notice('That code didn\'t work. Copy the *whole* code and try again.', 4); }
 }
-function startCreator() {
+function startCreator(slot) {
   G.screen = 'creator';
+  G.slot = slot || G.slot;
   G.state = newState();
   Creator.row = 0;
   G.textHandler = (e) => {
@@ -69,7 +81,7 @@ function startCreator() {
 }
 async function startGame(fromSave) {
   G.textHandler = null;
-  if (fromSave) { const s = loadSave(); if (s) G.state = Object.assign(newState(), s); }
+  if (fromSave) { const s = loadSave(G.slot); if (s) G.state = Object.assign(newState(), s); }
   if (!G.state.name.trim()) G.state.name = 'Traveler';
   G.screen = 'game';
   G.fade = 1; G.fadeTo = 1;
@@ -82,20 +94,35 @@ async function startGame(fromSave) {
 
 // ---------------- title / creator drawing
 function drawTitleBg(t) {
-  vgrad(g, 0, 0, W, H, '#140c2c', '#4a2a5a', 16);
+  vgrad(g, 0, 0, W, H, '#0d0820', '#5a2f62', 18);
   const r = mulberry(3);
-  for (let i = 0; i < 120; i++) {
+  for (let i = 0; i < 140; i++) {
     const x = r() * W, y = r() * 170, b = r();
-    g.fillStyle = `rgba(255,255,255,${0.3 + 0.5 * b * (0.5 + 0.5 * Math.sin(t * 2 + i))})`;
+    g.fillStyle = `rgba(255,255,255,${0.25 + 0.5 * b * (0.5 + 0.5 * Math.sin(t * 2 + i))})`;
     g.fillRect(Math.round(x), Math.round(y), 1, 1);
   }
+  // shooting star every few seconds
+  const ss = (t % 7) / 1.1;
+  if (ss < 1) { const sx = 380 - ss * 150, sy = 20 + ss * 70; for (let k = 0; k < 10; k++) { g.fillStyle = `rgba(255,240,200,${(1 - k / 10) * (1 - ss)})`; g.fillRect(Math.round(sx + k * 2.4), Math.round(sy - k * 1.1), 2, 1); } }
+  // moon with halo
+  for (let k = 5; k > 0; k--) { g.fillStyle = `rgba(247,201,72,${0.025 * (6 - k)})`; g.beginPath(); g.arc(404, 52, 14 + k * 5, 0, 7); g.fill(); }
+  g.fillStyle = '#f6e7b4'; g.beginPath(); g.arc(404, 52, 14, 0, 7); g.fill();
+  g.fillStyle = '#e0cc92'; g.beginPath(); g.arc(399, 48, 3, 0, 7); g.arc(409, 58, 2, 0, 7); g.arc(410, 46, 1.5, 0, 7); g.fill();
   // constellation of the roadmap
-  g.strokeStyle = 'rgba(247,201,72,0.25)'; g.lineWidth = 1;
-  const pts = [[60, 60], [110, 40], [160, 70], [210, 38], [270, 30], [320, 64], [380, 44], [430, 70]];
+  g.strokeStyle = 'rgba(247,201,72,0.22)'; g.lineWidth = 1;
+  const pts = [[40, 118], [88, 96], [140, 124], [192, 92], [246, 108], [300, 84], [350, 112]];
   g.beginPath(); pts.forEach(([x, y], i) => i ? g.lineTo(x, y) : g.moveTo(x, y)); g.stroke();
-  pts.forEach(([x, y], i) => { g.fillStyle = `rgba(247,201,72,${0.6 + 0.4 * Math.sin(t * 3 + i)})`; g.fillRect(x - 1, y - 1, 3, 3); });
-  // hills
+  pts.forEach(([x, y], i) => { const a = 0.6 + 0.4 * Math.sin(t * 3 + i); g.fillStyle = `rgba(247,201,72,${a * 0.25})`; g.fillRect(x - 2, y - 2, 5, 5); g.fillStyle = `rgba(255,236,160,${a})`; g.fillRect(x - 1, y - 1, 3, 3); });
+  // drifting clouds
+  for (let i = 0; i < 4; i++) {
+    const cx = ((i * 190 + t * (3 + i * 1.5)) % (W + 120)) - 60, cy = 134 + i * 11 + Math.sin(i * 2) * 5;
+    g.fillStyle = `rgba(150,110,170,${0.13 + 0.03 * i})`;
+    g.fillRect(Math.round(cx - 26), Math.round(cy), 52, 3); g.fillRect(Math.round(cx - 16), Math.round(cy - 3), 30, 3); g.fillRect(Math.round(cx - 34), Math.round(cy + 3), 36, 2);
+  }
+  // far hills, hills
   for (let x = 0; x < W; x++) {
+    const h0 = 176 + Math.sin(x * 0.014 + 1) * 9 + Math.sin(x * 0.04) * 3;
+    R(g, '#3a2650', x, h0, 1, H - h0);
     const h1 = 190 + Math.sin(x * 0.02) * 10 + Math.sin(x * 0.05) * 4;
     R(g, '#2a1a3a', x, h1, 1, H - h1);
     const h2 = 214 + Math.sin(x * 0.03 + 2) * 8;
@@ -110,38 +137,161 @@ function drawTitleBg(t) {
   }
   drawSign(g, 240, 218);
   drawOwl(g, 240, 201, t, {});
-  // west temple, east gate silhouettes
+  // west temple (lit windows), east gate silhouettes
   for (let i = 0; i < 4; i++) R(g, '#3a2a4a', 60 + i * 10, 176, 4, 20);
   R(g, '#3a2a4a', 56, 172, 42, 4); R(g, '#3a2a4a', 62, 168, 30, 4);
+  for (let i = 0; i < 3; i++) R(g, `rgba(247,201,72,${0.5 + 0.3 * Math.sin(t * 2 + i)})`, 66 + i * 10, 182, 2, 6);
   ring(g, 410, 186, 14, '#3a2a4a', 3); R(g, '#3a2a4a', 392, 200, 36, 3);
+  // fireflies
+  for (let i = 0; i < 14; i++) {
+    const fx = (i * 67 + Math.sin(t * 0.6 + i * 3) * 18) % W, fy = 200 + ((i * 31) % 60) + Math.sin(t * 0.9 + i) * 8, a = Math.max(0, Math.sin(t * 1.6 + i * 2));
+    g.fillStyle = `rgba(200,255,140,${a * 0.9})`; g.fillRect(Math.round(fx), Math.round(fy), 2, 2);
+    g.fillStyle = `rgba(200,255,140,${a * 0.2})`; g.fillRect(Math.round(fx) - 1, Math.round(fy) - 1, 4, 4);
+  }
+}
+
+// the golden PHILWORLD logo: a soft glow and a gentle wave through the letters
+function drawLogo(y, size = 24) {
+  const word = 'PHILWORLD', o = { title: true, size };
+  const adv = word.split('').map(c => textW(c, o) + 1);
+  let x = 240 - adv.reduce((a, b) => a + b, 0) / 2;
+  ctx.save();
+  word.split('').forEach((c, i) => {
+    const dy = Math.sin(G.t * 2.2 - i * 0.55) * 1.6;
+    ctx.shadowColor = 'rgba(247,201,72,0.65)'; ctx.shadowBlur = 14;
+    text(c, x, y + dy, { ...o, color: i < 4 ? '#ffe28a' : '#f7c948', shadow: false });
+    ctx.shadowBlur = 0;
+    text(c, x + 1, y + dy + 1.5, { ...o, color: 'rgba(90,50,10,0.55)', shadow: false });
+    text(c, x, y + dy, { ...o, color: i < 4 ? '#ffe28a' : '#f7c948', shadow: false });
+    x += adv[i];
+  });
+  ctx.restore();
+  // ornament under the logo: ──── ✦ ────
+  const ow = 70 + 10 * Math.sin(G.t * 1.5);
+  ctx.fillStyle = 'rgba(247,201,72,0.5)'; ctx.fillRect(240 - 14 - ow, y + size + 8, ow, 1); ctx.fillRect(240 + 14, y + size + 8, ow, 1);
+  text('✦', 240, y + size + 2, { size: 13, align: 'center', color: '#f7c948' });
+  text('a walk through the love of wisdom', 240, y + size + 16, { size: 16, align: 'center', color: '#e8d5a8' });
+}
+
+function titleBtn(label, x, y, w, sel, fn, o = {}) {
+  Title.rects.push({ x, y, w, h: o.h || 16, fn });
+  const h = o.h || 16;
+  if (sel) { ctx.fillStyle = 'rgba(247,201,72,0.14)'; ctx.fillRect(x, y, w, h); ctx.fillStyle = '#f7c948'; ctx.fillRect(x, y, 1, h); ctx.fillRect(x + w - 1, y, 1, h); }
+  text(label, x + w / 2, y + 1, { size: o.size || 15, align: 'center', color: sel ? (o.hot || '#f7c948') : (o.col || '#e8d5a8') });
+}
+
+function titleBack() { if (Title.confirm) Title.confirm = false; else if (Title.mode === 'slots') { Title.mode = 'main'; Title.sel = 0; } SFX.select(); }
+function slotPrimary(n) {
+  const a = slotActions(n)[Title.row ? Title.act : 0];
+  SFX.confirm();
+  if (Title.confirm) {
+    if (a === 'Yes, delete it') { clearSave(n + 1); refreshTitleSave(); SFX.boing(); notice('Journey deleted.', 2); }
+    Title.confirm = false; Title.act = 0; Title.row = 0; return;
+  }
+  if (a === 'Continue') { G.slot = n + 1; startGame(true); }
+  else if (a === 'Begin') { startCreator(n + 1); }
+  else if (a === 'Copy code') copySaveCode(n + 1);
+  else if (a === 'Paste code') enterSaveCode(n + 1);
+  else if (a === 'Delete') { Title.confirm = true; Title.row = 1; Title.act = 1; }
+}
+function mainPrimary(o) {
+  SFX.confirm();
+  if (o === 'Continue') { G.slot = Title.last; startGame(true); }
+  else if (o === 'Begin journey') startCreator(1);
+  else if (o === 'Journeys') { Title.mode = 'slots'; Title.row = 0; Title.act = 0; Title.confirm = false; Title.slotSel = Math.max(0, Title.last - 1); }
+  else if (o === 'Settings') Settings.show();
+}
+function titleTap(x, y) {
+  for (const r of Title.rects) if (x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h) { r.fn(); return; }
 }
 
 function updateTitle() {
-  const opts = titleOptions();
-  if (hit('up')) { Title.sel = (Title.sel + opts.length - 1) % opts.length; SFX.select(); }
-  if (hit('down')) { Title.sel = (Title.sel + 1) % opts.length; SFX.select(); }
-  if (hit('act')) {
-    SFX.confirm();
-    const o = opts[Title.sel];
-    if (o === 'Continue journey') startGame(true);
-    else if (o === 'Copy save code') copySaveCode();
-    else if (o === 'Enter save code') enterSaveCode();
-    else if (o === 'Settings') Settings.show();
-    else startCreator();
+  if (Title.mode === 'main') {
+    const opts = mainOptions();
+    if (hit('up')) { Title.sel = (Title.sel + opts.length - 1) % opts.length; SFX.select(); }
+    if (hit('down')) { Title.sel = (Title.sel + 1) % opts.length; SFX.select(); }
+    if (hit('act')) mainPrimary(opts[Title.sel]);
+    return;
+  }
+  const n = Title.slotSel, acts = slotActions(n);
+  if (hit('esc')) { titleBack(); return; }
+  if (Title.row === 0) {
+    if (hit('left')) { Title.slotSel = (n + SLOTS - 1) % SLOTS; Title.confirm = false; SFX.select(); }
+    if (hit('right')) { Title.slotSel = (n + 1) % SLOTS; Title.confirm = false; SFX.select(); }
+    if (hit('down')) { Title.row = 1; Title.act = 0; SFX.select(); }
+    if (hit('act')) slotPrimary(n);
+  } else {
+    if (hit('left')) { Title.act = (Title.act + acts.length - 1) % acts.length; SFX.select(); }
+    if (hit('right')) { Title.act = (Title.act + 1) % acts.length; SFX.select(); }
+    if (hit('up')) { Title.row = 0; Title.confirm = false; SFX.select(); }
+    if (hit('act')) slotPrimary(n);
   }
 }
+function drawSlotCard(i, x, y, w, h) {
+  const s = Title.slots[i], sel = i === Title.slotSel, focus = sel && Title.row === 0;
+  Title.rects.push({ x, y, w, h, fn: () => { if (Title.slotSel === i && Title.row === 0) slotPrimary(i); else { Title.slotSel = i; Title.row = 0; Title.confirm = false; SFX.select(); } } });
+  panel(x, y, w, h, { bg: sel ? '#2c2048' : '#1c1530', border: sel ? '#f7c948' : '#6b5a8a', border2: sel ? '#b9770e' : '#463a63' });
+  text('JOURNEY ' + (i + 1), x + w / 2, y + 7, { title: true, size: 6, align: 'center', color: sel ? '#f7c948' : '#9a8fb8' });
+  if (!s) {
+    const pulse = 0.5 + 0.5 * Math.sin(G.t * 3);
+    text('+', x + w / 2, y + 36 + (focus ? Math.round(pulse * 2) : 0), { size: 40, align: 'center', color: sel ? '#f7c948' : '#6b5a8a' });
+    text('empty', x + w / 2, y + 82, { size: 15, align: 'center', color: '#9a8fb8' });
+    text('start a new journey', x + w / 2, y + 96, { size: 12, align: 'center', color: '#6b5a8a' });
+    return;
+  }
+  // little portrait of the traveler
+  _ccg.clearRect(0, 0, 24, 28);
+  drawPerson(_ccg, 12, 26, playerLook(s.look), 0, sel ? Math.floor(G.t * 4) % 4 : 0, {});
+  ctx.fillStyle = 'rgba(0,0,0,0.25)'; ctx.fillRect(x + w / 2 - 26, y + 20, 52, 50);
+  ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(_cc, x + w / 2 - 24, y + 20, 48, 56);
+  text(s.name || 'Traveler', x + w / 2, y + 77, { size: 16, align: 'center', color: '#fff' });
+  // 10 insight pips
+  const got = (s.insights || []).length, px = x + w / 2 - 5 * 9 + 1;
+  for (let k = 0; k < 10; k++) { ctx.fillStyle = k < got ? '#f7c948' : '#3a2f58'; ctx.fillRect(px + k * 9, y + 94, 7, 5); }
+  text(`${got}/10 insights`, x + w / 2, y + 100, { size: 12, align: 'center', color: '#e8d5a8' });
+  const rn = (MAP_NODES.find(n => n.id === s.room) || {}).name || '';
+  text(rn, x + w / 2, y + 111, { size: 12, align: 'center', color: '#9a8fb8' });
+  const when = ago(s.ts); if (when) text(when, x + w / 2, y + 122, { size: 11, align: 'center', color: '#6b5a8a' });
+}
 function drawTitleUI() {
-  const opts = titleOptions();
-  text('PHILWORLD', 240, 78, { title: true, size: 22, align: 'center', color: '#f7c948' });
-  text('a walk through the love of wisdom', 240, 108, { size: 16, align: 'center', color: '#e8d5a8' });
-  opts.forEach((o, i) => {
-    const sel = i === Title.sel;
-    text((sel ? '▶ ' : '  ') + o, 240, 126 + i * 14, { size: 15, align: 'center', color: sel ? '#f7c948' : '#e8d5a8' });
-  });
-  if (Title.hasSave && Title.info) text(Title.info, 240, 184, { size: 13, align: 'center', color: '#9a8fb8' });
-  const tip = { 'New journey': Title.hasSave ? '(starting over replaces your saved journey)' : '', 'Copy save code': 'copy a code to move your progress to another browser or device', 'Enter save code': 'paste a code from another browser to continue your journey here', 'Settings': 'volume for music, voices and sound effects' }[opts[Title.sel]];
-  if (tip) text(tip, 240, 172, { size: 12, align: 'center', color: opts[Title.sel] === 'New journey' ? '#c0604a' : '#9a8fb8' });
-  text('arrows / WASD to move · E or Space to interact · headphones recommended', 240, 258, { size: 12, align: 'center', color: '#9a8fb8' });
+  Title.rects = [];
+  const intro = Math.min(1, (G.t - Title.t0) / 1.2);
+  ctx.globalAlpha = intro;
+  if (Title.mode === 'main') {
+    drawLogo(46, 24);
+    const opts = mainOptions();
+    opts.forEach((o, i) => {
+      const sel = i === Title.sel, y = 128 + i * 20;
+      titleBtn((sel ? '▶  ' : '') + o + (sel ? '  ◀' : ''), 150, y, 180, sel, () => { Title.sel = i; mainPrimary(o); }, { h: 18, size: 17 });
+    });
+    const sl = Title.slots[Title.last - 1];
+    const cur = mainOptions()[Title.sel];
+    let tip = '';
+    if (cur === 'Continue' && sl) tip = `${sl.name} · ${(sl.insights || []).length}/10 insights · ${(MAP_NODES.find(n => n.id === sl.room) || {}).name || ''}`;
+    else if (cur === 'Journeys') tip = `${Title.slots.filter(Boolean).length} of ${SLOTS} journeys saved · switch, copy or delete`;
+    else if (cur === 'Settings') tip = 'volume for music, voices and sound effects';
+    else if (cur === 'Begin journey') tip = 'create your traveler and set out from the crossroads';
+    if (tip) text(tip, 240, 128 + opts.length * 20 + 4, { size: 13, align: 'center', color: '#9a8fb8' });
+    text('arrows / WASD to move · E or Space to interact · headphones recommended', 240, 258, { size: 12, align: 'center', color: '#9a8fb8' });
+  } else {
+    ctx.fillStyle = 'rgba(10,6,22,0.62)'; ctx.fillRect(0, 0, W, H);
+    text('YOUR JOURNEYS', 240, 14, { title: true, size: 10, align: 'center', color: '#f7c948' });
+    titleBtn('◀ back', 8, 8, 52, false, titleBack, { size: 13, col: '#9a8fb8' });
+    const cw = 144, gap = 8, x0 = (W - (cw * SLOTS + gap * (SLOTS - 1))) / 2;
+    for (let i = 0; i < SLOTS; i++) drawSlotCard(i, x0 + i * (cw + gap), 38, cw, 138);
+    const acts = slotActions(Title.slotSel);
+    const bw = Title.confirm ? 100 : 82, tw = acts.length * bw + (acts.length - 1) * 8, ax = 240 - tw / 2;
+    if (Title.confirm) text(`Delete ${Title.slots[Title.slotSel].name}'s journey for good?`, 240, 184, { size: 14, align: 'center', color: '#c0604a' });
+    acts.forEach((a, k) => {
+      const sel = Title.row === 1 && Title.act === k, danger = a === 'Delete' || a === 'Yes, delete it';
+      const col = danger ? '#d07a68' : '#e8d5a8';
+      titleBtn(a, ax + k * (bw + 8), 198, bw, sel, () => { Title.row = 1; Title.act = k; slotPrimary(Title.slotSel); }, { h: 16, size: 14, col, hot: danger ? '#ff9a85' : '#f7c948' });
+    });
+    const hint = Title.row === 0 ? '←→ choose a journey · E to play · ↓ for more options · Esc to go back' : '←→ choose · E to confirm · ↑ back to journeys';
+    text(Title.slots[Title.slotSel] || Title.row ? hint : '←→ choose a journey · E to begin · Esc to go back', 240, 240, { size: 12, align: 'center', color: '#9a8fb8' });
+  }
+  ctx.globalAlpha = 1;
 }
 
 const _cc = document.createElement('canvas'); _cc.width = 24; _cc.height = 28; const _ccg = _cc.getContext('2d');
@@ -260,10 +410,9 @@ function render() {
   uiBegin();
   ctx.save(); ctx.beginPath(); ctx.rect(0, 0, W, H); ctx.clip();
   if (G.screen === 'boot') {
-    ctx.fillStyle = 'rgba(8,6,16,0.6)'; ctx.fillRect(0, 0, W, H);
-    text('PHILWORLD', 240, 96, { title: true, size: 22, align: 'center', color: '#f7c948' });
+    drawLogo(70, 26);
     if (Math.floor(G.t * 2) % 2 === 0) text('press any key to begin', 240, 140, { size: 18, align: 'center' });
-    text('(sound is a big part of this game; turn it up!)', 240, 164, { size: 13, align: 'center', color: '#9a8fb8' });
+    text('(sound is a big part of this game; turn it up!)', 240, 162, { size: 13, align: 'center', color: '#9a8fb8' });
   } else if (G.screen === 'title') { drawTitleUI(); drawMsg(); }
   else if (G.screen === 'creator') drawCreatorUI();
   else if (G.screen === 'game') {
