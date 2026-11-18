@@ -2029,37 +2029,343 @@
  },
  {
   "speaker": "aristotle",
-  "text": "My answer: *virtue*. And every virtue is a *mean* between two vices: one of too little, one of too much.",
+  "text": "My answer: *virtue*. And every virtue sits in the *middle*, between too little and too much. I call it the *mean*. But the middle of *what*? Let me show you. Dinner time!",
   "file": "js/rooms/lyceum.js",
   "kind": "say"
  },
  {
   "speaker": "aristotle",
-  "text": "Here. Tune these three virtues on this young soldier. Don't look for the exact middle. *Listen* for where it sounds right.",
-  "file": "js/rooms/lyceum.js",
-  "kind": "say"
- },
- {
-  "speaker": "aristotle",
-  "text": "You found them! Notice the mean wasn't always dead center. Courage leans a little toward boldness, generosity a little toward caution. The mean is *relative to us* and to the situation.",
-  "file": "js/rooms/lyceum.js",
-  "kind": "say"
- },
- {
-  "speaker": "aristotle",
-  "text": "That takes *practical wisdom*, phronesis. No rulebook can do it for you.",
-  "file": "js/rooms/lyceum.js",
-  "kind": "say"
- },
- {
-  "speaker": "aristotle",
-  "text": "And virtue is a *habit*. A harpist becomes good by playing the harp; we become brave by doing brave things. Do it until it's who you are.",
+  "text": "Now the most important part. How does anyone *become* good? I tutored a boy who became famous. You will raise him. Every choice you make for him becomes part of who he is.",
   "file": "js/rooms/lyceum.js",
   "kind": "say"
  },
  {
   "speaker": "owl",
   "text": "The path *west* to the Stoa is open, and so is the other road back at the Agora.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Suppose 10 pounds of food is too much for a person, and 2 pounds is too little. Is 6 pounds, the exact middle, right for *everyone*?",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Let's find out. Serve each guest the amount that is *right for them*.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "How much for *{}*?",
+  "file": "js/rooms/lyceum.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "name:A little girl",
+  "text": "Yum! Just right!",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:A thin scholar",
+  "text": "Ah, perfect. Now I can think clearly.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Milo of Croton, champion wrestler",
+  "text": "HA! Finally, a real meal! Now I can wrestle a bull!",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:A little girl",
+  "text": "Ugh… my tummy hurts. That's way too much!",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:A thin scholar",
+  "text": "Oof. I can't possibly. I'll fall asleep over my books!",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Milo of Croton, champion wrestler",
+  "text": "…",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Milo of Croton, champion wrestler",
+  "text": "Too much!",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:A little girl",
+  "text": "Still a bit hungry…",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:A thin scholar",
+  "text": "Hmm, I'll be hungry before my lecture is over.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Milo of Croton, champion wrestler",
+  "text": "THIS? This is a snack for a sparrow! I'm starving!",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Three guests, three different right amounts. Milo needs far more than the scholar. For Milo, 6 pounds is too *little*. For a beginner, it's too *much*.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "That's what I mean: the mean is *relative to us*. Not the mathematical middle, but the right amount for *this* person in *this* situation. Finding it takes judgment. I call it *practical wisdom*.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "A merchant brings King Philip a magnificent black horse, *Bucephalus*. But it bucks and rears. No one can ride it.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:King Philip",
+  "text": "Take the wild beast away! It's useless.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "alexander",
+  "text": "Wait, Father! He's not wild. He's afraid of his own *shadow*! Let me try.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Approach the horse. *Hold E* to walk while he is calm. *Let go* when he rears up. Wait too long and Philip will lose patience.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Alexander turns Bucephalus to face the sun, so his shadow falls behind him. The horse calms. Alexander swings up and rides!",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:King Philip",
+  "text": "My son, find a kingdom big enough for you. Macedon is too small!",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Brave, but *careful*: he moved when it was right and waited when it wasn't. That is courage.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "He got there, but by charging in when the horse was dangerous. Too much daring is *recklessness*.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "He got there, but he hesitated so long he nearly lost the chance. Too little daring is *cowardice*.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:An old soldier, begging",
+  "text": "Young prince… I fought for your father for twenty years. Now I have nothing. Could you spare anything?",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "What does Alexander do?",
+  "file": "js/rooms/lyceum.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Keeping what could do real good is *stinginess*.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Giving the right amount, to the right person, for the right reason. That is *generosity*.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:The royal treasurer",
+  "text": "The *whole* treasury?! But… how will we pay the army?",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Giving with no sense of measure isn't generosity. It's *wastefulness*, and soon there's nothing left to give anyone.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:Cleitus, his friend",
+  "text": "To the prince! More wine for Alexander! Tell us how you tamed that horse!",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "What does Alexander do at the feast?",
+  "file": "js/rooms/lyceum.js",
+  "kind": "ask"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Refusing every pleasure isn't a virtue. It's being *joyless*. A good life includes enjoying good things.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Enjoying pleasure in the right amount, and staying in charge of yourself. That is *self-control*.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "alexander",
+  "text": "I am the GREATEST! Greater than my father! Greater than any of you!",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "When pleasure takes over, you stop being in charge of yourself. That is *indulgence*, and it makes people do things they regret.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Years have passed. Alexander leads the cavalry in his first great battle.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "This time, *you don't choose*. Watch what his habits make him do.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "He charges *alone*, far ahead of his men, and is nearly surrounded before they can reach him.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "He hesitates at the critical moment. His officers have to lead the charge for him.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "He waits for the right moment, then leads his men through a gap in the enemy line, together.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "Did you see? You didn't choose that. His *habit* did. We become what we repeatedly do. Every choice you made for him has been carving his character, like water carving stone.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "name:King Alexander",
+  "text": "Onward! India, and then the edge of the world!",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "His exhausted army, years from home, sits down and *refuses* to march any further.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "At a drunken feast, a quarrel. In a rage, the king kills his old friend Cleitus, and then weeps for days.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "He gives away gifts and lands without measure, and his treasury is always empty.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "He hoards his riches, and his soldiers grumble that the king never shares.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "He avoids every risk, and his generals quietly take the real decisions.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "He never relaxes or laughs, and his court finds him cold and distant.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "narrator",
+  "text": "Your Alexander grows into a brave but careful leader, generous in the right measure, the master of himself. His people *flourish*, and so does he.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "Your Alexander became: *{}* in courage, *{}* in giving, *{}* in pleasure.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "owl",
+  "text": "The real Alexander was a brilliant, fearless commander who built an empire from Greece to India. But he was also often reckless, drank heavily, killed his friend Cleitus at a feast, and died at just 32. Aristotle might say he overshot the mean.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "This is my whole ethics in one boy. Virtue is a *habit*. A harpist becomes good by playing the harp; we become brave by doing brave things.",
+  "file": "js/rooms/lyceum.js",
+  "kind": "say"
+ },
+ {
+  "speaker": "aristotle",
+  "text": "The mean is *relative to us*: Milo's dinner is not the scholar's. And the goal of it all is *eudaimonia*: flourishing, a life lived well. Not a feeling you have, but a life you build.",
   "file": "js/rooms/lyceum.js",
   "kind": "say"
  },

@@ -150,6 +150,8 @@ for (const [sp, tpl, vals] of VARIANTS) {
 }
 // a few speaker variables
 for (const l of lines) { if (l.speaker === '?sp') l.speaker = 'name:Yan Hui, a student'; if (l.speaker.startsWith('?obj:{ name: CY_NAMES')) l.speaker = 'courtyardPeople'; }
+// Milo's dinner: the speaker is whichever guest is being served
+for (const l of lines) if (l.speaker === '?who') l.speaker = /tummy|Yum|Still a bit/.test(l.text) ? 'name:A little girl' : /books|lecture|think clearly|possibly/.test(l.text) ? 'name:A thin scholar' : 'name:Milo of Croton, champion wrestler';
 lines.splice(0, lines.length, ...lines.filter(l => l.speaker !== '?k' && !l.speaker.startsWith('?')));
 // de-duplicate
 const seen = new Set(); const out = [];

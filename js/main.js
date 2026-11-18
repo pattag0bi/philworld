@@ -264,6 +264,7 @@ function render() {
   else if (G.screen === 'creator') drawCreatorUI();
   else if (G.screen === 'game') {
     if (G.activity && G.activity.ui) { try { G.activity.ui(ctx, G.t); } catch (e) { console.error(e); } }
+    if (typeof drawHabits === 'function' && G.screen === 'game') drawHabits();
     if (!G.activity && !G.cutscene) drawDoorSigns();
     if (canControl()) drawPrompt();
     drawVignetteTitle();

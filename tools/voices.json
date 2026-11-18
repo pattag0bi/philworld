@@ -210,5 +210,37 @@
   "name:The Ruler": {
     "voice": "shubh_en_audiobook",
     "pace": 1.0
+  },
+  "name:A little girl": {
+    "voice": "nupur_en_kids",
+    "pace": 1.05
+  },
+  "name:A thin scholar": {
+    "voice": "kalpit_en_edtech",
+    "pace": 0.95
+  },
+  "name:Milo of Croton, champion wrestler": {
+    "voice": "ashwin_en_sports_energetic",
+    "pace": 1.0
+  },
+  "name:King Philip": {
+    "voice": "shubh_en_audiobook",
+    "pace": 0.95
+  },
+  "name:An old soldier, begging": {
+    "voice": "rustom_en_suspense",
+    "pace": 0.9
+  },
+  "name:The royal treasurer": {
+    "voice": "nachiket_en_ads",
+    "pace": 1.15
+  },
+  "name:Cleitus, his friend": {
+    "voice": "deven_en_conversation",
+    "pace": 1.05
+  },
+  "name:King Alexander": {
+    "voice": "ashwin_en_sports_energetic",
+    "pace": 1.05
   }
 }

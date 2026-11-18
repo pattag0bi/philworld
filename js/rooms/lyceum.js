@@ -167,14 +167,237 @@ async function aristotleTalk() {
   }
   await say('aristotle', 'Ah, walk with me! My students are called *Peripatetics*: "the ones who walk around." I think better on my feet.');
   await say('aristotle', 'My teacher Plato looked up to the heavens for truth. I look *here*: at animals, plants, cities, people. What actually makes a human life go *well*?');
-  await say('aristotle', 'My answer: *virtue*. And every virtue is a *mean* between two vices: one of too little, one of too much.');
-  await say('aristotle', 'Here. Tune these three virtues on this young soldier. Don\'t look for the exact middle. *Listen* for where it sounds right.');
-  await virtueTuner();
-  await say('aristotle', 'You found them! Notice the mean wasn\'t always dead center. Courage leans a little toward boldness, generosity a little toward caution. The mean is *relative to us* and to the situation.');
-  await say('aristotle', 'That takes *practical wisdom*, phronesis. No rulebook can do it for you.');
-  await say('aristotle', 'And virtue is a *habit*. A harpist becomes good by playing the harp; we become brave by doing brave things. Do it until it\'s who you are.');
+  await say('aristotle', 'My answer: *virtue*. And every virtue sits in the *middle*, between too little and too much. I call it the *mean*. But the middle of *what*? Let me show you. Dinner time!');
+  await milosDinner();
+  await say('aristotle', 'Now the most important part. How does anyone *become* good? I tutored a boy who became famous. You will raise him. Every choice you make for him becomes part of who he is.');
+  await raiseAlexander();
   await giveInsight('mean');
   await say('owl', 'The path *west* to the Stoa is open, and so is the other road back at the Agora.');
+}
+
+// ---------- 1. Milo's Dinner: the mean is relative to the person
+function drawScaled(g, x, y, sc, fn) { g.save(); g.translate(Math.round(x), Math.round(y)); g.scale(sc, sc); fn(g); g.restore(); }
+const MILO = { skin: '#c98e62', hairStyle: 'curly', hairC: '#2b1d14', beard: '#2b1d14', beardLen: 2, robe: '#c0392b', robe2: '#7b241c', legs: '#c98e62' };
+async function milosDinner() {
+  const C = await cutStart("Aristotle's dinner puzzle");
+  player.x = 200; player.y = 150; player.dir = 3;
+  const AXd = G.room.ents.find(e => e.id === 'alexander'); if (AXd) AXd.hidden = true;
+  const table = C.prop('table', 0, 0, (g) => { R(g, '#6b4a2b', 236, 150, 136, 6); R(g, '#8b5a2b', 236, 148, 136, 3); for (const x of [240, 366]) R(g, '#5a3a1a', x, 156, 3, 10); }, { z: 151 });
+  const diners = [
+    { id: 'kid', name: 'A little girl', look: { skin: '#f0d0a8', hairStyle: 'ponytail', hairC: '#d8b26e', robe: '#f39c12', robe2: '#9a5a10' }, x: 256, sc: 1, want: 0 },
+    { id: 'scholar', name: 'A thin scholar', look: { skin: '#eab994', hairStyle: 'bald', hairC: '#bbb', beard: '#bbb', beardLen: 3, robe: '#7a6a8a', robe2: '#4a3a5a', long: true }, x: 300, sc: 1, want: 1 },
+    { id: 'milo', name: 'Milo of Croton, champion wrestler', look: MILO, x: 346, sc: 1.6, want: 2 },
+  ];
+  for (const d of diners) {
+    d.a = C.actor(d.id, d.look, d.x, 146, { dir: 0 });
+    if (d.sc !== 1) d.a.customDraw = function (g) { drawScaled(g, this.x, this.y, d.sc, gg => drawPerson(gg, 0, 0, this.look, this.dir, 0, this.pose)); };
+    d.plate = C.prop('plate_' + d.id, d.x, 152, function (g, t) { ellipse(g, this.x, 150, 7, 2, '#ecf0f1'); const n = this.portion == null ? -1 : [1, 3, 7][this.portion]; for (let i = 0; i < n; i++) disc(g, this.x - 4 + (i % 3) * 4, 147 - Math.floor(i / 3) * 3, 2, ['#c0392b', '#f39c12', '#27ae60'][i % 3]); }, { z: 152 });
+  }
+  await say('aristotle', 'Suppose 10 pounds of food is too much for a person, and 2 pounds is too little. Is 6 pounds, the exact middle, right for *everyone*?');
+  await say('aristotle', 'Let\'s find out. Serve each guest the amount that is *right for them*.');
+  const sizes = ['A small bowl', 'A normal plate', 'A mountain of food'];
+  for (const d of diners) {
+    let done = false;
+    while (!done) {
+      C.emote(d.a, '?', 2);
+      const c = await ask('aristotle', `How much for *${d.name}*?`, sizes);
+      d.plate.portion = c; SFX.coin();
+      await wait(0.5);
+      const who = { name: d.name, look: d.look, voice: d.id === 'kid' ? 480 : d.id === 'milo' ? 170 : 260 };
+      if (c === d.want) {
+        C.emote(d.a, 'heart', 2.5); d.a.pose = { smile: true }; SFX.success();
+        await say(who, ['Yum! Just right!', 'Ah, perfect. Now I can think clearly.', 'HA! Finally, a real meal! Now I can wrestle a bull!'][diners.indexOf(d)]);
+        done = true;
+      } else if (c > d.want) {
+        C.emote(d.a, 'sweat', 2.5); shake(0.1); AudioSys.play('sine', 180, { hz: true, wave: 'sawtooth', to: 90, dur: 0.5, vol: 0.05 });
+        await say(who, ['Ugh… my tummy hurts. That\'s way too much!', 'Oof. I can\'t possibly. I\'ll fall asleep over my books!', '…'][diners.indexOf(d)] || 'Too much!');
+        d.plate.portion = null;
+      } else {
+        C.emote(d.a, 'tear', 2.5); AudioSys.play('sine', 300, { hz: true, to: 200, dur: 0.4, vol: 0.05 });
+        await say(who, ['Still a bit hungry…', 'Hmm, I\'ll be hungry before my lecture is over.', 'THIS? This is a snack for a sparrow! I\'m starving!'][diners.indexOf(d)]);
+        d.plate.portion = null;
+      }
+    }
+  }
+  await say('aristotle', 'Three guests, three different right amounts. Milo needs far more than the scholar. For Milo, 6 pounds is too *little*. For a beginner, it\'s too *much*.');
+  await say('aristotle', 'That\'s what I mean: the mean is *relative to us*. Not the mathematical middle, but the right amount for *this* person in *this* situation. Finding it takes judgment. I call it *practical wisdom*.');
+  await C.end();
+  if (AXd) AXd.hidden = false;
+}
+
+// ---------- 2. Raise Alexander: virtue is a habit
+const HABITS = [
+  { id: 'courage', name: 'Courage', lo: 'cowardly', hi: 'reckless' },
+  { id: 'generosity', name: 'Generosity', lo: 'stingy', hi: 'wasteful' },
+  { id: 'temperance', name: 'Self-control', lo: 'joyless', hi: 'indulgent' },
+];
+function habitOf(h) { const v = G.alex[h]; return v.length ? v.reduce((a, b) => a + b, 0) / v.length : 0; }
+function habitWord(h) { const v = habitOf(h), H = HABITS.find(x => x.id === h); return v < -0.34 ? H.lo : v > 0.34 ? H.hi : 'balanced'; }
+function drawHabits() {
+  if (!G.alex || !G.alexShow) return;
+  panel(6, 64, 132, 66, { bg: 'rgba(22,16,34,0.9)' });
+  text("ALEXANDER'S HABITS", 72, 68, { title: true, size: 5, align: 'center', color: UIC.hl });
+  HABITS.forEach((H, i) => {
+    const y = 80 + i * 16, v = habitOf(H.id), n = G.alex[H.id].length;
+    text(H.name, 12, y - 2, { size: 11, color: UIC.ink });
+    const x0 = 66, w = 64;
+    const grd = ctx.createLinearGradient(x0, 0, x0 + w, 0); grd.addColorStop(0, '#5dade2'); grd.addColorStop(0.5, '#f7c948'); grd.addColorStop(1, '#e74c3c');
+    ctx.fillStyle = grd; ctx.globalAlpha = 0.45; ctx.fillRect(x0, y + 1, w, 4); ctx.globalAlpha = 1;
+    if (n) { const kx = x0 + (v + 1) / 2 * w; ctx.fillStyle = '#fff'; ctx.fillRect(kx - 1, y - 1, 3, 8); }
+    for (let k = 0; k < n; k++) { ctx.fillStyle = G.alex[H.id][k] === 0 ? '#2ecc71' : '#e67e22'; ctx.fillRect(x0 + k * 5, y + 7, 4, 2); }
+  });
+}
+function drawBucephalus(g, x, y, rear, t) {
+  const r = rear ? 6 : 0;
+  R(g, 'rgba(0,0,0,0.2)', x - 12, y - 1, 26, 3);
+  R(g, '#1d1d24', x - 11, y - 15 - r * 0.4, 22, 9);
+  R(g, '#1d1d24', x + 7, y - 22 - r, 5, 10); R(g, '#1d1d24', x + 9, y - 24 - r, 7, 4); R(g, '#f5f5f5', x + 12, y - 23 - r, 2, 1);
+  R(g, '#3a3a44', x + 7, y - 25 - r, 2, 9);
+  for (const lx of [-10, -6]) R(g, '#1d1d24', x + lx, y - 7, 2, 7);
+  for (const lx of [5, 9]) R(g, '#1d1d24', x + lx, y - 7 - r, 2, 7 - (rear ? 2 : 0));
+  R(g, '#3a3a44', x - 14, y - 15, 3, 9 + Math.round(Math.sin(t * 4)));
+  if (rear) for (let i = 0; i < 3; i++) R(g, '#c8b898', x - 6 + i * 6, y - 2 - ((t * 20 + i * 3) % 4), 2, 1);
+}
+async function raiseAlexander() {
+  G.alex = { courage: [], generosity: [], temperance: [] };
+  const AX = G.room.ents.find(e => e.id === 'alexander'), axHome = [AX.x, AX.y];
+  AX.hidden = true;
+  const YOUNG = Object.assign({}, LOOKS.alexander, { hat: null, robe: '#c0392b', robe2: '#c0a040' });
+  let C = await cutStart('Pella, Macedon · 344 BCE');
+  G.alexShow = true;
+  player.x = 220; player.y = 150; player.dir = 3;
+  const al = C.actor('alex', YOUNG, 260, 150, { dir: 3 });
+  // --- Scene 1: Bucephalus (timing mini-game)
+  const horse = C.prop('horse', 400, 150, function (g, t) { drawBucephalus(g, this.x + (this.warn && !this.rear ? Math.round(Math.sin(t * 40)) : 0), this.y, this.rear, t); }, { rear: false, z: 150 });
+  const philip = C.actor('philip', Object.assign({}, LOOKS.ruler, { beard: '#3a2a1a', beardLen: 2 }), 330, 120, { dir: 0 });
+  await say(null, 'A merchant brings King Philip a magnificent black horse, *Bucephalus*. But it bucks and rears. No one can ride it.');
+  await say({ name: 'King Philip', look: philip.look, voice: 230 }, 'Take the wild beast away! It\'s useless.');
+  C.emote(al, 'idea', 2.5);
+  await say('alexander', 'Wait, Father! He\'s not wild. He\'s afraid of his own *shadow*! Let me try.');
+  await say(null, 'Approach the horse. *Hold E* to walk while he is calm. *Let go* when he rears up. Wait too long and Philip will lose patience.');
+  let p = 0, reckless = 0, timid = 0, idle = 0, phaseT = 1.6, kicked = 0, rearStart = 0;
+  const end = setActivity({
+    panels: false,
+    update(dt) {
+      if (Dialog.cur || this.done) return;
+      phaseT -= dt;
+      if (phaseT <= 0) { horse.rear = !horse.rear; if (horse.rear) rearStart = G.t; phaseT = horse.rear ? 0.8 + Math.random() * 0.8 : 1.1 + Math.random() * 1.2; if (horse.rear) AudioSys.play('sine', 800, { hz: true, wave: 'sawtooth', to: 400, dur: 0.5, vol: 0.05 }); }
+      horse.warn = !horse.rear && phaseT < 0.5;
+      const holding = down('act') || keys['e'] || keys[' '];
+      if (holding) {
+        idle = 0;
+        if (horse.rear) { if (G.t - rearStart > 0.3 && G.t - kicked > 0.7) { kicked = G.t; reckless++; p = Math.max(0, p - 0.18); shake(0.25); SFX.thud(); notice('Too fast! He rears and you stumble back.', 1.2); } }
+        else { p = Math.min(1, p + dt * 0.2); al.step = Math.floor(G.t * 8) % 4; }
+      } else {
+        al.step = 0;
+        if (!horse.rear) { idle += dt; if (idle > 3) { idle = 0; timid++; notice('Philip: "Hurry up, boy, or I\'ll send it away!"', 1.4); } }
+      }
+      al.x = lerp(262, 384, p); al.dir = 3;
+      if (p >= 1) this.done = true;
+    },
+    ui() {
+      text('Hold E to approach · let go when he rears', 240, 58, { size: 12, align: 'center', color: UIC.hl });
+      const soon = !horse.rear && phaseT < 0.5;
+      text(horse.rear ? 'REARING! wait…' : soon ? 'about to rear…' : 'calm: go', 400, 104, { size: 12, align: 'center', color: horse.rear ? '#e74c3c' : soon ? '#f39c12' : '#2ecc71' });
+    },
+  });
+  const act = G.activity; await waitUntil(() => act.done); end();
+  horse.rear = false;
+  await say(null, 'Alexander turns Bucephalus to face the sun, so his shadow falls behind him. The horse calms. Alexander swings up and rides!');
+  for (let i = 0; i < 60; i++) { horse.x = 400 + Math.sin(i / 10) * 40; al.x = horse.x; al.y = 138; await nextFrame(); }
+  const cScore = reckless >= 3 ? 1 : timid >= 3 ? -1 : 0;
+  G.alex.courage.push(cScore);
+  await say({ name: 'King Philip', look: philip.look, voice: 230 }, 'My son, find a kingdom big enough for you. Macedon is too small!');
+  await say('aristotle', cScore === 0 ? 'Brave, but *careful*: he moved when it was right and waited when it wasn\'t. That is courage.' : cScore > 0 ? 'He got there, but by charging in when the horse was dangerous. Too much daring is *recklessness*.' : 'He got there, but he hesitated so long he nearly lost the chance. Too little daring is *cowardice*.');
+  horse.alpha = 0; philip.alpha = 0; al.x = 260; al.y = 150;
+  // --- Scene 2: the beggar at the gate (generosity)
+  C.caption('The palace gate, a few months later');
+  const beg = C.actor('beggar', { skin: '#c98e62', hairStyle: 'long', hairC: '#6a6a6a', beard: '#6a6a6a', beardLen: 3, robe: '#7a6a5a', robe2: '#5a4a3a', long: true }, 360, 150, { dir: 2, pose: { sit: true } });
+  C.emote(beg, '...', 2.5);
+  await say({ name: 'An old soldier, begging', look: beg.look, voice: 200 }, 'Young prince… I fought for your father for twenty years. Now I have nothing. Could you spare anything?');
+  const g1 = await ask('aristotle', 'What does Alexander do?', ['Walk past and keep his gold.', 'Give him a good meal and a coin, and listen to his story.', 'Hand him the entire royal treasury, on the spot!']);
+  const gScore = [-1, 0, 1][g1];
+  G.alex.generosity.push(gScore);
+  if (gScore === -1) { C.emote(beg, 'tear', 3); await C.walk(al, 440, 150, 50); await say('aristotle', 'Keeping what could do real good is *stinginess*.'); }
+  else if (gScore === 0) { await C.walk(al, 344, 150, 50); ICONS && SFX.coin(); C.emote(beg, 'heart', 3); beg.pose = { sit: true, smile: true }; await say('aristotle', 'Giving the right amount, to the right person, for the right reason. That is *generosity*.'); }
+  else { await C.walk(al, 344, 150, 50); for (let i = 0; i < 6; i++) { SFX.coin(); await wait(0.1); } const tre = C.actor('treasurer', { skin: '#eab994', hairStyle: 'bald', hairC: '#bbb', robe: '#2e86c1', robe2: '#c9a24a', long: true }, 300, 120, { dir: 0 }); C.emote(tre, '!', 2); tre.pose = { closedEyes: true }; await say({ name: 'The royal treasurer', look: tre.look, voice: 300 }, 'The *whole* treasury?! But… how will we pay the army?'); await say('aristotle', 'Giving with no sense of measure isn\'t generosity. It\'s *wastefulness*, and soon there\'s nothing left to give anyone.'); tre.alpha = 0; }
+  beg.alpha = 0; al.x = 260;
+  // --- Scene 3: the feast (self-control)
+  C.caption('A royal feast');
+  const feast = C.prop('feast', 0, 0, (g, t) => { R(g, '#6b4a2b', 280, 150, 140, 6); for (let i = 0; i < 6; i++) { ICONS[['apple', 'mango', 'coin'][i % 3]](g, 290 + i * 22, 144); } for (let i = 0; i < 3; i++) { R(g, '#c9a24a', 300 + i * 40, 140, 4, 6); } }, { z: 151 });
+  const guests = [0, 1, 2].map(i => C.actor('g' + i, { skin: ['#eab994', '#c98e62', '#e8b48f'][i], hairStyle: 'curly', hairC: '#2b1d14', beard: '#2b1d14', beardLen: 1, robe: ['#8e44ad', '#16a085', '#d35400'][i], robe2: '#c9a24a', long: true }, 300 + i * 50, 130, { dir: 0, pose: { sit: true } }));
+  await C.walk(al, 290, 156, 50); al.dir = 1;
+  const cleitus = guests[1];
+  await say({ name: 'Cleitus, his friend', look: cleitus.look, voice: 260 }, 'To the prince! More wine for Alexander! Tell us how you tamed that horse!');
+  const f1 = await ask('aristotle', 'What does Alexander do at the feast?', ['Refuse all food and wine, and sit in grim silence.', 'Enjoy the food and a cup of wine, then stop when it\'s enough.', 'Drink cup after cup, and boast louder and louder.']);
+  const tScore = [-1, 0, 1][f1];
+  G.alex.temperance.push(tScore);
+  if (tScore === -1) { al.pose = {}; C.emote(al, '...', 3); guests.forEach(g => C.emote(g, '?', 2)); await say('aristotle', 'Refusing every pleasure isn\'t a virtue. It\'s being *joyless*. A good life includes enjoying good things.'); }
+  else if (tScore === 0) { C.emote(al, 'heart', 2); guests.forEach(g => C.emote(g, 'ha', 2)); AudioSys.play('pluck', 67, { vol: 0.1 }); await say('aristotle', 'Enjoying pleasure in the right amount, and staying in charge of yourself. That is *self-control*.'); }
+  else { for (let i = 0; i < 4; i++) { al.x += 4 * (i % 2 ? -1 : 1); C.emote(al, 'ha', 1); AudioSys.play('sine', 300 + i * 60, { hz: true, wave: 'sawtooth', dur: 0.15, vol: 0.04 }); await wait(0.35); } al.pose = { armsUp: true }; C.emote(cleitus, 'angry', 2.5); shake(0.2); SFX.shatter(); await say('alexander', 'I am the GREATEST! Greater than my father! Greater than any of you!'); al.pose = {}; await say('aristotle', 'When pleasure takes over, you stop being in charge of yourself. That is *indulgence*, and it makes people do things they regret.'); }
+  feast.alpha = 0; guests.forEach(g => g.alpha = 0); al.x = 260; al.y = 150;
+  // --- Scene 4: the battle (his habit acts for him)
+  C.caption('Battle of Chaeronea · 338 BCE · Alexander is 18');
+  await say(null, 'Years have passed. Alexander leads the cavalry in his first great battle.');
+  await say('aristotle', 'This time, *you don\'t choose*. Watch what his habits make him do.');
+  const enemy = [0, 1, 2].map(i => C.actor('e' + i, { skin: '#e8b48f', hairStyle: 'short', robe: '#2e86c1', robe2: '#1b4f72', hat: 'helmet' }, 400 + (i % 2) * 14, 130 + i * 14, { dir: 2 }));
+  const allies = [0, 1].map(i => C.actor('a' + i, { skin: '#e8b48f', hairStyle: 'short', robe: '#c0392b', hat: 'helmet' }, 230, 136 + i * 24, { dir: 3 }));
+  al.look = Object.assign({}, YOUNG, { hat: 'helmet' });
+  const ch = habitOf('courage');
+  if (ch > 0.34) {
+    await C.walk(al, 390, 150, 120); C.emote(al, '!', 2); SFX.thud(); shake(0.3);
+    await say(null, 'He charges *alone*, far ahead of his men, and is nearly surrounded before they can reach him.');
+  } else if (ch < -0.34) {
+    C.emote(al, 'sweat', 3); await wait(1.2);
+    await say(null, 'He hesitates at the critical moment. His officers have to lead the charge for him.');
+    await C.walkAll(allies.map(a => [a, 380, a.y, 70]));
+  } else {
+    C.emote(al, 'idea', 2);
+    await say(null, 'He waits for the right moment, then leads his men through a gap in the enemy line, together.');
+    await C.walkAll([[al, 370, 150, 70], ...allies.map(a => [a, 360, a.y, 70])]);
+    enemy.forEach(e => C.emote(e, '!', 2));
+  }
+  G.alex.courage.push(ch > 0.34 ? 1 : ch < -0.34 ? -1 : 0);
+  await say('aristotle', 'Did you see? You didn\'t choose that. His *habit* did. We become what we repeatedly do. Every choice you made for him has been carving his character, like water carving stone.');
+  enemy.forEach(e => e.alpha = 0); allies.forEach(a => a.alpha = 0);
+  await C.end();
+  await alexanderEnding(al, YOUNG);
+  G.alexShow = false;
+  AX.hidden = false; AX.x = axHome[0]; AX.y = axHome[1];
+}
+
+// ---------- 3. the man he becomes
+async function alexanderEnding() {
+  const C = await cutStart('Alexander the Great, years later');
+  const KING = Object.assign({}, LOOKS.alexander, { hat: 'crown', robe: '#8e44ad', robe2: '#f1c40f', long: true });
+  const k = C.actor('king', KING, 300, 150, { dir: 0 });
+  const w = { courage: habitWord('courage'), generosity: habitWord('generosity'), temperance: habitWord('temperance') };
+  const balanced = Object.values(w).every(x => x === 'balanced');
+  if (w.courage === 'reckless') {
+    const sol = [0, 1, 2].map(i => C.actor('s' + i, { skin: '#e8b48f', hairStyle: 'short', robe: '#c0392b', hat: 'helmet' }, 340 + i * 14, 160, { dir: 2, pose: { sit: true } }));
+    C.emote(k, '!', 2); sol.forEach(s => C.emote(s, 'sweat', 3));
+    await say({ name: 'King Alexander', look: KING, voice: 480 }, 'Onward! India, and then the edge of the world!');
+    await say(null, 'His exhausted army, years from home, sits down and *refuses* to march any further.');
+  }
+  if (w.temperance === 'indulgent') {
+    const cl = C.actor('cl', { skin: '#c98e62', hairStyle: 'curly', hairC: '#2b1d14', beard: '#2b1d14', beardLen: 1, robe: '#16a085', long: true }, 260, 150, { dir: 3 });
+    C.emote(k, 'angry', 2.5); shake(0.3); SFX.thud();
+    await say(null, 'At a drunken feast, a quarrel. In a rage, the king kills his old friend Cleitus, and then weeps for days.');
+    await C.fadeActor(cl, 0, 1);
+  }
+  if (w.generosity === 'wasteful') { for (let i = 0; i < 6; i++) SFX.coin(); await say(null, 'He gives away gifts and lands without measure, and his treasury is always empty.'); }
+  if (w.generosity === 'stingy') { await say(null, 'He hoards his riches, and his soldiers grumble that the king never shares.'); }
+  if (w.courage === 'cowardly') { await say(null, 'He avoids every risk, and his generals quietly take the real decisions.'); }
+  if (w.temperance === 'joyless') { await say(null, 'He never relaxes or laughs, and his court finds him cold and distant.'); }
+  if (balanced) {
+    C.emote(k, 'heart', 3); SFX.chime();
+    await say(null, 'Your Alexander grows into a brave but careful leader, generous in the right measure, the master of himself. His people *flourish*, and so does he.');
+  }
+  await say('owl', `Your Alexander became: *${w.courage}* in courage, *${w.generosity}* in giving, *${w.temperance}* in pleasure.`);
+  await say('owl', 'The real Alexander was a brilliant, fearless commander who built an empire from Greece to India. But he was also often reckless, drank heavily, killed his friend Cleitus at a feast, and died at just 32. Aristotle might say he overshot the mean.');
+  await C.end();
+  await say('aristotle', 'This is my whole ethics in one boy. Virtue is a *habit*. A harpist becomes good by playing the harp; we become brave by doing brave things.');
+  await say('aristotle', 'The mean is *relative to us*: Milo\'s dinner is not the scholar\'s. And the goal of it all is *eudaimonia*: flourishing, a life lived well. Not a feeling you have, but a life you build.');
 }
 
 function drawLion(g, x, y, mood, t) {
@@ -184,86 +407,4 @@ function drawLion(g, x, y, mood, t) {
   for (const lx of [0, 4, 10, 13]) R(g, '#c4923a', x + lx, y - 2, 2, 2);
   R(g, '#c4923a', x + 14, y - 12, 1, 4);
   if (mood === 'calm') { R(g, '#e0b060', x - 3, y - 13, 2, 1); }
-}
-async function virtueTuner() {
-  const rows = [
-    { name: 'Courage', lo: 'Cowardice', hi: 'Recklessness', target: 0.57, v: 0.08, done: false, hold: 0 },
-    { name: 'Generosity', lo: 'Stinginess', hi: 'Wastefulness', target: 0.44, v: 0.92, done: false, hold: 0 },
-    { name: 'Wit', lo: 'Boorishness', hi: 'Buffoonery', target: 0.5, v: 0.12, done: false, hold: 0 },
-  ];
-  let sel = 0, beat = 0;
-  const tol = 0.075;
-  const state = r => { const d = r.v - r.target; return Math.abs(d) < tol ? 'mean' : d < 0 ? 'lo' : 'hi'; };
-  const hero = playerLook();
-  showVignette((v, t) => {
-    const r = rows[sel], s = state(r), d = r.v - r.target;
-    R(v, s === 'mean' ? '#2a3a2a' : '#2a2440', 0, 0, 160, 90);
-    R(v, '#5a7a3a', 0, 70, 160, 20);
-    if (sel === 0) {
-      const hx = s === 'lo' ? 40 - (t * 30 % 20) : s === 'hi' ? 92 + Math.sin(t * 20) * 2 : 66;
-      drawPerson(v, hx, 78, hero, s === 'lo' ? 2 : 3, s !== 'mean' ? Math.floor(t * 10) % 4 : 0, { armsUp: s === 'hi', hold: s === 'mean' ? (g, x, y) => { R(g, '#c9a24a', x + 3, y - 14, 5, 9); R(g, '#8b1e2b', x + 4, y - 12, 3, 4); } : null });
-      if (s === 'lo') { R(v, '#5dade2', hx + 5, 58, 1, 2); R(v, '#5dade2', hx - 6, 60, 1, 2); }
-      if (s === 'hi') for (let i = 0; i < 3; i++) line(v, 84 + i * 4, 52, 88 + i * 4, 46, '#e74c3c');
-      drawLion(v, 118, 78, s === 'mean' ? 'calm' : 'roar', t);
-    } else if (sel === 1) {
-      drawPerson(v, 58, 78, hero, 3, 0, { hold: s === 'lo' ? (g, x, y) => { disc(g, x, y - 9, 4, '#8b5a2b'); R(g, '#f1c40f', x - 1, y - 13, 2, 1); } : null, armsUp: s === 'hi' });
-      drawPerson(v, 110, 78, { skin: '#c98e62', hairStyle: 'long', hairC: '#6a6a6a', robe: '#7a6a5a', robe2: '#5a4a3a', long: true }, 2, 0, { sit: true, smile: s === 'mean' });
-      if (s === 'lo') { R(v, '#5dade2', 108, 64, 1, 2); }
-      if (s === 'hi') { for (let i = 0; i < 12; i++) ICONS.coin(v, 20 + ((i * 37 + t * 40) % 130), 10 + ((i * 23 + t * 60) % 60)); R(v, '#8b5a2b', 52, 66, 12, 12); }
-      if (s === 'mean') { const k = (t * 0.8) % 1; ICONS.coin(v, 64 + k * 40, 66 - Math.sin(k * 3.14) * 12); ICONS.heart(v, 84, 30 + Math.sin(t * 3) * 2); }
-    } else {
-      R(v, '#8b5a2b', 30, 62, 100, 6);
-      drawPerson(v, 80, 60, hero, 0, 0, { armsUp: s === 'hi', smile: s !== 'lo', hold: s === 'hi' ? (g, x, y) => { R(g, '#7f8c8d', x - 4, y - 22, 8, 4); } : null });
-      for (const [gx, i] of [[42, 0], [118, 1]]) {
-        const b = s === 'mean' ? Math.round(Math.sin(t * 12 + i) * 1) : 0;
-        drawPerson(v, gx, 60 + b, [LOOKS.youngPlato, LOOKS.sophist][i], 0, 0, { sit: true, smile: s === 'mean', closedEyes: s === 'lo' });
-        if (s === 'lo') { R(v, '#aed6f1', gx + 5, 34 - (t * 6 % 6), 3, 1); R(v, '#aed6f1', gx + 6, 30 - (t * 6 % 6), 3, 1); }
-        if (s === 'hi') { R(v, '#e74c3c', gx, 30, 2, 6); R(v, '#e74c3c', gx, 38, 2, 2); }
-        if (s === 'mean') { drawSpark(v, gx + 6, 34, t + i); }
-      }
-    }
-    // label
-    v.fillStyle = s === 'mean' ? '#2ecc71' : '#e74c3c'; v.fillRect(0, 0, 160, 2);
-  }, { title: 'The Golden Mean' });
-  const end = setActivity({
-    update(dt) {
-      if (Dialog.cur) return;
-      const r = rows[sel];
-      if (!r.done) {
-        const dv = (down('right') ? 1 : 0) - (down('left') ? 1 : 0);
-        r.v = clamp(r.v + dv * dt * 0.45, 0, 1);
-        if (state(r) === 'mean' && !dv) { r.hold += dt; if (r.hold > 0.9) { r.done = true; SFX.success(); } } else r.hold = 0;
-      }
-      if (hit('up')) { sel = (sel + 2) % 3; SFX.select(); }
-      if (hit('down')) { sel = (sel + 1) % 3; SFX.select(); }
-      if (r.done && rows.some(x => !x.done) && hit('act')) { sel = rows.findIndex(x => !x.done); SFX.select(); }
-      // sound of the virtue
-      beat -= dt;
-      const s = state(r), d = r.v - r.target;
-      if (beat <= 0) {
-        if (s === 'mean') { beat = 0.55; [60, 64, 67].forEach((n, i) => AudioSys.play('pluck', n + 7, { vol: 0.1, dur: 1.2 }, i * 0.03)); }
-        else if (s === 'lo') { beat = 0.6 + (-d) * 0.8; AudioSys.play('sine', 55 - Math.round(-d * 14), { vol: 0.05 * (1 - (-d) * 0.8), dur: 0.5 }); }
-        else { beat = Math.max(0.12, 0.4 - d * 0.6); AudioSys.play('pluck', 70, { vol: 0.08 + d * 0.1, dur: 0.4, wave: 'sawtooth', saw: 1 }); AudioSys.play('pluck', 71 + Math.round(d * 6), { vol: 0.08 + d * 0.1, dur: 0.4, wave: 'square', saw: 1 }); }
-      }
-    },
-    ui() {
-      panel(70, 112, 340, 102);
-      rows.forEach((r, i) => {
-        const y = 120 + i * 26, isSel = i === sel, s = state(r);
-        text((isSel ? '▶ ' : '  ') + r.name + (r.done ? '  ✓' : ''), 78, y, { size: 13, color: r.done ? '#2ecc71' : isSel ? UIC.hl : UIC.ink });
-        text(r.lo, 180, y + 11, { size: 11, color: UIC.dim }); text(r.hi, 400, y + 11, { size: 11, align: 'right', color: UIC.dim });
-        ctx.fillStyle = '#1a1020'; ctx.fillRect(180, y + 2, 220, 8);
-        const grd = ctx.createLinearGradient(180, 0, 400, 0); grd.addColorStop(0, '#5dade2'); grd.addColorStop(0.5, '#f7c948'); grd.addColorStop(1, '#e74c3c');
-        ctx.fillStyle = grd; ctx.globalAlpha = 0.35; ctx.fillRect(180, y + 2, 220, 8); ctx.globalAlpha = 1;
-        const kx = 180 + r.v * 220;
-        ctx.fillStyle = r.done ? '#2ecc71' : s === 'mean' ? '#fff' : UIC.hl; ctx.fillRect(kx - 2, y - 1, 4, 14);
-        if (s === 'mean' && !r.done) text('♪', kx, y - 12, { size: 13, align: 'center', color: '#2ecc71' });
-      });
-      text(rows.every(r => r.done) ? '' : '↑↓ pick a virtue · hold ← → to adjust · let go when it sounds right', 240, 199, { size: 12, align: 'center', color: UIC.dim });
-    },
-  });
-  await waitUntil(() => rows.every(r => r.done));
-  await wait(0.6);
-  end(); hideVignette();
-  [60, 64, 67, 72, 76].forEach((n, i) => AudioSys.play('pluck', n, { vol: 0.12, dur: 2 }, i * 0.1));
 }
