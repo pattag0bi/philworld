@@ -1,6 +1,6 @@
 # PhilWorld
 
-A small pixel-art RPG for exploring philosophy. You walk through 10 rooms, meet thinkers, and come to understand each big idea by *doing* something, seeing it, and hearing it. All art, music and sound are generated in code, with no asset files.
+A small pixel-art RPG for exploring philosophy. You walk through 10 rooms, meet thinkers, and come to understand each big idea by *doing* something, seeing it, and hearing it. All art and sound effects are generated in code. The background music is real recorded tracks (see *Music credits*), and the character voices come from ElevenLabs (Socrates, Plato, Aristotle, Alexander, Confucius, Laozi, Marcus, Nietzsche) and Sarvam AI (everyone else).
 
 ## Play it
 
@@ -65,6 +65,25 @@ cd tools && npm install && npm run extract && npm run voices
 ```
 
 `tools/voices.json` decides which Sarvam persona voices each character. Change one and run `npm run voices` again; only the changed lines are regenerated. Use `npm run voices -- --sample` to try 12 lines first.
+
+## Music credits
+
+Each room loops one recorded track from `audio/music/<scene>.mp3`, fading from one to the next. If a file is missing, the old procedural music in `js/audio.js` plays instead. All tracks are by **Kevin MacLeod ([incompetech.com](https://incompetech.com))**, licensed under [Creative Commons: By Attribution 4.0](https://creativecommons.org/licenses/by/4.0/). They were trimmed, faded and re-encoded for the game.
+
+| Room | Track |
+|---|---|
+| Title screen | "Ancient Winds" |
+| The Crossroads | "Healing" |
+| The Agora | "Teller of the Tales" |
+| Plato's Cave | "Echoes of Time v2" |
+| Leaving the Cave | "Bathed in the Light" |
+| Aristotle's Lyceum | "Pippin the Hunchback" |
+| The Painted Stoa | "Meditation Impromptu 02" |
+| Nietzsche's Mountain | "Sovereign Quarter" |
+| Confucius's Courtyard | "Shenyang" |
+| Laozi's Valley | "Eastern Thought" |
+| The Bodhi Tree | "Dhaka" |
+| The Café | "Night in Venice" |
 
 ## Saving
 

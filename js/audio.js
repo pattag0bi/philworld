@@ -1,6 +1,6 @@
 'use strict';
 // ============================================================
-// PhilWorld — procedural audio (Web Audio, no files)
+// PhilWorld — audio: recorded music tracks + procedural ambience/SFX (Web Audio)
 // ============================================================
 const AudioSys = (() => {
   let ac = null, master, comp, roomFilter, musicBus, ambBus, sfxBus, revSend, reverb, noiseBuf;
@@ -10,6 +10,34 @@ const AudioSys = (() => {
   let layers = [];
   let musicOverride = null;
   const mus = { step: 0, next: 0, deg: 2 };
+
+  // ---------------- recorded music (audio/music/<scene>.mp3), looped, crossfaded
+  // Falls back to the procedural generator below if a track is missing or fails.
+  const TRACKS = ['title', 'crossroads', 'agora', 'cave', 'caveOut', 'lyceum', 'stoa', 'mountain', 'courtyard', 'valley', 'bodhi', 'cafe'];
+  const TRACK_VOL = 0.5;
+  let track = null; // { name, el, gain, ok }
+  function startTrack(name) {
+    if (track && track.name === name) return;
+    stopTrack(2);
+    if (!TRACKS.includes(name)) return;
+    const el = new Audio('audio/music/' + name + '.mp3');
+    el.loop = true; el.preload = 'auto';
+    const gain = ac.createGain(); gain.gain.value = 0.0001; gain.connect(musicBus);
+    const t = { name, el, gain, ok: true };
+    try { ac.createMediaElementSource(el).connect(gain); } catch (e) { t.ok = false; }
+    el.addEventListener('error', () => { t.ok = false; });
+    el.play().catch(() => { t.ok = false; });
+    track = t;
+    fadeTrack(musicOverride ? 0.0001 : TRACK_VOL, 2);
+  }
+  function stopTrack(sec) {
+    if (!track) return;
+    const t = track; track = null;
+    t.gain.gain.setTargetAtTime(0.0001, ac.currentTime, sec / 3);
+    setTimeout(() => { t.el.pause(); t.el.removeAttribute('src'); t.gain.disconnect(); }, sec * 1000 + 200);
+  }
+  function fadeTrack(v, sec) { if (track) track.gain.gain.setTargetAtTime(v, ac.currentTime, sec / 3); }
+  const trackPlaying = () => track && track.ok;
 
   const midi = m => 440 * Math.pow(2, (m - 69) / 12);
   const SC = {
@@ -280,7 +308,7 @@ const AudioSys = (() => {
     }
   }
   function musicTick() {
-    const m = musicOverride || (scene && scene.music);
+    const m = musicOverride || (!trackPlaying() && scene && scene.music);
     if (!m || !ac) return;
     const spb = 60 / m.bpm / 2;
     if (mus.next < ac.currentTime) mus.next = ac.currentTime + 0.05;
@@ -366,6 +394,7 @@ const AudioSys = (() => {
     scene = SCENES[name] || null; sceneName = name;
     musicOverride = null;
     mus.deg = 3;
+    startTrack(name);
     if (!scene) return;
     for (const [k, o] of (scene.layers || [])) layers.push(layer(k, o));
   }
@@ -379,7 +408,8 @@ const AudioSys = (() => {
     roomFilter.frequency.setTargetAtTime(f, ac.currentTime, ti / 3);
   }
   function setMusicVol(v, ti = 0.8) { if (ac) musicBus.gain.setTargetAtTime(v, ac.currentTime, ti / 3); }
-  function setMusic(m) { musicOverride = m; mus.step = 0; if (ac) mus.next = ac.currentTime + 0.05; }
+  // Custom cutscene music (e.g. Nietzsche's recurrence melody) temporarily replaces the room track.
+  function setMusic(m) { musicOverride = m; mus.step = 0; if (ac) { mus.next = ac.currentTime + 0.05; fadeTrack(m ? 0.0001 : TRACK_VOL, m ? 1 : 3); } }
   function toggleMute() {
     muted = !muted;
     try { localStorage.setItem('philworld-muted', muted ? '1' : '0'); } catch (e) { }
@@ -432,6 +462,7 @@ const AudioSys = (() => {
   return {
     unlock, setScene, tick, setMuffle, setMusicVol, setMusic, layer, play, midi, SC, I: () => I,
     sfx: S, ev: EV, toggleMute, isMuted: () => muted, ready: () => !!ac, now, scene: () => sceneName,
+    track: () => track && { name: track.name, ok: track.ok, paused: track.el.paused, time: track.el.currentTime, gain: track.gain.gain.value },
   };
 })();
 const SFX = AudioSys.sfx;
